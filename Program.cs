@@ -1,0 +1,58 @@
+using FluentValidation;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using OnSet.Infrastructure.Behaviors;
+using OnSet.Infrastructure.Data;
+
+namespace OnSet
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
+
+            // --- 1. EF Core Setup ---
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+                ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(connectionString));
+
+            // --- 2. MediatR Setup ---
+            // Register MediatR, scanning the entire assembly for handlers, validators, and behaviors
+            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+
+            // --- 3. Validation & Pipeline Behaviors ---
+            // Register all IValidator implementations from the assembly
+            builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
+
+            // Register the Validation Behavior in the MediatR Pipeline (The order is critical!)
+            builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+
+            // Add services to the container.
+            builder.Services.AddRazorPages();
+
+            var app = builder.Build();
+
+            // Configure the HTTP request pipeline.
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseExceptionHandler("/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
+
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.MapRazorPages();
+
+            app.Run();
+        }
+    }
+}
