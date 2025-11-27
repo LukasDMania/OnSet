@@ -1,6 +1,11 @@
+
 using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using OnSet.Domain;
+using OnSet.Domain.Models;
+using OnSet.Extensions;
 using OnSet.Infrastructure.Behaviors;
 using OnSet.Infrastructure.Data;
 
@@ -16,8 +21,18 @@ namespace OnSet
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
                 ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
-            builder.Services.AddDbContext<AppDbContext>(options =>
+            //Db setup
+            builder.Services.AddDbContext<OnSetDbContext>(options =>
                 options.UseSqlServer(connectionString));
+
+            
+            builder.Services.AddAuthentication().AddCookie(IdentityConstants.ApplicationScheme);
+            builder.Services.AddAuthorization();
+
+            builder.Services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<OnSetDbContext>()
+                .AddApiEndpoints();
+
 
             // --- 2. MediatR Setup ---
             // Register MediatR, scanning the entire assembly for handlers, validators, and behaviors
@@ -26,8 +41,9 @@ namespace OnSet
             // --- 3. Validation & Pipeline Behaviors ---
             // Register all IValidator implementations from the assembly
             builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
+            //Test
 
-            // Register the Validation Behavior in the MediatR Pipeline (The order is critical!)
+            // Register the Validation Behavior in the MediatR Pipeline
             builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
             // Add services to the container.
@@ -35,12 +51,18 @@ namespace OnSet
 
             var app = builder.Build();
 
+
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
+
+            }
+            else
+            {
+                app.ApplyMigrations();
             }
 
             app.UseHttpsRedirection();
@@ -49,8 +71,11 @@ namespace OnSet
             app.UseRouting();
 
             app.UseAuthorization();
+           
 
             app.MapRazorPages();
+
+            app.MapIdentityApi<User>();
 
             app.Run();
         }
