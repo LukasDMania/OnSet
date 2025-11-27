@@ -25,9 +25,7 @@ namespace OnSet
             builder.Services.AddDbContext<OnSetDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
-            
-            builder.Services.AddAuthentication().AddCookie(IdentityConstants.ApplicationScheme);
-            builder.Services.AddAuthorization();
+        
 
             builder.Services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<OnSetDbContext>()
@@ -37,6 +35,9 @@ namespace OnSet
             // --- 2. MediatR Setup ---
             // Register MediatR, scanning the entire assembly for handlers, validators, and behaviors
             builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+
+            //Add automapper
+            builder.Services.AddAutoMapper(typeof(Program));
 
             // --- 3. Validation & Pipeline Behaviors ---
             // Register all IValidator implementations from the assembly
@@ -70,6 +71,7 @@ namespace OnSet
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
            
 
