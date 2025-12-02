@@ -2,12 +2,14 @@
 
 namespace OnSet.Domain.Models
 {
-    public class Project : IEntity
+    public class Project : IOnSetEntity
     {
         [Column("ProjectID")]
         public int Id { get; set; }
-        public string? Name { get; set; }
-        public string? Description { get; set; }
+
+
+        public virtual ICollection<UserProject> UserProjects { get; set; } = new List<UserProject>();
+        public virtual ICollection<Document> Documents { get; set; } = new List<Document>();
 
     }
 }

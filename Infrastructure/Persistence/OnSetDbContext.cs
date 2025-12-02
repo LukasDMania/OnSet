@@ -8,8 +8,10 @@ namespace OnSet.Infrastructure.Data
     {
         public OnSetDbContext(DbContextOptions<OnSetDbContext> options) : base(options) { }
 
-        //Entities
         public DbSet<Project> Projects { get; set; }
+        public DbSet<Document> Documents { get; set; }
+        public DbSet<Contract> Contracts { get; set; }
+        public DbSet<UserProject> UserProjects { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
