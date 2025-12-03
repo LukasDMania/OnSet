@@ -17,8 +17,7 @@ namespace OnSet.Features.Projects.Create
         {
             var project = new Project
             {
-                Name = request.Name,
-                Description = request.Description,
+                
             };
 
             await _db.Projects.AddAsync(project, cancellationToken);

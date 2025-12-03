@@ -11,13 +11,6 @@ namespace OnSet.Features.Projects.Edit
 
         public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
         {
-            var project = await _db.Projects.FindAsync(request.Id);
-
-            project.Name = request.Name;
-            project.Description = request.Description;
-
-            await _db.SaveChangesAsync(cancellationToken);
-
             return default;
         }
     }

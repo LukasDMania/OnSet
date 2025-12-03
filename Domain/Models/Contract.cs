@@ -1,7 +1,10 @@
-﻿namespace OnSet.Domain.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace OnSet.Domain.Models
 {
     public class Contract : IOnSetEntity
     {
+        [Column("ContractID")]
         public int Id { get; set; }
 
         public int DocumentId { get; set; }

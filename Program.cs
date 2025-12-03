@@ -13,7 +13,7 @@ namespace OnSet
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -25,11 +25,14 @@ namespace OnSet
             builder.Services.AddDbContext<OnSetDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
-        
 
-            builder.Services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<OnSetDbContext>()
-                .AddApiEndpoints();
+
+            builder.Services.AddIdentity<User, IdentityRole>(options =>
+            {
+
+            })
+            .AddEntityFrameworkStores<OnSetDbContext>()
+            .AddDefaultTokenProviders();
 
 
             // --- 2. MediatR Setup ---
@@ -77,7 +80,21 @@ namespace OnSet
 
             app.MapRazorPages();
 
-            app.MapIdentityApi<User>();
+            using (var scope = app.Services.CreateScope()) 
+            {
+                var roleManager = 
+                    scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+                var roles = new[] { "Admin", "Production", "RegisteredUser", "Guest" };
+
+                foreach (var role in roles) 
+                {
+                    if (!await roleManager.RoleExistsAsync(role))
+                    {
+                        await roleManager.CreateAsync(new IdentityRole(role));
+                    }
+                }
+            }
 
             app.Run();
         }

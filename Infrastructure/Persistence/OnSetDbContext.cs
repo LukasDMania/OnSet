@@ -15,8 +15,26 @@ namespace OnSet.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);     
-            
+            base.OnModelCreating(modelBuilder);
+
+
+            modelBuilder.Entity<UserProject>()
+                .HasKey(up => new { up.UserId, up.ProjectId });
+
+            modelBuilder.Entity<User>(u =>
+            {
+                u.OwnsOne(x => x.FirstName, fn =>
+                {
+                    fn.Property(p => p.Value).HasColumnName("FirstName");
+                });
+
+                u.OwnsOne(x => x.LastName, ln =>
+                {
+                    ln.Property(p => p.Value).HasColumnName("LastName");
+                });
+
+                u.OwnsOne(x => x.HomeAddress);
+            });
         }
     }
 }
