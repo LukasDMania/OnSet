@@ -1,20 +1,52 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using OnSet.Domain.Enums;
+using OnSet.Domain.ValueObjects;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnSet.Domain.Models
 {
     public class Contract : IOnSetEntity
     {
+        [Key]
         [Column("ContractID")]
-        public int Id { get; set; }
+        public int Id { get; private set; }
 
-        public int DocumentId { get; set; }
-        public string UserId { get; set; }
+        [Required]
+        public int DocumentId { get; private set; }
 
-        public bool IsSigned { get; set; }
-        public DateTime? SignedAt { get; set; }
+        [Required]
+        public string UserId { get; private set; }
 
-        //nav
-        public virtual Document Document { get; set; }
-        public virtual User User { get; set; }
+        [Required]
+        public ContractStatus Status { get; private set; } = ContractStatus.Pending;
+
+        public SignatureInfo? Signature { get; private set; }
+
+        [StringLength(200)]
+        public string? Notes { get; private set; }
+
+        // Nav
+        public virtual Document Document { get; private set; }
+        public virtual User User { get; private set; }
+
+        private Contract() { }
+
+        public Contract(int documentId, string userId)
+        {
+            DocumentId = documentId;
+            UserId = userId;
+        }
+
+        public void Sign(string userId)
+        {
+            Status = ContractStatus.Signed;
+            Signature = new SignatureInfo(userId, DateTime.UtcNow);
+        }
+
+        public void Decline(string note)
+        {
+            Status = ContractStatus.Declined;
+            Notes = note;
+        }
     }
 }

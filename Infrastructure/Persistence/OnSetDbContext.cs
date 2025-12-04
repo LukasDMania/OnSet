@@ -33,6 +33,7 @@ namespace OnSet.Infrastructure.Data
                     ln.Property(p => p.Value).HasColumnName("LastName");
                 });
 
+                u.OwnsOne(x => x.EmergencyContact);
                 u.OwnsOne(x => x.HomeAddress);
             });
         }

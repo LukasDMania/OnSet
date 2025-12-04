@@ -1,24 +1,60 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using OnSet.Domain.Enums;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnSet.Domain.Models
 {
     public class Document : IOnSetEntity
     {
+        [Key]
         [Column("DocumentID")]
-        public int Id { get; set; }
+        public int Id { get; private set; }
 
-        public int ProjectId { get; set; }
-        public string UserId { get; set; }
+        [Required]
+        public int ProjectId { get; private set; }
 
-        public string FileName { get; set; }
-        public string FilePath { get; set; }
-        public DateTime UploadedAt { get; set; }
+        [Required]
+        public string UserId { get; private set; }
 
 
-        //nav
-        public virtual Project Project { get; set; }
-        public virtual User User { get; set; }
+        [Required]
+        public FileMetadata Metadata { get; private set; }
 
-        public virtual Contract Contract { get; set; }
+        [Required]
+        [StringLength(300)]
+        public string FilePath { get; private set; }
+
+        [DataType(DataType.DateTime)]
+        public DateTime UploadedAt { get; private set; } = DateTime.UtcNow;
+
+        [StringLength(200)]
+        public string? Description { get; private set; }
+
+        public List<DocumentTags> Tags { get; private set; } = new List<DocumentTags>();
+
+        public bool IsArchived { get; private set; } = false;
+
+        // Navigation
+        public virtual Project Project { get; private set; }
+        public virtual User User { get; private set; }
+
+        public virtual Contract? Contract { get; private set; }
+
+
+        private Document() { }
+
+        public Document(int projectId, string userId, FileMetadata metadata, string filePath, string? description = null)
+        {
+            ProjectId = projectId;
+            UserId = userId;
+            Metadata = metadata;
+            FilePath = filePath;
+            Description = description;
+        }
+
+        public void Archive()
+        {
+            IsArchived = true;
+        }
     }
 }
