@@ -1,4 +1,5 @@
 ﻿using OnSet.Domain.Enums;
+using OnSet.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

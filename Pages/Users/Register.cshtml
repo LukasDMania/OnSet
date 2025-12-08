@@ -1,0 +1,140 @@
+﻿@page
+@using OnSet.Domain.Enums
+@model OnSet.Pages.Users.RegisterModel
+@{
+
+    <h1>@ViewData["Title"]</h1>
+
+    <form method="post">
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="form-group">
+            <label asp-for="Input.Email"></label>
+            <input asp-for="Input.Email" class="form-control" />
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Input.Password"></label>
+            <input asp-for="Input.Password" class="form-control" />
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Input.ConfirmPassword"></label>
+            <input asp-for="Input.ConfirmPassword" class="form-control" />
+            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+        </div>
+
+        <hr />
+
+        <div class="form-group">
+            <label asp-for="Input.FirstName"></label>
+            <input asp-for="Input.FirstName" class="form-control" />
+            <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Input.LastName"></label>
+            <input asp-for="Input.LastName" class="form-control" />
+            <span asp-validation-for="Input.LastName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Input.MainOccupationRole"></label>
+            <select asp-for="Input.MainOccupationRole" class="form-control" asp-items="Html.GetEnumSelectList<ProjectRoles>()">
+                <option value="">-- Select Role --</option>
+            </select>
+            <span asp-validation-for="Input.MainOccupationRole" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Input.YearsExperience"></label>
+            <input asp-for="Input.YearsExperience" class="form-control" />
+            <span asp-validation-for="Input.YearsExperience" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Input.Bio"></label>
+            <textarea asp-for="Input.Bio" class="form-control"></textarea>
+            <span asp-validation-for="Input.Bio" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Input.AvatarUrl"></label>
+            <input asp-for="Input.AvatarUrl" class="form-control" />
+            <span asp-validation-for="Input.AvatarUrl" class="text-danger"></span>
+        </div>
+
+        <hr />
+        <h4>Address</h4>
+
+        <div class="form-group">
+            <label asp-for="Input.Street"></label>
+            <input asp-for="Input.Street" class="form-control" />
+            <span asp-validation-for="Input.Street" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Input.City"></label>
+            <input asp-for="Input.City" class="form-control" />
+            <span asp-validation-for="Input.City" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Input.Province"></label>
+            <input asp-for="Input.Province" class="form-control" />
+            <span asp-validation-for="Input.Province" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Input.ZipCode"></label>
+            <input asp-for="Input.ZipCode" class="form-control" />
+            <span asp-validation-for="Input.ZipCode" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Input.Country"></label>
+            <input asp-for="Input.Country" class="form-control" />
+            <span asp-validation-for="Input.Country" class="text-danger"></span>
+        </div>
+
+        <hr />
+        <h4>Languages & Availability</h4>
+
+        <div class="form-group">
+            <label asp-for="Input.SpokenLanguages"></label>
+            <select asp-for="Input.SpokenLanguages" class="form-control" multiple="multiple" asp-items="Html.GetEnumSelectList<Languages>()">
+            </select>
+            <span asp-validation-for="Input.SpokenLanguages" class="text-danger"></span>
+        </div>
+
+        <div class="form-check">
+            <input asp-for="Input.IsAvailableForBooking" class="form-check-input" />
+            <label asp-for="Input.IsAvailableForBooking" class="form-check-label"></label>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Input.NextAvailableDate"></label>
+            <input asp-for="Input.NextAvailableDate" class="form-control" type="date" />
+            <span asp-validation-for="Input.NextAvailableDate" class="text-danger"></span>
+        </div>
+
+        <hr />
+        <h4>Emergency Contact</h4>
+
+        <div class="form-group">
+            <label asp-for="Input.EmergencyContactName"></label>
+            <input asp-for="Input.EmergencyContactName" class="form-control" />
+            <span asp-validation-for="Input.EmergencyContactName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Input.EmergencyContactPhone"></label>
+            <input asp-for="Input.EmergencyContactPhone" class="form-control" />
+            <span asp-validation-for="Input.EmergencyContactPhone" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Register</button>
+    </form>
+}

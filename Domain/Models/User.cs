@@ -35,7 +35,7 @@ namespace OnSet.Domain.Models
         public string? AvatarUrl { get; set; }
 
         [Display(Name = "Home Address")]
-        public Address HomeAddress { get; set; } = new Address();
+        public Address? HomeAddress { get; set; }
 
         [Display(Name = "Languages Spoken")]
         public List<Languages>? SpokenLanguages { get; set; }
@@ -71,5 +71,42 @@ namespace OnSet.Domain.Models
         public virtual ICollection<UserProject> UserProjects { get; set; } = new List<UserProject>();
         public virtual ICollection<Document> Documents { get; set; } = new List<Document>();
         public virtual ICollection<Contract> Contracts { get; set; } = new List<Contract>();
+
+
+
+        public static User Create(
+            FirstName firstName,
+            LastName lastName,
+            ProjectRoles? mainOccupationRole = null,
+            int? yearsExperience = null,
+            string? bio = null,
+            string? avatarUrl = null,
+            Address? homeAddress = null,
+            List<Languages>? spokenLanguages = null,
+            bool isAvailableForBooking = true,
+            DateTime? nextAvailableDate = null,
+            EmergencyContact? emergencyContact = null
+        )
+        {
+            bio = string.IsNullOrWhiteSpace(bio) ? null : bio;
+            avatarUrl = string.IsNullOrWhiteSpace(avatarUrl) ? null : avatarUrl;
+
+            return new User
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                MainOccupationRole = mainOccupationRole,
+                YearsExperience = yearsExperience,
+                Bio = bio,
+                AvatarUrl = avatarUrl,
+                HomeAddress = homeAddress,
+                SpokenLanguages = spokenLanguages ?? new List<Languages>(),
+                IsAvailableForBooking = isAvailableForBooking,
+                NextAvailableDate = nextAvailableDate,
+                EmergencyContact = emergencyContact,
+                IsActive = true,
+                CreatedAt = DateTime.UtcNow
+            };
+        }
     }
 }

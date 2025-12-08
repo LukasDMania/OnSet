@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnSet.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using OnSet.Infrastructure.Data;
 namespace OnSet.Migrations
 {
     [DbContext(typeof(OnSetDbContext))]
-    partial class OnSetDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251208105500_MakeUserAddressNullable")]
+    partial class MakeUserAddressNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -558,7 +561,7 @@ namespace OnSet.Migrations
                         .WithMany()
                         .HasForeignKey("OwnerId");
 
-                    b.OwnsOne("OnSet.Domain.ValueObjects.Address", "Location", b1 =>
+                    b.OwnsOne("OnSet.Domain.Models.Address", "Location", b1 =>
                         {
                             b1.Property<int>("ProjectId")
                                 .HasColumnType("int");
@@ -571,15 +574,11 @@ namespace OnSet.Migrations
                                 .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
-                            b1.Property<string>("ProvinceOrState")
+                            b1.Property<string>("PostalCode")
                                 .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("Street")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("ZipCode")
                                 .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
@@ -598,7 +597,7 @@ namespace OnSet.Migrations
 
             modelBuilder.Entity("OnSet.Domain.Models.User", b =>
                 {
-                    b.OwnsOne("OnSet.Domain.ValueObjects.Address", "HomeAddress", b1 =>
+                    b.OwnsOne("OnSet.Domain.Models.Address", "HomeAddress", b1 =>
                         {
                             b1.Property<string>("UserId")
                                 .HasColumnType("nvarchar(450)");
@@ -611,15 +610,11 @@ namespace OnSet.Migrations
                                 .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
-                            b1.Property<string>("ProvinceOrState")
+                            b1.Property<string>("PostalCode")
                                 .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("Street")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("ZipCode")
                                 .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 

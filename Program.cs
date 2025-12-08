@@ -2,12 +2,14 @@
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using OnSet.Domain;
 using OnSet.Domain.Models;
 using OnSet.Extensions;
 using OnSet.Infrastructure.Behaviors;
 using OnSet.Infrastructure.Data;
+using OnSet.Utils;
 
 namespace OnSet
 {
@@ -25,11 +27,9 @@ namespace OnSet
             builder.Services.AddDbContext<OnSetDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
-
-
             builder.Services.AddIdentity<User, IdentityRole>(options =>
             {
-
+                options.SignIn.RequireConfirmedAccount = true;
             })
             .AddEntityFrameworkStores<OnSetDbContext>()
             .AddDefaultTokenProviders();
@@ -50,6 +50,10 @@ namespace OnSet
             // Register the Validation Behavior in the MediatR Pipeline
             builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
+            // Add Services
+            builder.Services.AddTransient<IEmailSender, NoOpEmailSender>();
+
+
             // Add services to the container.
             builder.Services.AddRazorPages();
 
@@ -67,6 +71,18 @@ namespace OnSet
             else
             {
                 app.ApplyMigrations();
+
+                using var scope = app.Services.CreateScope();
+                
+                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+                if (!await roleManager.RoleExistsAsync(Roles.Admin))
+                {
+                    await roleManager.CreateAsync(new IdentityRole(Roles.Admin));
+                }
+                if (!await roleManager.RoleExistsAsync(Roles.StandardUser))
+                {
+                    await roleManager.CreateAsync(new IdentityRole(Roles.StandardUser));
+                }
             }
 
             app.UseHttpsRedirection();
@@ -79,22 +95,6 @@ namespace OnSet
            
 
             app.MapRazorPages();
-
-            using (var scope = app.Services.CreateScope()) 
-            {
-                var roleManager = 
-                    scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-
-                var roles = new[] { "Admin", "Production", "RegisteredUser", "Guest" };
-
-                foreach (var role in roles) 
-                {
-                    if (!await roleManager.RoleExistsAsync(role))
-                    {
-                        await roleManager.CreateAsync(new IdentityRole(role));
-                    }
-                }
-            }
 
             app.Run();
         }

@@ -36,6 +36,25 @@ namespace OnSet.Infrastructure.Data
                 u.OwnsOne(x => x.EmergencyContact);
                 u.OwnsOne(x => x.HomeAddress);
             });
+
+            modelBuilder.Entity<Document>(d => {
+                d.OwnsOne(x => x.Metadata);
+
+                d.HasOne(d => d.Contract)
+                 .WithOne(c => c.Document)
+                 .HasForeignKey<Contract>(c => c.DocumentId)
+                 .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            modelBuilder.Entity<Contract>(c => {
+                c.OwnsOne(x => x.Signature);
+
+            });
+
+            modelBuilder.Entity<Project>(p => {
+                p.OwnsOne(x => x.Location);
+            });
+
         }
     }
 }
