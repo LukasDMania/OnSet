@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using OnSet.Domain.Enums;
 using OnSet.Domain.Models;
 using OnSet.Domain.ValueObjects;
+using OnSet.Utils;
 
 namespace OnSet.Features.Users.Register
 {
@@ -17,7 +18,6 @@ namespace OnSet.Features.Users.Register
 
         public async Task<CommandResult> Handle(Command request, CancellationToken cancellationToken)
         {
-            // Map value objects
             var firstName = new FirstName(request.FirstName);
             var lastName = new LastName(request.LastName);
 
@@ -77,6 +77,7 @@ namespace OnSet.Features.Users.Register
                     Errors = result.Errors is not null ? GetErrors(result.Errors) : new[] { "Unknown error" }
                 };
             }
+            await _userManager.AddToRoleAsync(user, Roles.StandardUser);
 
             return new CommandResult { Success = true };
         }

@@ -13,5 +13,21 @@ namespace OnSet.Domain.Models
         public virtual User User { get; set; }
         public virtual Project Project { get; set; }
 
+
+        private UserProject() { }
+
+        public static UserProject Create(string userId, ProjectRoles role)
+        {
+            return new UserProject
+            {
+                UserId = userId,
+                RoleOnProject = role
+            };
+        }
+
+        public void ChangeRole(ProjectRoles newRole)
+        {
+            this.RoleOnProject = newRole;
+        }
     }
 }

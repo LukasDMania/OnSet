@@ -140,7 +140,6 @@ namespace OnSet.Pages.Users
                 return Page();
             }
 
-            // Optionally sign in immediately after registration
             return LocalRedirect(ReturnUrl);
         }
     }

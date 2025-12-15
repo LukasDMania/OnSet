@@ -15,13 +15,20 @@ namespace OnSet.Features.Projects.Create
 
         public async Task<int> Handle(Command request, CancellationToken cancellationToken)
         {
-            var project = new Project
-            {
-                
-            };
+            var project = Project.Create(
+        
+                name: request.Name,
+                startDate: request.StartDate,
+                status: request.Status,
+                ownerId: request.CurrentUserId,
+                creatorRole: request.CreatorRole,
+                description: request.Description,
+                clientName: request.ClientName,
+                referenceCode: request.ReferenceCode,
+                budget: request.Budget
+            );
 
             await _db.Projects.AddAsync(project, cancellationToken);
-
             await _db.SaveChangesAsync(cancellationToken);
 
             return project.Id;
