@@ -59,6 +59,9 @@ namespace OnSet.Domain.Models
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         [DataType(DataType.DateTime)]
+        public DateTime? UpdatedAt { get; set; }
+
+        [DataType(DataType.DateTime)]
         public DateTime? LastLoginAt { get; set; }
 
         [DataType(DataType.DateTime)]

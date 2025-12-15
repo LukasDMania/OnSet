@@ -51,10 +51,5 @@ namespace OnSet.Domain.Models
             FilePath = filePath;
             Description = description;
         }
-
-        public void Archive()
-        {
-            IsArchived = true;
-        }
     }
 }

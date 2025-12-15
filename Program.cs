@@ -52,6 +52,8 @@ namespace OnSet
 
             // Add Services
             builder.Services.AddTransient<IEmailSender, NoOpEmailSender>();
+            builder.Services.AddHttpContextAccessor();
+            builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 
 
             // Add services to the container.

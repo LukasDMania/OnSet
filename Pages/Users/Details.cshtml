@@ -1,0 +1,113 @@
+﻿@page
+@model Users.DetailsModel
+
+@{
+    ViewData["Title"] = "User Details";
+}
+
+<h1>User Details</h1>
+
+@if (Model.UserDetails == null)
+{
+    <p>User not found.</p>
+}
+else
+{
+    <div class="user-details-container">
+
+        <header class="profile-header">
+            @if (!string.IsNullOrEmpty(Model.UserDetails.AvatarUrl))
+            {
+                <img src="@Model.UserDetails.AvatarUrl" alt="Profile Picture" class="avatar" />
+            }
+            <h1>@Model.UserDetails.FirstName @Model.UserDetails.LastName</h1>
+            <p class="user-id">User ID: @Model.UserDetails.Id</p>
+        </header>
+
+        <section class="contact-info">
+            <h2>Contact Information</h2>
+            <p><strong>Email:</strong> @Model.UserDetails.Email</p>
+            <p><strong>Phone:</strong> @Model.UserDetails.PhoneNumber</p>
+        </section>
+
+        <section class="professional-info">
+            <h2>Professional Details</h2>
+            <p><strong>Bio:</strong> @Model.UserDetails.Bio</p>
+            <p><strong>Main Role:</strong> @Model.UserDetails.MainOccupationRole</p>
+            <p><strong>Years Experience:</strong> @(Model.UserDetails.YearsExperience.HasValue ? Model.UserDetails.YearsExperience.ToString() : "N/A")</p>
+
+            @if (Model.UserDetails.SpokenLanguages.Any())
+            {
+                <p><strong>Spoken Languages:</strong> @string.Join(", ", Model.UserDetails.SpokenLanguages)</p>
+            }
+
+            <h3>Availability</h3>
+            <p><strong>Available for Booking:</strong> @(Model.UserDetails.IsAvailableForBooking ? "Yes" : "No")</p>
+            @if (Model.UserDetails.NextAvailableDate.HasValue)
+            {
+                <p><strong>Next Available Date:</strong> @Model.UserDetails.NextAvailableDate.Value.ToShortDateString()</p>
+            }
+        </section>
+
+        <section class="address-info">
+            <h2>Address</h2>
+            @if (!string.IsNullOrEmpty(Model.UserDetails.Street))
+            {
+                <p>@Model.UserDetails.Street</p>
+                <p>@Model.UserDetails.City, @Model.UserDetails.Province @Model.UserDetails.ZipCode</p>
+                <p>@Model.UserDetails.Country</p>
+            }
+            else
+            {
+                <p>Address information not provided.</p>
+            }
+        </section>
+
+        <section class="emergency-contact">
+            <h2>Emergency Contact</h2>
+            <p><strong>Name:</strong> @Model.UserDetails.EmergencyContactName</p>
+            <p><strong>Phone:</strong> @Model.UserDetails.EmergencyContactPhone</p>
+        </section>
+
+        <section class="system-metadata">
+            <h2>Account Status</h2>
+            <p><strong>Account Active:</strong> @(Model.UserDetails.IsActive ? "Yes" : "No")</p>
+            <p><strong>Created At:</strong> @Model.UserDetails.CreatedAt.ToShortDateString()</p>
+            <p><strong>Last Login:</strong> @(Model.UserDetails.LastLoginAt.HasValue ? Model.UserDetails.LastLoginAt.Value.ToString() : "Never")</p>
+            @if (!string.IsNullOrEmpty(Model.UserDetails.InternalNotes))
+            {
+                <details>
+                    <summary>Internal Notes (Visible to you and Admins)</summary>
+                    <p>@Model.UserDetails.InternalNotes</p>
+                </details>
+            }
+        </section>
+
+        @if (Model.UserDetails.Projects.Any())
+        {
+            <section class="projects">
+                <h2>Associated Projects (@Model.UserDetails.Projects.Count)</h2>
+                <ul>
+                    @foreach (var project in Model.UserDetails.Projects)
+                    {
+                        <li>@project.Name - Role: @project.RoleOnProject</li>
+                    }
+                </ul>
+            </section>
+        }
+
+        @if (Model.UserDetails.Contracts.Any())
+        {
+            <section class="contracts">
+                <h2>Contracts (@Model.UserDetails.Contracts.Count)</h2>
+                <ul>
+                    @foreach (var contract in Model.UserDetails.Contracts)
+                    {
+                        <li>Contract ID: @contract.Id - Status: @contract.Status - Issued: </li>
+                    }
+                </ul>
+            </section>
+        }
+
+    </div>
+}
