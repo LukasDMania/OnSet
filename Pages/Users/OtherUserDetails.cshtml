@@ -1,0 +1,121 @@
+﻿@page "{id}"
+@model OnSet.Pages.Users.OtherUserDetailsModel
+@{
+    ViewData["Title"] = $"{Model.OtherUserDetails?.FirstName}'s Profile";
+    var user = Model.OtherUserDetails;
+}
+
+@if (user == null)
+{
+    <div class="alert alert-warning m-5">
+        <h4 class="alert-heading">User Not Found</h4>
+        <p>The user profile you are looking for could not be found or has been deactivated.</p>
+        <a asp-page="./Index" class="btn btn-primary">Back to Directory</a>
+    </div>
+}
+else
+{
+    <div class="container py-5">
+        <div class="bg-white rounded-lg shadow-sm border p-6 mb-6">
+            <div class="d-flex flex-column flex-md-row align-items-center gap-4">
+                <div class="flex-shrink-0">
+                    @if (!string.IsNullOrEmpty(user.AvatarUrl))
+                    {
+                        <img src="@user.AvatarUrl" alt="@user.FirstName" class="rounded-circle shadow-sm" style="width: 120px; height: 120px; object-fit: cover;" />
+                    }
+                    else
+                    {
+                        <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 120px; height: 120px; font-size: 3rem;">
+                            @user.FirstName[0]@user.LastName[0]
+                        </div>
+                    }
+                </div>
+                <div class="flex-grow-1 text-center text-md-start">
+                    <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-2 mb-1">
+                        <h1 class="h2 mb-0 fw-bold text-dark">@user.FirstName @user.LastName</h1>
+                        @if (user.IsAvailableForBooking)
+                        {
+                            <span class="badge rounded-pill bg-success px-3">Available</span>
+                        }
+                    </div>
+                    <p class="text-muted fs-5 mb-2">@(user.MainOccupationRole ?? "Professional")</p>
+                    <div class="d-flex flex-wrap justify-content-center justify-content-md-start gap-3 text-muted small">
+                        <span><i class="bi bi-envelope me-1"></i> @user.Email</span>
+                        @if (!string.IsNullOrEmpty(user.PhoneNumber))
+                        {
+                            <span><i class="bi bi-telephone me-1"></i> @user.PhoneNumber</span>
+                        }
+                    </div>
+                </div>
+                <div class="flex-shrink-0 mt-3 mt-md-0">
+                    <button class="btn btn-outline-primary px-4">Contact User</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold mb-4">Status & Availability</h5>
+
+                        <div class="mb-3">
+                            <label class="text-muted small d-block">Next Available Date</label>
+                            <span class="fw-medium">@(user.NextAvailableDate?.ToShortDateString() ?? "Immediate")</span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="text-muted small d-block">Experience</label>
+                            <span class="fw-medium">@(user.YearsExperience?.ToString() ?? "0") Years</span>
+                        </div>
+
+                        <div class="mb-0">
+                            <label class="text-muted small d-block">Languages</label>
+                            <div class="d-flex flex-wrap gap-1 mt-1">
+                                @if (user.SpokenLanguages.Any())
+                                {
+                                    @foreach (var lang in user.SpokenLanguages)
+                                    {
+                                        <span class="badge bg-light text-dark border">@lang</span>
+                                    }
+                                }
+                                else
+                                {
+                                    <span class="text-muted italic small">No languages listed</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <p class="text-muted small mb-0">
+                            <i class="bi bi-clock-history me-1"></i>
+                            Last active: @(user.LastLoginAt?.ToShortDateString() ?? "N/A")
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body p-4">
+                        <h5 class="card-title fw-bold mb-4">About</h5>
+                        <div class="prose text-secondary mb-5" style="white-space: pre-wrap;">
+                            @(string.IsNullOrWhiteSpace(user.Bio) ? "No bio provided." : user.Bio)
+                        </div>
+
+                        <hr class="my-4 text-light" />
+
+                        <h5 class="card-title fw-bold mb-3">Project History</h5>
+                        @* Placeholder for UserProjects or other related data *@
+                        <div class="p-5 bg-light rounded text-center">
+                            <p class="text-muted mb-0">Detailed project history is only visible to authenticated managers.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

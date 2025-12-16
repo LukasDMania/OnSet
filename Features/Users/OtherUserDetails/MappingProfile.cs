@@ -1,0 +1,23 @@
+﻿using AutoMapper;
+using OnSet.Domain.Models;
+
+namespace OnSet.Features.Users.OtherUserDetails
+{
+    public class MappingProfile : Profile
+    {
+        public MappingProfile() 
+        {
+            CreateProjection<User, Model>()
+            .ForMember(d => d.FirstName,
+                o => o.MapFrom(s => s.FirstName.Value))
+            .ForMember(d => d.LastName,
+                o => o.MapFrom(s => s.LastName.Value))
+            .ForMember(d => d.MainOccupationRole,
+                o => o.MapFrom(s => s.MainOccupationRole != null
+                    ? s.MainOccupationRole.ToString()
+                    : null))
+            .ForMember(d => d.SpokenLanguages,
+                o => o.MapFrom(s => s.SpokenLanguages.Select(l => l.ToString())));
+        }
+    }
+}

@@ -1,113 +1,150 @@
-﻿@page
+﻿@page 
 @model Users.DetailsModel
-
 @{
-    ViewData["Title"] = "User Details";
+    ViewData["Title"] = "Edit My Profile";
 }
 
-<h1>User Details</h1>
+<div class="container py-5">
+    <form method="post" enctype="multipart/form-data">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <div>
+                <h1 class="h3 fw-bold mb-0">Edit Profile</h1>
+                <p class="text-muted">Manage your personal and professional information.</p>
+            </div>
+            <div class="d-flex gap-2">
+                <a asp-page="./Details" asp-route-id="@Model.UserDetails.Id" class="btn btn-outline-secondary">Cancel</a>
+                <button type="submit" class="btn btn-primary px-4 shadow-sm">Save Changes</button>
+            </div>
+        </div>
 
-@if (Model.UserDetails == null)
-{
-    <p>User not found.</p>
-}
-else
-{
-    <div class="user-details-container">
+        <div class="row">
+            <div class="col-lg-3 mb-4">
+                <div class="card border-0 shadow-sm sticky-top" style="top: 20px;">
+                    <div class="list-group list-group-flush" id="edit-tabs" role="tablist">
+                        <a class="list-group-item list-group-item-action active p-3" data-bs-toggle="list" href="#basic" role="tab">
+                            <i class="bi bi-person me-2"></i>Basic Info
+                        </a>
+                        <a class="list-group-item list-group-item-action p-3" data-bs-toggle="list" href="#professional" role="tab">
+                            <i class="bi bi-briefcase me-2"></i>Professional
+                        </a>
+                        <a class="list-group-item list-group-item-action p-3" data-bs-toggle="list" href="#contact" role="tab">
+                            <i class="bi bi-geo-alt me-2"></i>Contact & Safety
+                        </a>
+                    </div>
+                </div>
+            </div>
 
-        <header class="profile-header">
-            @if (!string.IsNullOrEmpty(Model.UserDetails.AvatarUrl))
-            {
-                <img src="@Model.UserDetails.AvatarUrl" alt="Profile Picture" class="avatar" />
-            }
-            <h1>@Model.UserDetails.FirstName @Model.UserDetails.LastName</h1>
-            <p class="user-id">User ID: @Model.UserDetails.Id</p>
-        </header>
+            <div class="col-lg-9">
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="basic" role="tabpanel">
+                        <div class="card border-0 shadow-sm mb-4">
+                            <div class="card-body p-4">
+                                <h5 class="fw-bold mb-4">Profile Appearance</h5>
 
-        <section class="contact-info">
-            <h2>Contact Information</h2>
-            <p><strong>Email:</strong> @Model.UserDetails.Email</p>
-            <p><strong>Phone:</strong> @Model.UserDetails.PhoneNumber</p>
-        </section>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-medium">First Name</label>
+                                        <input asp-for="UserDetails.FirstName" class="form-control" placeholder="Enter first name" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-medium">Last Name</label>
+                                        <input asp-for="UserDetails.LastName" class="form-control" placeholder="Enter last name" />
+                                    </div>
+                                    <div class="col-12 mt-4">
+                                        <label class="form-label fw-medium">Bio</label>
+                                        <textarea asp-for="UserDetails.Bio" class="form-control" rows="5" placeholder="Write a short professional bio..."></textarea>
+                                        <div class="form-text">Visible to other users and managers.</div>
+                                    </div>
+                                    <div class="col-12 mt-4">
+                                        <label class="form-label fw-medium">Profile Image URL</label>
+                                        <input asp-for="UserDetails.AvatarUrl" class="form-control" placeholder="https://path-to-your-image.com/img.jpg" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        <section class="professional-info">
-            <h2>Professional Details</h2>
-            <p><strong>Bio:</strong> @Model.UserDetails.Bio</p>
-            <p><strong>Main Role:</strong> @Model.UserDetails.MainOccupationRole</p>
-            <p><strong>Years Experience:</strong> @(Model.UserDetails.YearsExperience.HasValue ? Model.UserDetails.YearsExperience.ToString() : "N/A")</p>
+                    <div class="tab-pane fade" id="professional" role="tabpanel">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body p-4">
+                                <h5 class="fw-bold mb-4">Work & Availability</h5>
+                                <div class="row g-3">
+                                    <div class="col-md-8">
+                                        <label class="form-label fw-medium">Main Occupation Role</label>
+                                        <input asp-for="UserDetails.MainOccupationRole" class="form-control" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label fw-medium">Years of Experience</label>
+                                        <input asp-for="UserDetails.YearsExperience" type="number" class="form-control" />
+                                    </div>
 
-            @if (Model.UserDetails.SpokenLanguages.Any())
-            {
-                <p><strong>Spoken Languages:</strong> @string.Join(", ", Model.UserDetails.SpokenLanguages)</p>
-            }
+                                    <div class="col-12 py-3">
+                                        <div class="form-check form-switch bg-light p-3 rounded border">
+                                            <input class="form-check-input ms-0 me-3" type="checkbox" asp-for="UserDetails.IsAvailableForBooking">
+                                            <label class="form-check-label fw-bold" for="IsAvailableForBooking">Available for Booking</label>
+                                            <div class="form-text ms-5">Toggle this off to hide yourself from active search results.</div>
+                                        </div>
+                                    </div>
 
-            <h3>Availability</h3>
-            <p><strong>Available for Booking:</strong> @(Model.UserDetails.IsAvailableForBooking ? "Yes" : "No")</p>
-            @if (Model.UserDetails.NextAvailableDate.HasValue)
-            {
-                <p><strong>Next Available Date:</strong> @Model.UserDetails.NextAvailableDate.Value.ToShortDateString()</p>
-            }
-        </section>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-medium">Next Available Date</label>
+                                        <input asp-for="UserDetails.NextAvailableDate" type="date" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        <section class="address-info">
-            <h2>Address</h2>
-            @if (!string.IsNullOrEmpty(Model.UserDetails.Street))
-            {
-                <p>@Model.UserDetails.Street</p>
-                <p>@Model.UserDetails.City, @Model.UserDetails.Province @Model.UserDetails.ZipCode</p>
-                <p>@Model.UserDetails.Country</p>
-            }
-            else
-            {
-                <p>Address information not provided.</p>
-            }
-        </section>
+                    <div class="tab-pane fade" id="contact" role="tabpanel">
+                        <div class="card border-0 shadow-sm mb-4">
+                            <div class="card-body p-4">
+                                <h5 class="fw-bold mb-4">Home Address</h5>
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <label class="form-label small">Street Address</label>
+                                        <input asp-for="UserDetails.Street" class="form-control" />
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label class="form-label small">City</label>
+                                        <input asp-for="UserDetails.City" class="form-control" />
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label small">Province/State</label>
+                                        <input asp-for="UserDetails.Province" class="form-control" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label small">Zip/Postal Code</label>
+                                        <input asp-for="UserDetails.ZipCode" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-        <section class="emergency-contact">
-            <h2>Emergency Contact</h2>
-            <p><strong>Name:</strong> @Model.UserDetails.EmergencyContactName</p>
-            <p><strong>Phone:</strong> @Model.UserDetails.EmergencyContactPhone</p>
-        </section>
+                        <div class="card border-0 shadow-sm border-start border-danger border-4">
+                            <div class="card-body p-4">
+                                <h5 class="fw-bold mb-4 text-danger"><i class="bi bi-exclamation-triangle me-2"></i>Emergency Contact</h5>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-medium">Contact Name</label>
+                                        <input asp-for="UserDetails.EmergencyContactName" class="form-control border-danger-subtle" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-medium">Contact Phone</label>
+                                        <input asp-for="UserDetails.EmergencyContactPhone" class="form-control border-danger-subtle" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <section class="system-metadata">
-            <h2>Account Status</h2>
-            <p><strong>Account Active:</strong> @(Model.UserDetails.IsActive ? "Yes" : "No")</p>
-            <p><strong>Created At:</strong> @Model.UserDetails.CreatedAt.ToShortDateString()</p>
-            <p><strong>Last Login:</strong> @(Model.UserDetails.LastLoginAt.HasValue ? Model.UserDetails.LastLoginAt.Value.ToString() : "Never")</p>
-            @if (!string.IsNullOrEmpty(Model.UserDetails.InternalNotes))
-            {
-                <details>
-                    <summary>Internal Notes (Visible to you and Admins)</summary>
-                    <p>@Model.UserDetails.InternalNotes</p>
-                </details>
-            }
-        </section>
-
-        @if (Model.UserDetails.Projects.Any())
-        {
-            <section class="projects">
-                <h2>Associated Projects (@Model.UserDetails.Projects.Count)</h2>
-                <ul>
-                    @foreach (var project in Model.UserDetails.Projects)
-                    {
-                        <li>@project.Name - Role: @project.RoleOnProject</li>
-                    }
-                </ul>
-            </section>
-        }
-
-        @if (Model.UserDetails.Contracts.Any())
-        {
-            <section class="contracts">
-                <h2>Contracts (@Model.UserDetails.Contracts.Count)</h2>
-                <ul>
-                    @foreach (var contract in Model.UserDetails.Contracts)
-                    {
-                        <li>Contract ID: @contract.Id - Status: @contract.Status - Issued: </li>
-                    }
-                </ul>
-            </section>
-        }
-
-    </div>
-}
+                @if (!string.IsNullOrEmpty(Model.UserDetails.InternalNotes))
+                {
+                    <div class="alert alert-warning mt-4 small shadow-sm border-0">
+                        <strong><i class="bi bi-info-circle me-1"></i> Note:</strong> Your account has internal administrator notes. These cannot be edited by users.
+                    </div>
+                }
+            </div>
+        </div>
+    </form>
+</div>
