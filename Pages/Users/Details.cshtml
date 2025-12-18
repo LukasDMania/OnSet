@@ -1,4 +1,5 @@
 ﻿@page 
+@using OnSet.Domain.Enums
 @model Users.DetailsModel
 @{
     ViewData["Title"] = "Edit My Profile";
@@ -12,7 +13,7 @@
                 <p class="text-muted">Manage your personal and professional information.</p>
             </div>
             <div class="d-flex gap-2">
-                <a asp-page="./Details" asp-route-id="@Model.UserDetails.Id" class="btn btn-outline-secondary">Cancel</a>
+                <a asp-page="./Details" asp-route-id="@Model.EditCommand.UserId" class="btn btn-outline-secondary">Cancel</a>
                 <button type="submit" class="btn btn-primary px-4 shadow-sm">Save Changes</button>
             </div>
         </div>
@@ -44,20 +45,20 @@
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <label class="form-label fw-medium">First Name</label>
-                                        <input asp-for="UserDetails.FirstName" class="form-control" placeholder="Enter first name" />
+                                        <input asp-for="EditCommand.FirstName" class="form-control" placeholder="Enter first name" />
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label fw-medium">Last Name</label>
-                                        <input asp-for="UserDetails.LastName" class="form-control" placeholder="Enter last name" />
+                                        <input asp-for="EditCommand.LastName" class="form-control" placeholder="Enter last name" />
                                     </div>
                                     <div class="col-12 mt-4">
                                         <label class="form-label fw-medium">Bio</label>
-                                        <textarea asp-for="UserDetails.Bio" class="form-control" rows="5" placeholder="Write a short professional bio..."></textarea>
+                                        <textarea asp-for="EditCommand.Bio" class="form-control" rows="5" placeholder="Write a short professional bio..."></textarea>
                                         <div class="form-text">Visible to other users and managers.</div>
                                     </div>
                                     <div class="col-12 mt-4">
                                         <label class="form-label fw-medium">Profile Image URL</label>
-                                        <input asp-for="UserDetails.AvatarUrl" class="form-control" placeholder="https://path-to-your-image.com/img.jpg" />
+                                        <input asp-for="EditCommand.AvatarUrl" class="form-control" placeholder="https://path-to-your-image.com/img.jpg" />
                                     </div>
                                 </div>
                             </div>
@@ -70,17 +71,37 @@
                                 <h5 class="fw-bold mb-4">Work & Availability</h5>
                                 <div class="row g-3">
                                     <div class="col-md-8">
-                                        <label class="form-label fw-medium">Main Occupation Role</label>
-                                        <input asp-for="UserDetails.MainOccupationRole" class="form-control" />
+                                        <label asp-for="EditCommand.MainOccupationRole" class="form-label"></label>
+
+                                        <select asp-for="EditCommand.MainOccupationRole"
+                                                asp-items="Model.RoleOptions"
+                                                class="form-select">
+                                            <option value="">-- Select a Role --</option>
+                                        </select>
+
+                                        <span asp-validation-for="EditCommand.MainOccupationRole" class="text-danger"></span>
                                     </div>
                                     <div class="col-md-4">
                                         <label class="form-label fw-medium">Years of Experience</label>
-                                        <input asp-for="UserDetails.YearsExperience" type="number" class="form-control" />
+                                        <input asp-for="EditCommand.YearsExperience" type="number" class="form-control" />
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label asp-for="EditCommand.SpokenLanguages" class="form-label">Languages</label>
+
+                                        <select asp-for="EditCommand.SpokenLanguages"
+                                                asp-items="Model.LanguageOptions"
+                                                class="form-select"
+                                                multiple>
+                                        </select>
+
+                                        <small class="text-muted">Hold Ctrl (or Cmd) to select multiple</small>
+                                        <span asp-validation-for="EditCommand.SpokenLanguages" class="text-danger"></span>
                                     </div>
 
                                     <div class="col-12 py-3">
                                         <div class="form-check form-switch bg-light p-3 rounded border">
-                                            <input class="form-check-input ms-0 me-3" type="checkbox" asp-for="UserDetails.IsAvailableForBooking">
+                                            <input class="form-check-input ms-0 me-3" type="checkbox" asp-for="EditCommand.IsAvailableForBooking">
                                             <label class="form-check-label fw-bold" for="IsAvailableForBooking">Available for Booking</label>
                                             <div class="form-text ms-5">Toggle this off to hide yourself from active search results.</div>
                                         </div>
@@ -88,7 +109,7 @@
 
                                     <div class="col-md-6">
                                         <label class="form-label fw-medium">Next Available Date</label>
-                                        <input asp-for="UserDetails.NextAvailableDate" type="date" class="form-control" />
+                                        <input asp-for="EditCommand.NextAvailableDate" type="date" class="form-control" />
                                     </div>
                                 </div>
                             </div>
@@ -102,19 +123,23 @@
                                 <div class="row g-3">
                                     <div class="col-12">
                                         <label class="form-label small">Street Address</label>
-                                        <input asp-for="UserDetails.Street" class="form-control" />
+                                        <input asp-for="EditCommand.Street" class="form-control" />
                                     </div>
                                     <div class="col-md-5">
                                         <label class="form-label small">City</label>
-                                        <input asp-for="UserDetails.City" class="form-control" />
+                                        <input asp-for="EditCommand.City" class="form-control" />
                                     </div>
                                     <div class="col-md-3">
                                         <label class="form-label small">Province/State</label>
-                                        <input asp-for="UserDetails.Province" class="form-control" />
+                                        <input asp-for="EditCommand.Province" class="form-control" />
                                     </div>
                                     <div class="col-md-4">
                                         <label class="form-label small">Zip/Postal Code</label>
-                                        <input asp-for="UserDetails.ZipCode" class="form-control" />
+                                        <input asp-for="EditCommand.ZipCode" class="form-control" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label small">Country</label>
+                                        <input asp-for="EditCommand.Country" class="form-control" />
                                     </div>
                                 </div>
                             </div>
@@ -126,24 +151,17 @@
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <label class="form-label fw-medium">Contact Name</label>
-                                        <input asp-for="UserDetails.EmergencyContactName" class="form-control border-danger-subtle" />
+                                        <input asp-for="EditCommand.EmergencyContactName" class="form-control border-danger-subtle" />
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label fw-medium">Contact Phone</label>
-                                        <input asp-for="UserDetails.EmergencyContactPhone" class="form-control border-danger-subtle" />
+                                        <input asp-for="EditCommand.EmergencyContactPhone" class="form-control border-danger-subtle" />
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                @if (!string.IsNullOrEmpty(Model.UserDetails.InternalNotes))
-                {
-                    <div class="alert alert-warning mt-4 small shadow-sm border-0">
-                        <strong><i class="bi bi-info-circle me-1"></i> Note:</strong> Your account has internal administrator notes. These cannot be edited by users.
-                    </div>
-                }
             </div>
         </div>
     </form>

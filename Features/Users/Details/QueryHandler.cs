@@ -9,12 +9,12 @@ using OnSet.Features.Projects.Details;
 
 namespace OnSet.Features.Users.Details
 {
-    public class CommandHandler : IRequestHandler<Query, Model> 
+    public class QueryHandler : IRequestHandler<Query, Model> 
     {
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
 
-        public CommandHandler(UserManager<User> userManager, IMapper mapper)
+        public QueryHandler(UserManager<User> userManager, IMapper mapper)
         {
             _userManager = userManager;
             _mapper = mapper;

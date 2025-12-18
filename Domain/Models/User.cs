@@ -111,5 +111,46 @@ namespace OnSet.Domain.Models
                 CreatedAt = DateTime.UtcNow
             };
         }
+
+        public void UpdateProfile(
+            FirstName firstName,
+            LastName lastName,
+            ProjectRoles? mainOccupationRole,
+            int? yearsExperience,
+            string? bio,
+            string? avatarUrl,
+            Address? homeAddress,
+            List<Languages>? spokenLanguages,
+            bool isAvailableForBooking,
+            DateTime? nextAvailableDate,
+            EmergencyContact? emergencyContact)
+        {
+            bio = string.IsNullOrWhiteSpace(bio) ? null : bio;
+            avatarUrl = string.IsNullOrWhiteSpace(avatarUrl) ? null : avatarUrl;
+
+            if (yearsExperience is < 0 or > 80)
+            { 
+                throw new Exception("Years of experience must be between 0 and 80."); 
+            }
+
+            if (!isAvailableForBooking)
+            {
+                nextAvailableDate = null;
+            }
+
+            FirstName = firstName;
+            LastName = lastName;
+            MainOccupationRole = mainOccupationRole;
+            YearsExperience = yearsExperience;
+            Bio = bio;
+            AvatarUrl = avatarUrl;
+            HomeAddress = homeAddress;
+            SpokenLanguages = spokenLanguages ?? new List<Languages>();
+            IsAvailableForBooking = isAvailableForBooking;
+            NextAvailableDate = nextAvailableDate;
+            EmergencyContact = emergencyContact;
+
+            UpdatedAt = DateTime.UtcNow;
+        }
     }
 }
