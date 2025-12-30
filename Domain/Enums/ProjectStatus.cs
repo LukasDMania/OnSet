@@ -4,6 +4,8 @@
     {
         PLANNING,
         ONGOING,
+        ONHOLD,
         COMPLETED,
+        CANCELLED
     }
 }

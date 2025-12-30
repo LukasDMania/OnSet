@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace OnSet.Features.Projects.Edit
+namespace OnSet.Features.Projects.Details
 {
     public class QueryValidator : AbstractValidator<Query>
     {

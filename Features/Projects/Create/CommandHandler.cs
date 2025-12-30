@@ -1,37 +1,70 @@
 ﻿using MediatR;
 using OnSet.Domain.Models;
+using OnSet.Domain.ValueObjects;
 using OnSet.Infrastructure.Data;
+using System.Security.Claims;
 
 namespace OnSet.Features.Projects.Create
 {
-    public class CommandHandler : IRequestHandler<Command, int>
+    public class CommandHandler : IRequestHandler<Command, CommandResult>
     {
-        private readonly OnSetDbContext _db;
+        private readonly OnSetDbContext _context;
+        private readonly ICurrentUserService _currentUserService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public CommandHandler(OnSetDbContext db)
+        public CommandHandler(
+            OnSetDbContext context,
+            IHttpContextAccessor httpContextAccessor,
+            ICurrentUserService currentUserService)
         {
-            _db = db;
+            _context = context;
+            _httpContextAccessor = httpContextAccessor;
+            _currentUserService = currentUserService;
         }
 
-        public async Task<int> Handle(Command request, CancellationToken cancellationToken)
+        public async Task<CommandResult> Handle(Command request, CancellationToken cancellationToken)
         {
+            var userId = _currentUserService.UserId;
+
+            if (string.IsNullOrWhiteSpace(userId))
+            {
+                return new CommandResult
+                {
+                    Success = false,
+                    Errors = new[] { "User is not authenticated." }
+                };
+            }
+
+            Address? location = null;
+
+            if (!string.IsNullOrWhiteSpace(request.Street))
+            {
+                location = new Address(
+                    request.Street!,
+                    request.City!,
+                    request.Province,
+                    request.Country!,
+                    request.ZipCode!
+                );
+            }
+
             var project = Project.Create(
-        
-                name: request.Name,
+                name: request.ProjectName,
                 startDate: request.StartDate,
                 status: request.Status,
-                ownerId: request.CurrentUserId,
                 creatorRole: request.CreatorRole,
+                ownerId: userId,
                 description: request.Description,
                 clientName: request.ClientName,
                 referenceCode: request.ReferenceCode,
-                budget: request.Budget
+                budget: request.Budget,
+                location: location
             );
 
-            await _db.Projects.AddAsync(project, cancellationToken);
-            await _db.SaveChangesAsync(cancellationToken);
+            _context.Projects.Add(project);
+            await _context.SaveChangesAsync(cancellationToken);
 
-            return project.Id;
+            return new CommandResult { Success = true };
         }
     }
 }

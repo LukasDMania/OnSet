@@ -2,51 +2,95 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using OnSet.Domain.Enums;
 using OnSet.Domain.Models;
 using OnSet.Features.Projects.Create;
+using OnSet.Utils;
+using System.ComponentModel.DataAnnotations;
 
 namespace OnSet.Pages.Projects
 {
-    public class Create : PageModel
+    public class CreateModel : PageModel
     {
         private readonly IMediator _mediator;
-        private readonly UserManager<User> _userManager;
 
-        public Create(IMediator mediator, UserManager<User> userManager)
+        public CreateModel(IMediator mediator)
         {
             _mediator = mediator;
-            _userManager = userManager;
         }
 
         [BindProperty]
         public InputModel Input { get; set; } = new();
 
+        public class InputModel
+        {
+            [Required]
+            public string ProjectName { get; set; }
+
+            public string? Description { get; set; }
+            public string? ClientName { get; set; }
+            public string? ReferenceCode { get; set; }
+
+            [Required]
+            [DataType(DataType.Date)]
+            public DateTime StartDate { get; set; }
+
+            [DataType(DataType.Date)]
+            public DateTime? EndDate { get; set; }
+
+            public decimal? Budget { get; set; }
+
+            [Required]
+            public ProjectStatus Status { get; set; }
+
+            [Required]
+            public ProjectRoles CreatorRole { get; set; }
+
+            public string? Street { get; set; }
+            public string? City { get; set; }
+            public string? Province { get; set; }
+            public string? Country { get; set; }
+            public string? ZipCode { get; set; }
+        }
+
+        public void OnGet() { }
+
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
+                return Page();
+
+            var command = new Command
             {
-                // UI validation fails (e.g., Required fields missing)  
+                ProjectName = Input.ProjectName,
+                Description = Input.Description,
+                ClientName = Input.ClientName,
+                ReferenceCode = Input.ReferenceCode,
+                StartDate = Input.StartDate,
+                EndDate = Input.EndDate,
+                Budget = Input.Budget,
+                Status = Input.Status,
+                CreatorRole = Input.CreatorRole,
+                Street = Input.Street,
+                City = Input.City,
+                Province = Input.Province,
+                Country = Input.Country,
+                ZipCode = Input.ZipCode
+            };
+
+            var result = await _mediator.Send(command);
+
+            if (!result.Success)
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error);
+                }
+
                 return Page();
             }
 
-            var currentUserId = _userManager.GetUserId(User);
-
-            var command = new Command
-            (
-                Name: Input.Name,
-                StartDate: Input.StartDate,
-                Status: Input.Status,
-                Description: Input.Description,
-                ClientName: null,
-                ReferenceCode: null,
-                Budget: null,
-                CreatorRole: Input.CreatorRole,
-                CurrentUserId: currentUserId
-            );
-
-            var result = await _mediator.Send(command);
-            return RedirectToPage("./Details", new { id = result });
-            //return this.RedirectToPageJson("Index");
+            return RedirectToPage(PageRoutes.ProjectsIndex);
         }
     }
 }

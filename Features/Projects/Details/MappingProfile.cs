@@ -1,7 +1,14 @@
-﻿namespace OnSet.Features.Projects.Details
+﻿using AutoMapper;
+using OnSet.Domain.Models;
+using OnSet.Features.Users.Details;
+
+namespace OnSet.Features.Projects.Details
 {
-    public class MappingProfile
+    public class MappingProfile : Profile
     {
-        //automapper profile
+        public MappingProfile()
+        {
+            CreateProjection<Project, Model>();
+        }
     }
 }

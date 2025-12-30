@@ -70,7 +70,7 @@ namespace OnSet.Domain.Models
 
         private void AddCreator(string creatorId, ProjectRoles role)
         {
-            var userProject = UserProject.Create(creatorId, role);
+            var userProject = UserProject.Create(creatorId, role, this);
             this.UserProjects.Add(userProject);
         }
 
@@ -112,6 +112,43 @@ namespace OnSet.Domain.Models
             project.AddCreator(ownerId, creatorRole);
 
             return project;
+        }
+
+        public void UpdateDetails(
+        string name,
+        DateTime startDate,
+        ProjectStatus status,
+        string? description = null,
+        string? clientName = null,
+        string? referenceCode = null,
+        DateTime? endDate = null,
+        decimal? budget = null,
+        Address? location = null)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException("Project name is required.");
+
+            if (startDate == default)
+                throw new ArgumentException("Start date is required.");
+
+            if (endDate.HasValue && endDate.Value < startDate)
+                throw new ArgumentException("End date cannot be before the start date.");
+
+            if (budget.HasValue && budget.Value < 0)
+                throw new ArgumentException("Budget cannot be negative.");
+
+            Name = name.Trim();
+            Description = string.IsNullOrWhiteSpace(description) ? null : description;
+            ClientName = string.IsNullOrWhiteSpace(clientName) ? null : clientName;
+            ReferenceCode = string.IsNullOrWhiteSpace(referenceCode) ? null : referenceCode;
+
+            StartDate = startDate;
+            EndDate = endDate;
+            Budget = budget;
+            Status = status;
+            Location = location;
+
+            UpdatedAt = DateTime.UtcNow;
         }
     }
 }

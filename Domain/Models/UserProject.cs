@@ -16,16 +16,28 @@ namespace OnSet.Domain.Models
 
         private UserProject() { }
 
-        public static UserProject Create(string userId, ProjectRoles role)
+        public static UserProject Create(string userId, ProjectRoles role, Project project)
         {
             return new UserProject
             {
                 UserId = userId,
-                RoleOnProject = role
+                RoleOnProject = role,
+                Project = project
             };
         }
 
-        public void ChangeRole(ProjectRoles newRole)
+        //Overload for adding members to an EXISTING project
+        public static UserProject Create(string userId, ProjectRoles role, int projectId)
+        {
+            return new UserProject
+            {
+                UserId = userId,
+                RoleOnProject = role,
+                ProjectId = projectId
+            };
+        }
+
+        public void ChangeRoleOnProject(ProjectRoles newRole)
         {
             this.RoleOnProject = newRole;
         }

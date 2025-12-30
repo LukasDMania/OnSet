@@ -12,7 +12,7 @@ namespace OnSet.Pages.Projects
         public Model Data { get; private set; }
         public async Task OnGetAsync(Query query) 
         {
-            await _mediator.Send(query);
+            Data = await _mediator.Send(query);
         }
     }
 }
