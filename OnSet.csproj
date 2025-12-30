@@ -35,7 +35,6 @@
 
   <ItemGroup>
     <Folder Include="Features\Projects\Delete\" />
-    <Folder Include="Features\Projects\Edit\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 

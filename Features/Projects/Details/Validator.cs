@@ -2,9 +2,9 @@
 
 namespace OnSet.Features.Projects.Details
 {
-    public class QueryValidator : AbstractValidator<Query>
+    public class Validator : AbstractValidator<Query>
     {
-        public QueryValidator()
+        public Validator()
         {
             RuleFor(p => p.Id).NotNull();
         }
