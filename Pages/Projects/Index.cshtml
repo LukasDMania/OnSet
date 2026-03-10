@@ -1,0 +1,106 @@
+@page
+@model OnSet.Pages.Projects.IndexModel
+@{
+    ViewData["Title"] = "Projects";
+}
+
+<div class="container py-5">
+    <div class="row mb-4 align-items-center">
+        <div class="col-lg-7">
+            <h1 class="fw-bold mb-1">Your projects</h1>
+            <div class="text-muted small">
+                Only productions you are a member of are visible here. Join a project with a code shared by the producer.
+            </div>
+        </div>
+        <div class="col-lg-5 text-lg-end mt-3 mt-lg-0">
+            <a asp-page="./Create" class="btn btn-primary shadow-sm me-2">
+                <i class="bi bi-plus-square me-2"></i>Create project
+            </a>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-8">
+            @if (Model.Data.Projects.Count == 0)
+            {
+                <div class="alert alert-dark border-0 shadow-sm d-flex align-items-center">
+                    <i class="bi bi-shield-lock me-3"></i>
+                    <div>
+                        <div class="fw-semibold">No visible projects yet</div>
+                        <div class="small text-muted">
+                            Create a new production, or join an existing one using a private project code from the production team.
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header border-0 bg-transparent d-flex justify-content-between align-items-center">
+                        <span class="small text-uppercase text-muted fw-bold">Projects you’re part of</span>
+                        <span class="badge bg-secondary bg-opacity-50">@Model.Data.Projects.Count</span>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0 align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Client</th>
+                                    <th>Code</th>
+                                    <th>Start</th>
+                                    <th>End</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var p in Model.Data.Projects)
+                                {
+                                    <tr>
+                                        <td class="fw-semibold">@p.Name</td>
+                                        <td>@(p.ClientName ?? "—")</td>
+                                        <td class="text-monospace small">@(p.ReferenceCode ?? "—")</td>
+                                        <td>@p.StartDate.ToShortDateString()</td>
+                                        <td>@(p.EndDate?.ToShortDateString() ?? "—")</td>
+                                        <td class="text-end">
+                                            <a asp-page="./Details" asp-route-id="@p.Id" class="btn btn-sm btn-outline-light">
+                                                View
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm mb-3">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-2 d-flex align-items-center">
+                        <i class="bi bi-key-fill text-warning me-2"></i>
+                        Join with project code
+                    </h5>
+                    <p class="small text-muted mb-3">
+                        Productions are private. Enter the secret code you received from the production office to join a project.
+                    </p>
+                    <form method="post" asp-page-handler="Join">
+                        <div class="mb-3">
+                            <label class="form-label fw-medium" for="JoinCode">Project code</label>
+                            <input id="JoinCode" name="JoinCode" class="form-control" placeholder="e.g. TOP-SECRET-9F2K" />
+                        </div>
+                        <button type="submit" class="btn btn-warning w-100">
+                            <i class="bi bi-box-arrow-in-right me-1"></i>Join project
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="small text-muted">
+                Project names and details only appear after you successfully join. Codes are unique per production and can be rotated by the owner.
+            </div>
+        </div>
+    </div>
+</div>
+

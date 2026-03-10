@@ -1,9 +1,11 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OnSet.Features.Projects.Details;
 
 namespace OnSet.Pages.Projects
 {
+    [Authorize(Policy = "Authenticated")]
     public class Details : PageModel
     {
         private readonly IMediator _mediator;

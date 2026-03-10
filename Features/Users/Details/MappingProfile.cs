@@ -1,4 +1,4 @@
-﻿using OnSet.Domain.Models;
+using OnSet.Domain.Models;
 using AutoMapper;
 using OnSet.Domain.Enums;
 
@@ -11,15 +11,15 @@ namespace OnSet.Features.Users.Details
             CreateProjection<User, Model>()
                 .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.FirstName.Value))
                 .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName.Value))
-                .ForMember(dest => dest.MainOccupationRole, opt => opt.MapFrom(src => src.MainOccupationRole.ToString()))
-                .ForMember(dest => dest.Street, opt => opt.MapFrom(src => src.HomeAddress.Street))
-                .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.HomeAddress.City))
-                .ForMember(dest => dest.Province, opt => opt.MapFrom(src => src.HomeAddress.ProvinceOrState))
-                .ForMember(dest => dest.ZipCode, opt => opt.MapFrom(src => src.HomeAddress.ZipCode))
-                .ForMember(dest => dest.Country, opt => opt.MapFrom(src => src.HomeAddress.Country))
-                .ForMember(dest => dest.SpokenLanguages, opt => opt.MapFrom(src => src.SpokenLanguages.Select(l => l.ToString())))
-                .ForMember(dest => dest.EmergencyContactName, opt => opt.MapFrom(src => src.EmergencyContact.Name))
-                .ForMember(dest => dest.EmergencyContactPhone, opt => opt.MapFrom(src => src.EmergencyContact.Phone))
+                .ForMember(dest => dest.MainOccupationRole, opt => opt.MapFrom(src => src.MainOccupationRole))
+                .ForMember(dest => dest.Street, opt => opt.MapFrom(src => src.HomeAddress != null ? src.HomeAddress.Street : null))
+                .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.HomeAddress != null ? src.HomeAddress.City : null))
+                .ForMember(dest => dest.Province, opt => opt.MapFrom(src => src.HomeAddress != null ? src.HomeAddress.ProvinceOrState : null))
+                .ForMember(dest => dest.ZipCode, opt => opt.MapFrom(src => src.HomeAddress != null ? src.HomeAddress.ZipCode : null))
+                .ForMember(dest => dest.Country, opt => opt.MapFrom(src => src.HomeAddress != null ? src.HomeAddress.Country : null))
+                .ForMember(dest => dest.SpokenLanguages, opt => opt.MapFrom(src => src.SpokenLanguages ?? new List<Languages>()))
+                .ForMember(dest => dest.EmergencyContactName, opt => opt.MapFrom(src => src.EmergencyContact != null ? src.EmergencyContact.Name : null))
+                .ForMember(dest => dest.EmergencyContactPhone, opt => opt.MapFrom(src => src.EmergencyContact != null ? src.EmergencyContact.Phone : null))
                 .ForMember(dest => dest.Projects, opt => opt.MapFrom(src => src.UserProjects))
                 .ForMember(dest => dest.Contracts, opt => opt.MapFrom(src => src.Contracts));
 

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 <head>
     <meta charset="utf-8" />
@@ -10,47 +10,58 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom shadow-sm mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">OnSet</a>
+                <a class="navbar-brand fw-bold d-flex align-items-center gap-2" asp-area="" asp-page="/Index">
+                    <span class="badge bg-primary rounded-circle" style="width: 10px; height: 10px;"></span>
+                    <span>OnSet</span>
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav me-auto mb-2 mb-sm-0">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">@OnSet.Resources.Resource.Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Users/Register">Register</a>
+                            <a class="nav-link" asp-area="" asp-page="/Index">Dashboard</a>
                         </li>
                         @if (User.Identity?.IsAuthenticated == true)
                         {
                             <li class="nav-item">
-                                <p>@User.Identity.Name</p>
+                                <a class="nav-link" asp-area="" asp-page="/Projects/Index">Projects</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-page="/Users/Details">My Details</a>
+                                <a class="nav-link" asp-area="" asp-page="/Users/Details">My Profile</a>
+                            </li>
+                        }
+                    </ul>
+
+                    <ul class="navbar-nav ms-auto mb-2 mb-sm-0">
+                        <li class="nav-item me-2 d-flex align-items-center">
+                            @if (User.Identity?.IsAuthenticated == true)
+                            {
+                                <span class="small text-muted me-2">Signed in as</span>
+                                <span class="badge bg-secondary bg-opacity-75">@User.Identity!.Name</span>
+                            }
+                        </li>
+
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                            <li class="nav-item">
+                                <form asp-page="/Users/Logout" method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-sm btn-outline-light ms-2">Logout</button>
+                                </form>
                             </li>
                         }
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Users/Login">Login</a>
+                                <a class="btn btn-sm btn-outline-light me-2" asp-area="" asp-page="/Users/Login">Log in</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Users/Register">Register</a>
+                                <a class="btn btn-sm btn-primary" asp-area="" asp-page="/Users/Register">Sign up</a>
                             </li>
                         }
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Projects/Details" asp-route-id="1">proj details</a>
-                        </li>
-
                     </ul>
                 </div>
             </div>
@@ -62,9 +73,10 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - OnSet - <a asp-area="" asp-page="/Privacy">Privacy</a>
+    <footer class="border-top footer text-muted mt-auto">
+        <div class="container py-3 small d-flex justify-content-between align-items-center">
+            <span>&copy; 2025 - OnSet</span>
+            <a asp-area="" asp-page="/Privacy" class="link-secondary text-decoration-none">Privacy</a>
         </div>
     </footer>
 

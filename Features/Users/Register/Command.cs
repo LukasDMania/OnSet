@@ -1,10 +1,11 @@
-﻿using MediatR;
+using MediatR;
 using OnSet.Domain.Enums;
+using OnSet.Infrastructure.Results;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnSet.Features.Users.Register
 {
-    public record Command : IRequest<CommandResult>
+    public record Command : IRequest<Result>
     {
         [Required]
         [EmailAddress]
@@ -42,11 +43,5 @@ namespace OnSet.Features.Users.Register
         public DateTime? NextAvailableDate { get; init; }
         public string? EmergencyContactName { get; init; }
         public string? EmergencyContactPhone { get; init; }
-    }
-
-    public class CommandResult
-    {
-        public bool Success { get; set; }
-        public IEnumerable<string> Errors { get; set; } = Array.Empty<string>();
     }
 }

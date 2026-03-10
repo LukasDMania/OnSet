@@ -1,13 +1,14 @@
-﻿using MediatR;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using OnSet.Domain.Enums;
 using OnSet.Domain.Models;
 using OnSet.Domain.ValueObjects;
+using OnSet.Infrastructure.Results;
 using OnSet.Utils;
 
 namespace OnSet.Features.Users.Register
 {
-    public class CommandHandler : IRequestHandler<Command, CommandResult>
+    public class CommandHandler : IRequestHandler<Command, Result>
     {
         private readonly UserManager<User> _userManager;
 
@@ -16,7 +17,7 @@ namespace OnSet.Features.Users.Register
             _userManager = userManager;
         }
 
-        public async Task<CommandResult> Handle(Command request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(Command request, CancellationToken cancellationToken)
         {
             var firstName = new FirstName(request.FirstName);
             var lastName = new LastName(request.LastName);
@@ -71,15 +72,11 @@ namespace OnSet.Features.Users.Register
             var result = await _userManager.CreateAsync(user, request.Password);
             if (!result.Succeeded)
             {
-                return new CommandResult
-                {
-                    Success = false,
-                    Errors = result.Errors is not null ? GetErrors(result.Errors) : new[] { "Unknown error" }
-                };
+                return Result.Fail(result.Errors is not null ? GetErrors(result.Errors) : new[] { "Unknown error" });
             }
             await _userManager.AddToRoleAsync(user, Roles.StandardUser);
 
-            return new CommandResult { Success = true };
+            return Result.Ok();
         }
 
         private IEnumerable<string> GetErrors(IEnumerable<IdentityError> errors)

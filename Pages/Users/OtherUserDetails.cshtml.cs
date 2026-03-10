@@ -1,10 +1,12 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OnSet.Features.Users.OtherUserDetails;
 
 namespace OnSet.Pages.Users
 {
+    [Authorize(Policy = "Authenticated")]
     public class OtherUserDetailsModel : PageModel
     {
         public readonly IMediator _mediator;

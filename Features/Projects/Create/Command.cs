@@ -1,10 +1,11 @@
-﻿using MediatR;
+using MediatR;
 using OnSet.Domain.Enums;
+using OnSet.Infrastructure.Results;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnSet.Features.Projects.Create
 {
-    public record Command : IRequest<CommandResult>
+    public record Command : IRequest<Result>
     {
         [Required]
         [StringLength(100)]
@@ -41,11 +42,5 @@ namespace OnSet.Features.Projects.Create
         public string? Province { get; init; }
         public string? Country { get; init; }
         public string? ZipCode { get; init; }
-    }
-
-    public class CommandResult
-    {
-        public bool Success { get; set; }
-        public IEnumerable<string> Errors { get; set; } = Array.Empty<string>();
     }
 }

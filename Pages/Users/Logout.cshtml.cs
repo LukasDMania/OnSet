@@ -1,10 +1,12 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OnSet.Features.Users.Logout;
 
 namespace OnSet.Pages.Users
 {
+    [Authorize(Policy = "Authenticated")]
     public class LogoutModel : PageModel
     {
         private readonly IMediator _mediator;

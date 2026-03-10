@@ -54,7 +54,13 @@ namespace OnSet
             builder.Services.AddTransient<IEmailSender, NoOpEmailSender>();
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+            builder.Services.AddScoped<IStorageService, LocalStorageService>();
 
+
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Authenticated", policy => policy.RequireAuthenticatedUser());
+            });
 
             // Add services to the container.
             builder.Services.AddRazorPages();

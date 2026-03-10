@@ -1,0 +1,112 @@
+﻿# OnSet Code Style & Conventions
+
+This document describes the **official code style**, **naming conventions**, and **general guidelines** for the OnSet project.  
+All contributors should follow these rules for **new code** and, where practical, when **touching existing code**.
+
+---
+
+## 1. General Principles
+
+- **Consistency over personal preference**: Match the existing style in the file even if it differs slightly from this guide, unless you’re doing a focused refactor.
+- **Clarity over cleverness**: Prefer readable, explicit code to “smart” one‑liners.
+- **Small, focused changes**: Keep pull requests and commits focused on one concern.
+- **Fail fast**: Prefer validating inputs early and throwing/returning errors as soon as possible.
+
+---
+
+## 2. Project Structure & Organization
+
+- **Layers**:
+  - `Domain`: Entities, value objects, enums, domain services, business rules.
+  - `Application` (or `Features`): Commands, queries, handlers, DTOs, validation, mapping.
+  - `Infrastructure`: EF Core `DbContext`, repositories, external services, storage, behaviors.
+  - `Pages` (Razor Pages): UI models, handlers, and front‑end views.
+  - `Utils` / `Common`: Cross‑cutting helpers that don’t fit a specific feature.
+
+- **Feature folders**:
+  - Group vertical slices by feature: `Features/Users`, `Features/Projects`, etc.
+  - Inside each feature, prefer:
+    - `Command.cs`, `CommandHandler.cs`, `Validator.cs` for writes.
+    - `Query.cs`, `QueryHandler.cs` for reads.
+    - `Model.cs` or `Dto.cs` for view models.
+    - `MappingProfile.cs` for AutoMapper configuration.
+
+- **File naming**:
+  - One **public class / record / interface** per file.
+  - File name matches the type name exactly (`User.cs`, `ProjectDetailsQueryHandler.cs`).
+
+---
+
+## 3. Naming Conventions
+
+### 3.1 C# Types, Members, and Locals
+
+- **Namespaces**: `PascalCase`, dot‑separated, aligned with folder structure.
+  - Example: `OnSet.Features.Users.Details`.
+
+- **Classes / Records / Structs / Enums**: `PascalCase`
+  - Example: `User`, `Project`, `FileMetaData`, `DocumentTags`.
+
+- **Interfaces**: `IPascalCase` with `I` prefix.
+  - Example: `IStorageService`, `IUserRepository`.
+
+- **Methods**: `PascalCase`, verbs or verb phrases.
+  - Example: `GetByIdAsync`, `Handle`, `Validate`, `MapToModel`.
+
+- **Properties**: `PascalCase`, nouns or adjectives.
+  - Example: `FirstName`, `CreatedAt`, `IsActive`.
+
+- **Fields**:
+  - Private readonly fields: `_camelCase` with leading underscore.
+    - Example: `_dbContext`, `_logger`, `_storageService`.
+  - Public fields (rare): `PascalCase` (prefer properties).
+
+- **Local variables & parameters**: `camelCase`.
+  - Example: `projectId`, `userId`, `fileMetaData`, `cancellationToken`.
+
+- **Events**: `PascalCase`, usually verb in past tense or noun phrase.
+  - Example: `UserRegistered`, `ProjectUpdated`.
+
+- **Enum values**: `PascalCase`.
+  - Example: `DocumentTags.Script`, `DocumentTags.Storyboard`.
+
+### 3.2 Asynchronous Code
+
+- **Async methods**: Must end with `Async`.
+  - Example: `GetUserByIdAsync`, `SaveChangesAsync`.
+- **Cancellation tokens**:
+  - Parameter name: `cancellationToken`.
+  - Passed through to EF Core / async methods where available.
+
+---
+
+## 4. Formatting & Layout
+
+### 4.1 Braces & Indentation
+
+- **Braces**: All blocks use braces, even for single statements.
+  - K&R / Allman style (standard C#): opening brace on new line.
+  - Example:
+    ```csharp
+    if (condition)
+    {
+        DoSomething();
+    }
+    ```
+
+- **Indentation**:
+  - Use **4 spaces** for indentation.
+  - No tabs in committed code.
+
+### 4.2 Line Length & Wrapping
+
+- Try to keep lines under **120 characters**.
+- Break long method signatures and LINQ chains onto multiple lines, aligning logically.
+
+```csharp
+public async Task<UserDetailsModel> Handle(
+    Query request,
+    CancellationToken cancellationToken)
+{
+    ...
+}

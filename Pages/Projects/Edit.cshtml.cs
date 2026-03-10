@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OnSet.Features.Projects.Edit;
@@ -6,6 +7,7 @@ using OnSet.Utils;
 
 namespace OnSet.Pages.Projects
 {
+    [Authorize(Policy = "Authenticated")]
     public class EditModel : PageModel
     {
         private readonly IMediator _mediator;

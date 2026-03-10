@@ -1,9 +1,9 @@
-﻿using AutoMapper;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Azure.Core;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using OnSet.Infrastructure.Data;
+using OnSet.Application.Exceptions;
 
 namespace OnSet.Features.Projects.Edit
 {
@@ -28,7 +28,7 @@ namespace OnSet.Features.Projects.Edit
 
             if (model == null)
             {
-                throw new KeyNotFoundException($"Project with ID {message.Id} not found.");
+                throw new NotFoundException("Project", message.Id);
             }
 
             return model;

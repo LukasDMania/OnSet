@@ -1,4 +1,6 @@
-﻿namespace OnSet.Utils
+using OnSet.Application.Exceptions;
+
+namespace OnSet.Utils
 {
     public static class EnumConverter
     {
@@ -14,7 +16,7 @@
                 }
                 else
                 {
-                    throw new Exception($"Invalid value '{value}' for enum {typeof(T).Name}");
+                    throw new EnumConversionException($"Invalid value '{value}' for enum {typeof(T).Name}");
                 }
             }
 
@@ -24,12 +26,12 @@
         public static T ToEnum<T>(string value) where T : struct, Enum
         {
             if (string.IsNullOrWhiteSpace(value))
-                throw new Exception($"Value cannot be null or empty for enum {typeof(T).Name}");
+                throw new EnumConversionException($"Value cannot be null or empty for enum {typeof(T).Name}");
 
             if (Enum.TryParse<T>(value, true, out var enumValue))
                 return enumValue;
 
-            throw new Exception($"Invalid value '{value}' for enum {typeof(T).Name}");
+            throw new EnumConversionException($"Invalid value '{value}' for enum {typeof(T).Name}");
         }
 
 

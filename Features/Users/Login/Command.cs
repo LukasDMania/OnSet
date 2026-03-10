@@ -1,9 +1,10 @@
-﻿using MediatR;
+using MediatR;
+using OnSet.Infrastructure.Results;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnSet.Features.Users.Login
 {
-    public record Command : IRequest<CommandResult>
+    public record Command : IRequest<Result>
     {
         [Required]
         [EmailAddress]
@@ -15,11 +16,5 @@ namespace OnSet.Features.Users.Login
 
         [Display(Name = "Remember Me")]
         public bool RememberMe { get; init; } = false;
-    }
-
-    public class CommandResult
-    {
-        public bool Success { get; set; }
-        public IEnumerable<string> Errors { get; set; } = Array.Empty<string>();
     }
 }

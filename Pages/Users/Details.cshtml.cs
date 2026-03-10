@@ -1,18 +1,15 @@
 using MediatR;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OnSet.Domain.Enums;
-using OnSet.Domain.Models;
 using OnSet.Features.Users.Details;
-using OnSet.Features.Users.Register;
-using System.CodeDom.Compiler;
-using System.ComponentModel.DataAnnotations;
 using Command = OnSet.Features.Users.Edit.Command;
 
 namespace OnSet.Pages.Users
 {
+    [Authorize(Policy = "Authenticated")]
     public class DetailsModel : PageModel
     {
         private readonly IMediator _mediator;
@@ -65,9 +62,9 @@ namespace OnSet.Pages.Users
                 LastName = UserDetails.LastName,
                 Bio = UserDetails.Bio,
                 AvatarUrl = UserDetails.AvatarUrl,
-                MainOccupationRole = UserDetails.MainOccupationRole,
+                MainOccupationRole = UserDetails.MainOccupationRole?.ToString(),
                 YearsExperience = UserDetails.YearsExperience,
-                SpokenLanguages = UserDetails.SpokenLanguages,
+                SpokenLanguages = UserDetails.SpokenLanguages.Select(l => l.ToString()).ToList(),
                 IsAvailableForBooking = UserDetails.IsAvailableForBooking,
                 NextAvailableDate = UserDetails.NextAvailableDate,
                 Street = UserDetails.Street,

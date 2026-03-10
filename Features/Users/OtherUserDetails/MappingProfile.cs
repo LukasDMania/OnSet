@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+using AutoMapper;
+using OnSet.Domain.Enums;
 using OnSet.Domain.Models;
 
 namespace OnSet.Features.Users.OtherUserDetails
@@ -13,11 +14,9 @@ namespace OnSet.Features.Users.OtherUserDetails
             .ForMember(d => d.LastName,
                 o => o.MapFrom(s => s.LastName.Value))
             .ForMember(d => d.MainOccupationRole,
-                o => o.MapFrom(s => s.MainOccupationRole != null
-                    ? s.MainOccupationRole.ToString()
-                    : null))
+                o => o.MapFrom(s => s.MainOccupationRole))
             .ForMember(d => d.SpokenLanguages,
-                o => o.MapFrom(s => s.SpokenLanguages.Select(l => l.ToString())));
+                o => o.MapFrom(s => s.SpokenLanguages ?? new List<Languages>()));
         }
     }
 }

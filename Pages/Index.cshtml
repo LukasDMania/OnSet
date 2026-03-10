@@ -1,10 +1,63 @@
-﻿@page
-@model IndexModel
+@page
+@model OnSet.Pages.IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "OnSet – Production Toolkit";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container py-5">
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-8 text-center">
+            <h1 class="display-5 fw-bold mb-3">OnSet – Manage your productions</h1>
+            <p class="lead text-muted">
+                Create projects, manage your crew profiles, and prepare the foundation for callsheets and contracts – all in one place.
+            </p>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-2"><i class="bi bi-person me-2 text-primary"></i>Your account</h5>
+                    <p class="text-muted small mb-3">
+                        Register, log in, and maintain your personal production profile.
+                    </p>
+                    <div class="d-grid gap-2">
+                        <a asp-page="/Users/Register" class="btn btn-primary btn-sm">Create account</a>
+                        <a asp-page="/Users/Login" class="btn btn-outline-primary btn-sm">Log in</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-2"><i class="bi bi-briefcase me-2 text-success"></i>Projects</h5>
+                    <p class="text-muted small mb-3">
+                        Create and edit production projects, including budget, dates, and primary location.
+                    </p>
+                    <div class="d-grid gap-2">
+                        <a asp-page="/Projects/Index" class="btn btn-success btn-sm">View all projects</a>
+                        <a asp-page="/Projects/Create" class="btn btn-outline-success btn-sm">Create new project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-2"><i class="bi bi-person-badge me-2 text-dark"></i>Your profile</h5>
+                    <p class="text-muted small mb-3">
+                        Once logged in, manage your skills, availability, and emergency contact details.
+                    </p>
+                    <div class="d-grid gap-2">
+                        <a asp-page="/Users/Details" class="btn btn-dark btn-sm">Go to my profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+

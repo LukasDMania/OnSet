@@ -1,4 +1,4 @@
-﻿@page "{id}"
+@page "{id}"
 @model OnSet.Pages.Users.OtherUserDetailsModel
 @{
     ViewData["Title"] = $"{Model.OtherUserDetails?.FirstName}'s Profile";
@@ -38,7 +38,7 @@ else
                             <span class="badge rounded-pill bg-success px-3">Available</span>
                         }
                     </div>
-                    <p class="text-muted fs-5 mb-2">@(user.MainOccupationRole ?? "Professional")</p>
+                    <p class="text-muted fs-5 mb-2">@(user.MainOccupationRole?.ToString() ?? "Professional")</p>
                     <div class="d-flex flex-wrap justify-content-center justify-content-md-start gap-3 text-muted small">
                         <span><i class="bi bi-envelope me-1"></i> @user.Email</span>
                         @if (!string.IsNullOrEmpty(user.PhoneNumber))
@@ -76,7 +76,7 @@ else
                                 {
                                     @foreach (var lang in user.SpokenLanguages)
                                     {
-                                        <span class="badge bg-light text-dark border">@lang</span>
+                                        <span class="badge bg-light text-dark border">@lang.ToString()</span>
                                     }
                                 }
                                 else

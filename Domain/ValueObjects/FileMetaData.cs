@@ -1,4 +1,7 @@
-﻿using OnSet.Domain.ValueObjects;
+using System.IO;
+
+namespace OnSet.Domain.ValueObjects;
+
 public class FileMetadata : ValueObject
 {
     public string FileName { get; private set; }
@@ -16,14 +19,14 @@ public class FileMetadata : ValueObject
         FileName = fileName.Trim();
         Extension = Path.GetExtension(fileName)?.TrimStart('.').ToLower() ?? "";
         SizeBytes = sizeBytes;
-        MimeType = mimeType?.Trim() ?? "application/octet-stream";
+        MimeType = string.IsNullOrWhiteSpace(mimeType) ? "application/octet-stream" : mimeType.Trim();
     }
 
     protected override IEnumerable<object> GetEqualityComponents()
     {
-        yield return FileName.ToLower();
+        yield return FileName.ToLowerInvariant();
         yield return Extension;
         yield return SizeBytes;
-        yield return MimeType.ToLower();
+        yield return MimeType.ToLowerInvariant();
     }
 }

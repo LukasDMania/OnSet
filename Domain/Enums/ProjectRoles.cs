@@ -4,6 +4,8 @@
     {
         PRODUCTION,
         ACTOR,
-
+        CAMERA,
+        SOUND,
+        DIRECTOR,
     }
 }

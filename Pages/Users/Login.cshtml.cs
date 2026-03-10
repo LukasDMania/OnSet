@@ -1,11 +1,14 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OnSet.Features.Users.Login;
+using OnSet.Infrastructure.Results;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnSet.Pages.Users
 {
+    [AllowAnonymous]
     public class LoginModel : PageModel
     {
         private readonly IMediator _mediator;
@@ -53,7 +56,7 @@ namespace OnSet.Pages.Users
                 RememberMe = Input.RememberMe
             };
 
-            var result = await _mediator.Send(command);
+            Result result = await _mediator.Send(command);
 
             if (!result.Success)
             {

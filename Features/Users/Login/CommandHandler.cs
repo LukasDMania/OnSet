@@ -1,10 +1,11 @@
-﻿using MediatR;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using OnSet.Domain.Models;
+using OnSet.Infrastructure.Results;
 
 namespace OnSet.Features.Users.Login
 {
-    public class CommandHandler : IRequestHandler<Command, CommandResult>
+    public class CommandHandler : IRequestHandler<Command, Result>
     {
         private readonly SignInManager<User> _signInManager;
 
@@ -13,7 +14,7 @@ namespace OnSet.Features.Users.Login
             _signInManager = signInManager;
         }
 
-        public async Task<CommandResult> Handle(Command request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(Command request, CancellationToken cancellationToken)
         {
             var result = await _signInManager.PasswordSignInAsync(
                 request.Email,
@@ -24,14 +25,10 @@ namespace OnSet.Features.Users.Login
 
             if (!result.Succeeded)
             {
-                return new CommandResult
-                {
-                    Success = false,
-                    Errors = new List<string> { "Invalid login attempt." }
-                };
+                return Result.Fail("Invalid login attempt.");
             }
 
-            return new CommandResult { Success = true };
+            return Result.Ok();
         }
     }
 }

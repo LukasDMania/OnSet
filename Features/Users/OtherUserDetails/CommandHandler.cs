@@ -1,9 +1,10 @@
-﻿using AutoMapper;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OnSet.Domain.Models;
+using OnSet.Application.Exceptions;
 
 namespace OnSet.Features.Users.OtherUserDetails
 {
@@ -21,7 +22,7 @@ namespace OnSet.Features.Users.OtherUserDetails
         {
             if (string.IsNullOrWhiteSpace(request.Id))
             {
-                throw new ArgumentException("User ID cannot be null");
+                throw new DomainRuleException("User ID cannot be null.");
             }
 
             var model = await _userManager.Users
@@ -31,7 +32,7 @@ namespace OnSet.Features.Users.OtherUserDetails
 
             if (model == null) 
             {
-                throw new KeyNotFoundException($"User with ID {request.Id} not found.");
+                throw new NotFoundException("User", request.Id!);
             }
 
             return model;

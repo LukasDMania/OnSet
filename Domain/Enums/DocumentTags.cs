@@ -3,5 +3,7 @@
     public enum DocumentTags
     {
         CALLSHEET,
+        OTHER,
+
     }
 }

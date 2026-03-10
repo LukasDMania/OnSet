@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using OnSet.Domain.Models;
+using System.Text.Json;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using OnSet.Domain.Enums;
 
 namespace OnSet.Infrastructure.Data
 {
@@ -34,7 +37,25 @@ namespace OnSet.Infrastructure.Data
                 });
 
                 u.OwnsOne(x => x.EmergencyContact);
-                u.OwnsOne(x => x.HomeAddress);
+                u.OwnsOne(x => x.HomeAddress, ha =>
+                {
+                    ha.Property(p => p.Street).IsRequired(false);
+                    ha.Property(p => p.City).IsRequired(false);
+                    ha.Property(p => p.ProvinceOrState).IsRequired(false);
+                    ha.Property(p => p.Country).IsRequired(false);
+                    ha.Property(p => p.ZipCode).IsRequired(false);
+                });
+                u.Navigation(x => x.HomeAddress).IsRequired(false);
+
+                u.Property(x => x.SpokenLanguages)
+                    .HasConversion(
+                        v => JsonSerializer.Serialize(v ?? new List<Languages>(), (JsonSerializerOptions?)null),
+                        v => string.IsNullOrWhiteSpace(v) ? new List<Languages>() : JsonSerializer.Deserialize<List<Languages>>(v, (JsonSerializerOptions?)null) ?? new List<Languages>()
+                    )
+                    .Metadata.SetValueComparer(new ValueComparer<List<Languages>>(
+                        (a, b) => (a ?? new()).SequenceEqual(b ?? new()),
+                        v => (v ?? new()).Aggregate(0, (acc, next) => HashCode.Combine(acc, next.GetHashCode())),
+                        v => v == null ? new List<Languages>() : v.ToList()));
             });
 
             modelBuilder.Entity<Document>(d => {
@@ -44,6 +65,16 @@ namespace OnSet.Infrastructure.Data
                  .WithOne(c => c.Document)
                  .HasForeignKey<Contract>(c => c.DocumentId)
                  .OnDelete(DeleteBehavior.Restrict);
+
+                d.Property(x => x.Tags)
+                    .HasConversion(
+                        v => JsonSerializer.Serialize(v ?? new List<DocumentTags>(), (JsonSerializerOptions?)null),
+                        v => string.IsNullOrWhiteSpace(v) ? new List<DocumentTags>() : JsonSerializer.Deserialize<List<DocumentTags>>(v, (JsonSerializerOptions?)null) ?? new List<DocumentTags>()
+                    )
+                    .Metadata.SetValueComparer(new ValueComparer<List<DocumentTags>>(
+                        (a, b) => (a ?? new()).SequenceEqual(b ?? new()),
+                        v => (v ?? new()).Aggregate(0, (acc, next) => HashCode.Combine(acc, next.GetHashCode())),
+                        v => v == null ? new List<DocumentTags>() : v.ToList()));
             });
 
             modelBuilder.Entity<Contract>(c => {
@@ -52,7 +83,15 @@ namespace OnSet.Infrastructure.Data
             });
 
             modelBuilder.Entity<Project>(p => {
-                p.OwnsOne(x => x.Location);
+                p.OwnsOne(x => x.Location, loc =>
+                {
+                    loc.Property(p => p.Street).IsRequired(false);
+                    loc.Property(p => p.City).IsRequired(false);
+                    loc.Property(p => p.ProvinceOrState).IsRequired(false);
+                    loc.Property(p => p.Country).IsRequired(false);
+                    loc.Property(p => p.ZipCode).IsRequired(false);
+                });
+                p.Navigation(x => x.Location).IsRequired(false);
             });
 
         }

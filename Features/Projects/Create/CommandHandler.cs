@@ -1,44 +1,45 @@
-﻿using MediatR;
+using MediatR;
 using OnSet.Domain.Models;
 using OnSet.Domain.ValueObjects;
 using OnSet.Infrastructure.Data;
-using System.Security.Claims;
+using OnSet.Infrastructure.Results;
 
 namespace OnSet.Features.Projects.Create
 {
-    public class CommandHandler : IRequestHandler<Command, CommandResult>
+    public class CommandHandler : IRequestHandler<Command, Result>
     {
         private readonly OnSetDbContext _context;
         private readonly ICurrentUserService _currentUserService;
-        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public CommandHandler(
             OnSetDbContext context,
-            IHttpContextAccessor httpContextAccessor,
             ICurrentUserService currentUserService)
         {
             _context = context;
-            _httpContextAccessor = httpContextAccessor;
             _currentUserService = currentUserService;
         }
 
-        public async Task<CommandResult> Handle(Command request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(Command request, CancellationToken cancellationToken)
         {
             var userId = _currentUserService.UserId;
 
             if (string.IsNullOrWhiteSpace(userId))
             {
-                return new CommandResult
-                {
-                    Success = false,
-                    Errors = new[] { "User is not authenticated." }
-                };
+                return Result.Fail("User is not authenticated.");
             }
 
             Address? location = null;
 
-            if (!string.IsNullOrWhiteSpace(request.Street))
+            var hasAnyAddressPart =
+                !string.IsNullOrWhiteSpace(request.Street) ||
+                !string.IsNullOrWhiteSpace(request.City) ||
+                !string.IsNullOrWhiteSpace(request.ZipCode) ||
+                !string.IsNullOrWhiteSpace(request.Country) ||
+                !string.IsNullOrWhiteSpace(request.Province);
+
+            if (hasAnyAddressPart)
             {
+                // Validator ensures required address parts when any are provided.
                 location = new Address(
                     request.Street!,
                     request.City!,
@@ -64,7 +65,7 @@ namespace OnSet.Features.Projects.Create
             _context.Projects.Add(project);
             await _context.SaveChangesAsync(cancellationToken);
 
-            return new CommandResult { Success = true };
+            return Result.Ok();
         }
     }
 }

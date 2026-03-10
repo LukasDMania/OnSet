@@ -1,12 +1,15 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OnSet.Domain.Enums;
 using OnSet.Features.Users.Register;
+using OnSet.Infrastructure.Results;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnSet.Pages.Users
 {
+    [AllowAnonymous]
     public class RegisterModel : PageModel
     {
         private readonly IMediator _mediator;
@@ -129,7 +132,7 @@ namespace OnSet.Pages.Users
                 EmergencyContactPhone = Input.EmergencyContactPhone
             };
 
-            var result = await _mediator.Send(command);
+            Result result = await _mediator.Send(command);
 
             if (!result.Success)
             {

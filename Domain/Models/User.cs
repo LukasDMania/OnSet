@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 using OnSet.Domain.Enums;
 using OnSet.Domain.ValueObjects;
+using OnSet.Application.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -130,7 +131,7 @@ namespace OnSet.Domain.Models
 
             if (yearsExperience is < 0 or > 80)
             { 
-                throw new Exception("Years of experience must be between 0 and 80."); 
+                throw new DomainRuleException("Years of experience must be between 0 and 80."); 
             }
 
             if (!isAvailableForBooking)

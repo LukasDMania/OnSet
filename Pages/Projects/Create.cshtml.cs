@@ -1,15 +1,16 @@
 using MediatR;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OnSet.Domain.Enums;
-using OnSet.Domain.Models;
 using OnSet.Features.Projects.Create;
+using OnSet.Infrastructure.Results;
 using OnSet.Utils;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnSet.Pages.Projects
 {
+    [Authorize(Policy = "Authenticated")]
     public class CreateModel : PageModel
     {
         private readonly IMediator _mediator;

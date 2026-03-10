@@ -1,9 +1,10 @@
-﻿using MediatR;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using OnSet.Domain.Enums;
 using OnSet.Domain.ValueObjects;
 using OnSet.Infrastructure.Data;
 using OnSet.Utils;
+using OnSet.Application.Exceptions;
 
 namespace OnSet.Features.Users.Edit
 {
@@ -23,7 +24,7 @@ namespace OnSet.Features.Users.Edit
             // Auth guarding  
             if (request.UserId != _currentUserService.UserId)
             {
-                throw new UnauthorizedAccessException();
+                throw new ForbiddenAccessException();
             }
 
             var user = await _db.Users
@@ -31,13 +32,47 @@ namespace OnSet.Features.Users.Edit
 
             if (user == null)
             {
-                throw new Exception("user not found");
+                throw new NotFoundException("User", request.UserId);
             }
 
             // Enum conversions  
-            var mainRole = EnumConverter.ToEnum<ProjectRoles>(request.MainOccupationRole);
+            ProjectRoles? mainRole = null;
+            if (!string.IsNullOrWhiteSpace(request.MainOccupationRole))
+            {
+                mainRole = EnumConverter.ToEnum<ProjectRoles>(request.MainOccupationRole);
+            }
 
             var spokenLanguagesEnum = EnumConverter.ToEnumList<Languages>(request.SpokenLanguages);
+
+            Address? homeAddress = null;
+            var hasAnyAddressPart =
+                !string.IsNullOrWhiteSpace(request.Street) ||
+                !string.IsNullOrWhiteSpace(request.City) ||
+                !string.IsNullOrWhiteSpace(request.ZipCode) ||
+                !string.IsNullOrWhiteSpace(request.Country) ||
+                !string.IsNullOrWhiteSpace(request.Province);
+            if (hasAnyAddressPart)
+            {
+                homeAddress = new Address(
+                    request.Street,
+                    request.City,
+                    request.Province,
+                    request.Country,
+                    request.ZipCode
+                );
+            }
+
+            EmergencyContact? emergencyContact = null;
+            var hasAnyEmergencyPart =
+                !string.IsNullOrWhiteSpace(request.EmergencyContactName) ||
+                !string.IsNullOrWhiteSpace(request.EmergencyContactPhone);
+            if (hasAnyEmergencyPart)
+            {
+                emergencyContact = new EmergencyContact(
+                    request.EmergencyContactName,
+                    request.EmergencyContactPhone
+                );
+            }
 
             user.UpdateProfile(
                 new FirstName(request.FirstName),
@@ -46,18 +81,11 @@ namespace OnSet.Features.Users.Edit
                 request.YearsExperience,
                 request.Bio,
                 request.AvatarUrl,
-                new Address(
-                    request.Street,
-                    request.City,
-                    request.Province,
-                    request.ZipCode,
-                    request.Country),
+                homeAddress,
                 spokenLanguagesEnum,
                 request.IsAvailableForBooking,
                 request.NextAvailableDate,
-                new EmergencyContact(
-                    request.EmergencyContactName,
-                    request.EmergencyContactPhone)
+                emergencyContact
             );
 
             await _db.SaveChangesAsync(cancellationToken);
