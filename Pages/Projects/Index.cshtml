@@ -62,7 +62,7 @@
                                         <td>@p.StartDate.ToShortDateString()</td>
                                         <td>@(p.EndDate?.ToShortDateString() ?? "—")</td>
                                         <td class="text-end">
-                                            <a asp-page="./Details" asp-route-id="@p.Id" class="btn btn-sm btn-outline-light">
+                                            <a asp-page="/Projects/Project" asp-route-id="@p.Id" class="btn btn-sm btn-outline-light">
                                                 View
                                             </a>
                                         </td>

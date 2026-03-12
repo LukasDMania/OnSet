@@ -1,9 +1,11 @@
-﻿namespace OnSet.Domain.Enums
+namespace OnSet.Domain.Enums
 {
     public enum DocumentTags
     {
         CALLSHEET,
-        OTHER,
-
+        SCENARIO,
+        SCHEDULE,
+        LOGISTICS,
+        OTHER
     }
 }
