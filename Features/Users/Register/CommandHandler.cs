@@ -45,7 +45,7 @@ namespace OnSet.Features.Users.Register
                 );
             }
 
-            // Map spoken languages
+            //Map spoken languages
             var spokenLanguages = request.SpokenLanguages ?? new List<Languages>();
 
             // Create domain user

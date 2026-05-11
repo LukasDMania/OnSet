@@ -13,7 +13,7 @@ OnSet is a production management web application for film projects, built with A
 - **CQRS / Orchestration**: MediatR
 - **Validation**: FluentValidation (integrated as a MediatR pipeline behavior)
 - **Object mapping**: AutoMapper
-- **UI**: Razor Pages + Bootstrap 5, dark theme (`data-bs-theme="dark"`)
+- **UI**: Razor Pages + Bootstrap
 - **File storage**:
   - Local file system via `LocalStorageService` in development
   - Abstracted behind `IStorageService` for future Azure Blob Storage or other providers
@@ -374,19 +374,6 @@ When adding a new feature, follow this checklist to stay aligned with the curren
 
 ---
 
-## Getting Started (Development)
-
-1. **Configure connection string** in `appsettings.json` or user secrets:
-   - Key: `"ConnectionStrings:DefaultConnection"`.
-2. **Run EF migrations**:
-   - The app applies migrations automatically in development via `app.ApplyMigrations()` inside `Program.cs` (when `IsDevelopment`).
-3. **Run the application**:
-   - `dotnet run` from the project directory.
-4. **Seeded roles**:
-   - In development, roles `Admin` and `StandardUser` are ensured to exist on startup.
-
----
-
 ## Contact and Contributions
 
 - Follow the conventions in this README when:
@@ -397,6 +384,4 @@ When adding a new feature, follow this checklist to stay aligned with the curren
   - `Features/Projects/Index`, `Create`, `Details`, `ProjectDashboard`, `UploadDocument`.
   - `Features/Users/Details`, `Register`, `Login`.
   - `Pages/Projects` and `Pages/Users` implementations.
-
-This structure should provide a solid foundation for an enterprise-style ASP.NET Core application and make it straightforward for new contributors (human or AI) to extend the system safely and consistently.
 

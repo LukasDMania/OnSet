@@ -43,7 +43,7 @@ namespace OnSet.Features.Projects.UploadDocument
                 throw new NotFoundException("Project", request.ProjectId);
             }
 
-            // Ensure the current user is at least a member of the project.
+            //nsure the current user is at least a member of the project.
             var isMember = await _context.UserProjects
                 .AsNoTracking()
                 .AnyAsync(up => up.ProjectId == request.ProjectId && up.UserId == userId, cancellationToken);
@@ -54,7 +54,7 @@ namespace OnSet.Features.Projects.UploadDocument
             }
 
             // For now, only the project creator (owner) can upload documents.
-            // This is intentionally open for extension: in the future, we can
+            // This is intentionally open for extension: in the future, i can
             // extend this to allow specific project roles or a configurable set
             // of uploaders managed by the project creator.
             if (!string.Equals(project.OwnerId, userId, StringComparison.Ordinal))
