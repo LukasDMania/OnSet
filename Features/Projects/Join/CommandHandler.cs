@@ -36,7 +36,7 @@ namespace OnSet.Features.Projects.Join
 
             if (project is null)
             {
-                // Do not leak whether a project exists, keep message generic.
+                //o not leak whether a project exists, keep message generic.
                 return Result.Fail("Invalid project code.");
             }
 
