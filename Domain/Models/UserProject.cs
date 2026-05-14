@@ -1,13 +1,20 @@
 ﻿using OnSet.Domain.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace OnSet.Domain.Models
 {
-    public class UserProject
+    public class UserProject : IAuditableEntity
     {
         public string UserId { get; set; }
         public int ProjectId { get; set; }
 
         public ProjectRoles RoleOnProject { get; set; }
+
+        [DataType(DataType.DateTime)]
+        public DateTime CreatedAt { get; set; }
+
+        [DataType(DataType.DateTime)]
+        public DateTime? UpdatedAt { get; set; }
 
         //nav
         public virtual User User { get; set; }
@@ -22,7 +29,9 @@ namespace OnSet.Domain.Models
             {
                 UserId = userId,
                 RoleOnProject = role,
-                Project = project
+                Project = project,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = null
             };
         }
 
@@ -33,7 +42,9 @@ namespace OnSet.Domain.Models
             {
                 UserId = userId,
                 RoleOnProject = role,
-                ProjectId = projectId
+                ProjectId = projectId,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = null
             };
         }
 

@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnSet.Domain.Models
 {
-    public class User : IdentityUser
+    public class User : IdentityUser, IAuditableEntity
     {
         [Required]
         public FirstName FirstName { get; set; }
@@ -109,7 +109,8 @@ namespace OnSet.Domain.Models
                 NextAvailableDate = nextAvailableDate,
                 EmergencyContact = emergencyContact,
                 IsActive = true,
-                CreatedAt = DateTime.UtcNow
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = null
             };
         }
 
@@ -150,8 +151,6 @@ namespace OnSet.Domain.Models
             IsAvailableForBooking = isAvailableForBooking;
             NextAvailableDate = nextAvailableDate;
             EmergencyContact = emergencyContact;
-
-            UpdatedAt = DateTime.UtcNow;
         }
     }
 }

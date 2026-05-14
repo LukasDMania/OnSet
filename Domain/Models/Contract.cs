@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnSet.Domain.Models
 {
-    public class Contract : IOnSetEntity
+    public class Contract : IOnSetEntity, IAuditableEntity
     {
         [Key]
         [Column("ContractID")]
@@ -25,6 +25,12 @@ namespace OnSet.Domain.Models
         [StringLength(200)]
         public string? Notes { get; private set; }
 
+        [DataType(DataType.DateTime)]
+        public DateTime CreatedAt { get; set; }
+
+        [DataType(DataType.DateTime)]
+        public DateTime? UpdatedAt { get; set; }
+
         // Nav
         public virtual Document Document { get; private set; }
         public virtual User User { get; private set; }
@@ -35,6 +41,8 @@ namespace OnSet.Domain.Models
         {
             DocumentId = documentId;
             UserId = userId;
+            CreatedAt = DateTime.UtcNow;
+            UpdatedAt = null;
         }
 
         public void Sign(string userId)

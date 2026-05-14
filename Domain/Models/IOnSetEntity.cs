@@ -1,7 +1,6 @@
-﻿namespace OnSet.Domain.Models
+namespace OnSet.Domain.Models;
+
+public interface IOnSetEntity
 {
-    public interface IOnSetEntity
-    {
-        public int Id { get; }
-    }
+    int Id { get; }
 }

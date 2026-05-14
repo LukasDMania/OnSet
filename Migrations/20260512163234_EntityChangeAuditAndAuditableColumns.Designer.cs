@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnSet.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using OnSet.Infrastructure.Data;
 namespace OnSet.Migrations
 {
     [DbContext(typeof(OnSetDbContext))]
-    partial class OnSetDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260512163234_EntityChangeAuditAndAuditableColumns")]
+    partial class EntityChangeAuditAndAuditableColumns
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

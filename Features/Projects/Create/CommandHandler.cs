@@ -1,4 +1,5 @@
 using MediatR;
+using OnSet.Application.Notifications.Projects;
 using OnSet.Domain.Models;
 using OnSet.Domain.ValueObjects;
 using OnSet.Infrastructure.Data;
@@ -10,13 +11,16 @@ namespace OnSet.Features.Projects.Create
     {
         private readonly OnSetDbContext _context;
         private readonly ICurrentUserService _currentUserService;
+        private readonly IMediator _mediator;
 
         public CommandHandler(
             OnSetDbContext context,
-            ICurrentUserService currentUserService)
+            ICurrentUserService currentUserService,
+            IMediator mediator)
         {
             _context = context;
             _currentUserService = currentUserService;
+            _mediator = mediator;
         }
 
         public async Task<Result> Handle(Command request, CancellationToken cancellationToken)
@@ -39,7 +43,6 @@ namespace OnSet.Features.Projects.Create
 
             if (hasAnyAddressPart)
             {
-                // Validator ensures required address parts when any are provided.
                 location = new Address(
                     request.Street!,
                     request.City!,
@@ -64,6 +67,10 @@ namespace OnSet.Features.Projects.Create
 
             _context.Projects.Add(project);
             await _context.SaveChangesAsync(cancellationToken);
+
+            await _mediator.Publish(
+                new ProjectCreatedNotification(project.Id, userId, project.Name),
+                cancellationToken);
 
             return Result.Ok();
         }

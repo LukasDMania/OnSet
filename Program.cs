@@ -9,6 +9,8 @@ using OnSet.Domain.Models;
 using OnSet.Extensions;
 using OnSet.Infrastructure.Behaviors;
 using OnSet.Infrastructure.Data;
+using OnSet.Infrastructure.Persistence;
+using OnSet.Infrastructure.Services;
 using OnSet.Utils;
 
 namespace OnSet
@@ -23,9 +25,12 @@ namespace OnSet
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
                 ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
-            //Db setup
-            builder.Services.AddDbContext<OnSetDbContext>(options =>
-                options.UseSqlServer(connectionString));
+            builder.Services.AddScoped<AuditingSaveChangesInterceptor>();
+            builder.Services.AddDbContext<OnSetDbContext>((sp, options) =>
+            {
+                options.UseSqlServer(connectionString);
+                options.AddInterceptors(sp.GetRequiredService<AuditingSaveChangesInterceptor>());
+            });
 
             builder.Services.AddIdentity<User, IdentityRole>(options =>
             {
@@ -47,13 +52,15 @@ namespace OnSet
             builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
             //Test
 
-            // Register the Validation Behavior in the MediatR Pipeline
+            // Pipeline: command audit is outermost so validation failures are still persisted.
+            builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CommandAuditBehavior<,>));
             builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
             // Add Services
             builder.Services.AddTransient<IEmailSender, NoOpEmailSender>();
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+            builder.Services.AddScoped<ICommandAuditService, CommandAuditService>();
             builder.Services.AddScoped<IStorageService, LocalStorageService>();
 
 

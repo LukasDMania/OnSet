@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnSet.Domain.Models
 {
-    public class Project : IOnSetEntity
+    public class Project : IOnSetEntity, IAuditableEntity
     {
         private Project() { }
 
@@ -106,7 +106,8 @@ namespace OnSet.Domain.Models
                 Status = status,
                 OwnerId = ownerId,
                 Location = location,
-                CreatedAt = DateTime.UtcNow
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = null
             };
 
             project.AddCreator(ownerId, creatorRole);
@@ -147,8 +148,6 @@ namespace OnSet.Domain.Models
             Budget = budget;
             Status = status;
             Location = location;
-
-            UpdatedAt = DateTime.UtcNow;
         }
     }
 }

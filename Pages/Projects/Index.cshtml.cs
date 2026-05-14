@@ -37,7 +37,7 @@ public class IndexModel : PageModel
 
         if (string.IsNullOrWhiteSpace(userId))
         {
-            // Should not happen due to [Authorize], but keep it defensive.
+            //should not happen due to [Authorize], but jic
             return RedirectToPage("/Users/Login");
         }
 
@@ -57,7 +57,7 @@ public class IndexModel : PageModel
             }
         }
 
-        // Always reload the list so newly joined projects show up.
+        //reload the list so newly joined projects show up.
         Data = await _mediator.Send(new Query { UserId = userId });
         return Page();
     }

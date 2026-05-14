@@ -59,14 +59,14 @@ namespace OnSet.Features.Projects.ProjectDashboard
                 .AsNoTracking()
                 .Include(d => d.User)
                 .Where(d => d.ProjectId == project.Id && !d.IsArchived)
-                .OrderByDescending(d => d.UploadedAt)
+                .OrderByDescending(d => d.CreatedAt)
                 .Select(d => new
                 {
                     d.Id,
                     Tag = d.Tags.FirstOrDefault(),
                     d.Metadata.FileName,
                     UploadedBy = d.User.FullName ?? d.User.UserName ?? string.Empty,
-                    d.UploadedAt,
+                    UploadedAt = d.CreatedAt,
                     d.FilePath
                 })
                 .ToListAsync(cancellationToken);

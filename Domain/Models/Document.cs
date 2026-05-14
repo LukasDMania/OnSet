@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnSet.Domain.Models
 {
-    public class Document : IOnSetEntity
+    public class Document : IOnSetEntity, IAuditableEntity
     {
         [Key]
         [Column("DocumentID")]
@@ -26,7 +26,11 @@ namespace OnSet.Domain.Models
         public string FilePath { get; private set; }
 
         [DataType(DataType.DateTime)]
-        public DateTime UploadedAt { get; private set; } = DateTime.UtcNow;
+        [Column("UploadedAt")]
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+        [DataType(DataType.DateTime)]
+        public DateTime? UpdatedAt { get; set; }
 
         [StringLength(200)]
         public string? Description { get; private set; }

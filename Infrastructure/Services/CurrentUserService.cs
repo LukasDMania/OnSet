@@ -1,4 +1,6 @@
 using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Primitives;
 
 namespace OnSet
 {
@@ -92,6 +94,28 @@ namespace OnSet
                 }
 
                 return roles;
+            }
+        }
+
+        public string? ClientIp =>
+            _httpContextAccessor.HttpContext?.Connection.RemoteIpAddress?.ToString();
+
+        public string? CorrelationId
+        {
+            get
+            {
+                var http = _httpContextAccessor.HttpContext;
+                if (http is null)
+                    return null;
+
+                if (http.Request.Headers.TryGetValue("X-Correlation-Id", out StringValues header))
+                {
+                    var fromHeader = header.FirstOrDefault(h => !string.IsNullOrWhiteSpace(h));
+                    if (!string.IsNullOrWhiteSpace(fromHeader))
+                        return fromHeader.Trim();
+                }
+
+                return http.TraceIdentifier;
             }
         }
     }

@@ -23,9 +23,12 @@ namespace OnSet.Infrastructure.Behaviors
                 {
                     var errorMessages = failures.Select(f => f.ErrorMessage).Where(m => !string.IsNullOrWhiteSpace(m)).ToArray();
 
-                    // Commands: return Result.Invalid instead of throwing
-                    if (typeof(TResponse) == typeof(Result))
+                    //commands: return Result.Invalid instead of throwing
+                    if (typeof(TResponse) == typeof(Result)) 
+                    {
                         return (TResponse)(object)Result.Invalid(errorMessages);
+                    }
+                        
 
                     if (typeof(TResponse).IsGenericType && typeof(TResponse).GetGenericTypeDefinition() == typeof(Result<>))
                     {
@@ -34,7 +37,7 @@ namespace OnSet.Infrastructure.Behaviors
                             return (TResponse)invalidMethod.Invoke(null, new object[] { errorMessages })!;
                     }
 
-                    // Queries / other: keep exception-based flow
+                    //Queries/other: keep exception-based flow
                     throw new ValidationException(failures);
                 }
             }

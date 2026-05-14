@@ -1,0 +1,142 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+/*
+ * Dark Mode Styles for ASP.NET Razor Pages (Bootstrap 5 Convention)
+ *
+ * IMPORTANT PLACEMENT NOTE:
+ * This code should be placed at the END of your main CSS file (e.g., site.css)
+ * to ensure these rules override the default light theme styles.
+ *
+ * IMPLEMENTATION NOTE:
+ * To activate dark mode, you must add the attribute data-bs-theme="dark" to the <html> tag.
+ * Example in _Layout.cshtml: <html lang="en" data-bs-theme="dark">
+ */
+
+/* =================================
+   1. GLOBAL & BODY COLORS
+   ================================= */
+
+/* Define primary dark mode variables for Bootstrap components */
+html[data-bs-theme="dark"] {
+    /* Main colors */
+    --bs-body-color: #e9ecef; /* Light text for good contrast */
+    --bs-body-bg: #212529; /* Deep dark background (Dark 900) */
+    --bs-secondary-bg: #2c313a; /* Slightly lighter dark background for elements like cards/modals */
+    --bs-border-color: #495057; /* Subtle border color */
+    --bs-heading-color: #f8f9fa; /* White/off-white headings */
+    --bs-link-color: #8ab4f8; /* Accessible blue for links */
+
+    color-scheme: dark; /* Helps native form controls adopt dark theme */
+}
+
+    /* Apply base background and text color to the body */
+    html[data-bs-theme="dark"] body {
+        background-color: var(--bs-body-bg);
+        color: var(--bs-body-color);
+    }
+
+    /* =================================
+   2. NAVBAR, FOOTER & BORDERS
+   ================================= */
+
+    /* Customize the main navigation bar */
+    html[data-bs-theme="dark"] .navbar {
+        background-color: #343a40 !important; /* Slightly lighter dark gray for the header */
+        --bs-navbar-color: rgba(255, 255, 255, 0.75);
+        --bs-navbar-hover-color: #fff;
+        --bs-navbar-active-color: #fff;
+        --bs-navbar-brand-color: #fff;
+        --bs-navbar-brand-hover-color: #fff;
+        /* Invert the toggler icon color for visibility */
+        --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+    /* Adjust borders used in the default layout (e.g., footer) */
+    html[data-bs-theme="dark"] .border-top {
+        border-top-color: var(--bs-border-color) !important;
+    }
+
+    /* =================================
+   3. FORMS, INPUTS & CONTROLS
+   ================================= */
+
+    /* General form control styling (input, select, textarea) */
+    html[data-bs-theme="dark"] .form-control {
+        background-color: var(--bs-secondary-bg);
+        color: var(--bs-body-color);
+        border-color: var(--bs-border-color);
+    }
+
+        /* Keep colors consistent on focus */
+        html[data-bs-theme="dark"] .form-control:focus {
+            background-color: var(--bs-secondary-bg);
+            color: var(--bs-body-color);
+            border-color: #258cfb;
+        }
+
+    /* Form Check Inputs (checkboxes/radios) */
+    html[data-bs-theme="dark"] .form-check-input {
+        background-color: #495057;
+        border-color: #6c757d;
+    }
+
+        html[data-bs-theme="dark"] .form-check-input:checked {
+            background-color: #258cfb; /* Use primary focus color */
+            border-color: #258cfb;
+        }
+
+    /* =================================
+   4. TABLES & CARDS
+   ================================= */
+
+    /* Card Backgrounds (used for specific content blocks) */
+    html[data-bs-theme="dark"] .card {
+        background-color: var(--bs-table-color);
+        border-color: var(--bs-border-color);
+        color: var(--bs-table-color);
+    }
+
+    /* Table styling for dark mode */
+    html[data-bs-theme="dark"] .table {
+        --bs-table-color: #212529; /* dark text so it is readable on white */
+        --bs-table-bg: #ffffff; /* row background always white */
+        --bs-table-border-color: var(--bs-border-color);
+        --bs-table-striped-bg: #f2f2f2; /* light stripe */
+        --bs-table-hover-bg: #e9ecef; /* light hover */
+    }
+
+    /* =================================
+   5. FOCUS RING (Maintaining Original Logic)
+   ================================= */
+
+    /* Overriding the original focus ring with context-aware colors */
+    html[data-bs-theme="dark"] .btn:focus,
+    html[data-bs-theme="dark"] .btn:active:focus,
+    html[data-bs-theme="dark"] .btn-link.nav-link:focus,
+    html[data-bs-theme="dark"] .form-control:focus,
+    html[data-bs-theme="dark"] .form-check-input:focus {
+        /* The inner shadow (original 'white') is now body-bg to blend in,
+       The outer ring (original '#258cfb') remains the bright blue for focus. */
+          box-shadow: 0 0 0 0.1rem var(--bs-body-bg), 0 0 0 0.25rem #258cfb;
+    }

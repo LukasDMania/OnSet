@@ -5,6 +5,8 @@ using System.Text.Json;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using OnSet.Domain.Enums;
 
+using OnSet.Infrastructure.Persistence;
+
 namespace OnSet.Infrastructure.Data
 {
     public class OnSetDbContext : IdentityDbContext<User>
@@ -15,6 +17,8 @@ namespace OnSet.Infrastructure.Data
         public DbSet<Document> Documents { get; set; }
         public DbSet<Contract> Contracts { get; set; }
         public DbSet<UserProject> UserProjects { get; set; }
+        public DbSet<CommandAuditLog> CommandAuditLogs { get; set; }
+        public DbSet<EntityChangeAudit> EntityChangeAudits { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
