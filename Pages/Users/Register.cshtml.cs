@@ -32,7 +32,7 @@ namespace OnSet.Pages.Users
             public string Email { get; set; }
 
             [Required]
-            [StringLength(100, MinimumLength = 6)]
+            [StringLength(100, MinimumLength = 8)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }

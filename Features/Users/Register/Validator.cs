@@ -9,7 +9,7 @@ namespace OnSet.Features.Users.Register
             // --- 1. Required Identity and Domain Fields ---
 
             RuleFor(x => x.Email).NotEmpty().EmailAddress();
-            RuleFor(x => x.Password).NotEmpty().MinimumLength(6);
+            RuleFor(x => x.Password).NotEmpty().MinimumLength(8);
 
             RuleFor(x => x.ConfirmPassword)
                 .NotEmpty()

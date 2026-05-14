@@ -1,0 +1,15 @@
+@page "/BadRequest"
+@model BadRequestModel
+@{
+    ViewData["Title"] = "Invalid request";
+}
+
+<div class="container py-5 text-center">
+    <h1 class="display-6">Invalid request</h1>
+    <p class="text-secondary">This action could not be completed because a business rule was violated.</p>
+    @if (!string.IsNullOrWhiteSpace(Model.Details))
+    {
+        <p class="text-danger small mt-3 text-start mx-auto" style="max-width: 36rem;">@Model.Details</p>
+    }
+    <a class="btn btn-primary mt-3" asp-page="/Index">Back to home</a>
+</div>
