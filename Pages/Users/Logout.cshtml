@@ -1,11 +1,10 @@
 ﻿@page
 @model OnSet.Pages.Users.LogoutModel
 @{
-    @if (User.Identity?.IsAuthenticated == true)
+    if (User.Identity?.IsAuthenticated == true)
     {
         <form method="post" asp-page="/Users/Logout" class="d-inline">
-            <button type="submit" class="btn btn-link">Logout</button>
+            <button type="submit" class="btn btn-link">@L["Logout_Button"]</button>
         </form>
     }
-
 }

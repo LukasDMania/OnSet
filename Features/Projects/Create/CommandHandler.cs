@@ -12,14 +12,6 @@ namespace OnSet.Features.Projects.Create
         private readonly OnSetDbContext _context;
         private readonly ICurrentUserService _currentUserService;
         private readonly IMediator _mediator;
-        private OnSetDbContext context;
-        private ICurrentUserService @object;
-
-        public CommandHandler(OnSetDbContext context, ICurrentUserService @object)
-        {
-            this.context = context;
-            this.@object = @object;
-        }
 
         public CommandHandler(
             OnSetDbContext context,

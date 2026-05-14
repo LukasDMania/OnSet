@@ -148,6 +148,7 @@ namespace OnSet.Domain.Models
             Budget = budget;
             Status = status;
             Location = location;
+            UpdatedAt = DateTime.UtcNow;
         }
     }
 }

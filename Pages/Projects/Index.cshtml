@@ -1,20 +1,20 @@
 @page
 @model OnSet.Pages.Projects.IndexModel
 @{
-    ViewData["Title"] = "Projects";
+    ViewData["Title"] = L["Projects_Index_PageTitle"];
 }
 
 <div class="container py-5">
     <div class="row mb-4 align-items-center">
         <div class="col-lg-7">
-            <h1 class="fw-bold mb-1">Your projects</h1>
+            <h1 class="fw-bold mb-1">@L["Projects_Index_Heading"]</h1>
             <div class="text-muted small">
-                Only productions you are a member of are visible here. Join a project with a code shared by the producer.
+                @L["Projects_Index_Lead"]
             </div>
         </div>
         <div class="col-lg-5 text-lg-end mt-3 mt-lg-0">
             <a asp-page="./Create" class="btn btn-primary shadow-sm me-2">
-                <i class="bi bi-plus-square me-2"></i>Create project
+                <i class="bi bi-plus-square me-2"></i>@L["Projects_Index_CreateProject"]
             </a>
         </div>
     </div>
@@ -26,9 +26,9 @@
                 <div class="alert alert-dark border-0 shadow-sm d-flex align-items-center">
                     <i class="bi bi-shield-lock me-3"></i>
                     <div>
-                        <div class="fw-semibold">No visible projects yet</div>
+                        <div class="fw-semibold">@L["Projects_Index_EmptyTitle"]</div>
                         <div class="small text-muted">
-                            Create a new production, or join an existing one using a private project code from the production team.
+                            @L["Projects_Index_EmptyBody"]
                         </div>
                     </div>
                 </div>
@@ -37,18 +37,18 @@
             {
                 <div class="card border-0 shadow-sm">
                     <div class="card-header border-0 bg-transparent d-flex justify-content-between align-items-center">
-                        <span class="small text-uppercase text-muted fw-bold">Projects you’re part of</span>
+                        <span class="small text-uppercase text-muted fw-bold">@L["Projects_Index_TableCaption"]</span>
                         <span class="badge bg-secondary bg-opacity-50">@Model.Data.Projects.Count</span>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-hover mb-0 align-middle">
                             <thead class="table-light">
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Client</th>
-                                    <th>Code</th>
-                                    <th>Start</th>
-                                    <th>End</th>
+                                    <th>@L["Projects_Index_ColName"]</th>
+                                    <th>@L["Projects_Index_ColClient"]</th>
+                                    <th>@L["Projects_Index_ColCode"]</th>
+                                    <th>@L["Projects_Index_ColStart"]</th>
+                                    <th>@L["Projects_Index_ColEnd"]</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -57,13 +57,13 @@
                                 {
                                     <tr>
                                         <td class="fw-semibold">@p.Name</td>
-                                        <td>@(p.ClientName ?? "—")</td>
-                                        <td class="text-monospace small">@(p.ReferenceCode ?? "—")</td>
+                                        <td>@(p.ClientName ?? L["Common_EmDash"].Value)</td>
+                                        <td class="text-monospace small">@(p.ReferenceCode ?? L["Common_EmDash"].Value)</td>
                                         <td>@p.StartDate.ToShortDateString()</td>
-                                        <td>@(p.EndDate?.ToShortDateString() ?? "—")</td>
+                                        <td>@(p.EndDate?.ToShortDateString() ?? L["Common_EmDash"].Value)</td>
                                         <td class="text-end">
                                             <a asp-page="/Projects/Project" asp-route-id="@p.Id" class="btn btn-sm btn-outline-light">
-                                                View
+                                                @L["Common_View"]
                                             </a>
                                         </td>
                                     </tr>
@@ -80,28 +80,27 @@
                 <div class="card-body p-4">
                     <h5 class="fw-bold mb-2 d-flex align-items-center">
                         <i class="bi bi-key-fill text-warning me-2"></i>
-                        Join with project code
+                        @L["Projects_Index_JoinTitle"]
                     </h5>
                     <p class="small text-muted mb-3">
-                        Productions are private. Enter the secret code you received from the production office to join a project.
+                        @L["Projects_Index_JoinBody"]
                     </p>
                     <form method="post" asp-page-handler="Join">
                         <div class="mb-3">
-                            <label class="form-label fw-medium" asp-for="JoinCode">Project code</label>
-                            <input class="form-control" asp-for="JoinCode" placeholder="e.g. TOP-SECRET-9F2K" />
+                            <label class="form-label fw-medium" asp-for="JoinCode">@L["Projects_Index_ProjectCode"]</label>
+                            <input class="form-control" asp-for="JoinCode" placeholder="@L["Projects_Index_JoinCodePlaceholder"].Value" />
                         </div>
                         <div asp-validation-summary="All" class="text-warning small mb-2"></div>
                         <button type="submit" class="btn btn-warning w-100">
-                            <i class="bi bi-box-arrow-in-right me-1"></i>Join project
+                            <i class="bi bi-box-arrow-in-right me-1"></i>@L["Projects_Index_JoinProject"]
                         </button>
                     </form>
                 </div>
             </div>
 
             <div class="small text-muted">
-                Project names and details only appear after you successfully join. Codes are unique per production and can be rotated by the owner.
+                @L["Projects_Index_JoinFootnote"]
             </div>
         </div>
     </div>
 </div>
-

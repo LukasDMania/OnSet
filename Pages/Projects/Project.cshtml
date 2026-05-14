@@ -2,7 +2,7 @@
 @using OnSet.Domain.Enums
 @model OnSet.Pages.Projects.ProjectModel
 @{
-    ViewData["Title"] = $"Project Dashboard | {Model.Data.Name}";
+    ViewData["Title"] = string.Format(L["Projects_Project_BrowserTitle"].Value, Model.Data.Name);
 }
 
 <div class="container py-5">
@@ -11,7 +11,7 @@
             <div class="col-lg-8">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-2 text-uppercase fw-bold" style="font-size: 0.7rem; letter-spacing: 1px;">
-                        <li class="breadcrumb-item"><a asp-page="/Projects/Index" class="text-decoration-none">Portfolio</a></li>
+                        <li class="breadcrumb-item"><a asp-page="/Projects/Index" class="text-decoration-none">@L["Projects_Breadcrumb_Portfolio"]</a></li>
                         <li class="breadcrumb-item active text-primary">@Model.Data.ReferenceCode</li>
                     </ol>
                 </nav>
@@ -19,17 +19,17 @@
                     <h1 class="display-6 fw-bold mb-0 text-dark">@Model.Data.Name</h1>
                 </div>
                 <p class="text-muted mt-3 mb-0 d-flex align-items-center gap-4">
-                    <span><i class="bi bi-person-badge me-2"></i><strong>Client:</strong> @(Model.Data.ClientName ?? "Internal production")</span>
-                    <span><i class="bi bi-hash me-2"></i><strong>Ref:</strong> @(Model.Data.ReferenceCode ?? "N/A")</span>
+                    <span><i class="bi bi-person-badge me-2"></i><strong>@L["Projects_Project_Client"]</strong> @(Model.Data.ClientName ?? L["Projects_Project_InternalProduction"].Value)</span>
+                    <span><i class="bi bi-hash me-2"></i><strong>@L["Projects_Details_Ref"]</strong> @(Model.Data.ReferenceCode ?? L["Common_NotAvailable"].Value)</span>
                 </p>
             </div>
             <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
                 <div class="btn-group shadow-sm">
                     <a asp-page="/Projects/Details" asp-route-id="@Model.Data.Id" class="btn btn-outline-secondary px-4">
-                        <i class="bi bi-card-text me-2"></i>Details
+                        <i class="bi bi-card-text me-2"></i>@L["Projects_Project_Details"]
                     </a>
                     <a asp-page="/Projects/Edit" asp-route-id="@Model.Data.Id" class="btn btn-outline-dark px-4">
-                        <i class="bi bi-pencil-square me-2"></i>Edit
+                        <i class="bi bi-pencil-square me-2"></i>@L["Projects_Project_Edit"]
                     </a>
                 </div>
             </div>
@@ -41,9 +41,9 @@
             <div class="card border-0 shadow-sm mb-4">
                 <div class="card-body p-4 d-flex justify-content-between align-items-center">
                     <div>
-                        <h5 class="fw-bold mb-1">Production documents</h5>
+                        <h5 class="fw-bold mb-1">@L["Projects_Project_DocumentsTitle"]</h5>
                         <p class="small text-muted mb-0">
-                            All files are scoped to this project and only visible to project members.
+                            @L["Projects_Project_DocumentsLead"]
                         </p>
                     </div>
                     <div class="text-end">
@@ -56,7 +56,7 @@
                                   class="text-start">
                                 <div class="row g-2 align-items-end">
                                     <div class="col-md-4">
-                                        <label class="form-label small fw-semibold" asp-for="Upload.Tag">Document type</label>
+                                        <label class="form-label small fw-semibold" asp-for="Upload.Tag">@L["Projects_Project_DocumentType"]</label>
                                         <select class="form-select form-select-sm" asp-for="Upload.Tag">
                                             @foreach (DocumentTags tag in Enum.GetValues(typeof(DocumentTags)))
                                             {
@@ -65,29 +65,29 @@
                                         </select>
                                     </div>
                                     <div class="col-md-5">
-                                        <label class="form-label small fw-semibold" asp-for="Upload.File">File</label>
+                                        <label class="form-label small fw-semibold" asp-for="Upload.File">@L["Projects_Project_File"]</label>
                                         <input class="form-control form-control-sm" asp-for="Upload.File" type="file" />
                                     </div>
                                     <div class="col-md-3 text-end">
                                         <button type="submit" class="btn btn-dark btn-sm px-3 mt-2 mt-md-0">
-                                            <i class="bi bi-cloud-arrow-up me-1"></i>Upload
+                                            <i class="bi bi-cloud-arrow-up me-1"></i>@L["Projects_Project_Upload"]
                                         </button>
                                     </div>
                                 </div>
                                 <div class="mt-2">
-                                    <label class="form-label small fw-semibold" asp-for="Upload.Description">Notes (optional)</label>
+                                    <label class="form-label small fw-semibold" asp-for="Upload.Description">@L["Projects_Project_NotesOptional"]</label>
                                     <input class="form-control form-control-sm" asp-for="Upload.Description" placeholder="e.g. Call sheet – Day 1" />
                                 </div>
                                 <div asp-validation-summary="All" class="small text-danger mt-2"></div>
                                 <p class="small text-muted mt-1 mb-0">
-                                    As the project creator you can upload documents now. In a later version, you’ll be able to delegate upload rights to selected crew members.
+                                    @L["Projects_Project_UploadNote"]
                                 </p>
                             </form>
                         }
                         else
                         {
                             <span class="badge bg-light text-muted border small">
-                                Uploads are managed by the production office.
+                                @L["Projects_Project_UploadManagedByOffice"]
                             </span>
                         }
                     </div>
@@ -99,9 +99,9 @@
                 <div class="alert alert-light border-0 shadow-sm d-flex align-items-center">
                     <i class="bi bi-folder-x me-3 text-muted"></i>
                     <div>
-                        <div class="fw-semibold">No documents uploaded yet</div>
+                        <div class="fw-semibold">@L["Projects_Project_NoDocumentsTitle"]</div>
                         <div class="small text-muted">
-                            When the production office uploads call sheets, schedules, scenarios, and logistics files, they will appear here grouped by type.
+                            @L["Projects_Project_NoDocumentsBody"]
                         </div>
                     </div>
                 </div>
@@ -127,10 +127,10 @@
                             <table class="table table-hover mb-0 align-middle">
                                 <thead class="table-light">
                                     <tr>
-                                        <th>File</th>
-                                        <th>Uploaded by</th>
-                                        <th>Uploaded at</th>
-                                        <th class="text-end">Actions</th>
+                                        <th>@L["Projects_Project_ColFile"]</th>
+                                        <th>@L["Projects_Project_ColUploadedBy"]</th>
+                                        <th>@L["Projects_Project_ColUploadedAt"]</th>
+                                        <th class="text-end">@L["Projects_Project_ColActions"]</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -147,7 +147,7 @@
                                                 <a href="@doc.FilePath"
                                                    class="btn btn-sm btn-outline-dark"
                                                    download>
-                                                    <i class="bi bi-download me-1"></i>Download
+                                                    <i class="bi bi-download me-1"></i>@L["Projects_Project_Download"]
                                                 </a>
                                             </td>
                                         </tr>
@@ -163,16 +163,16 @@
         <div class="col-lg-4">
             <div class="card border-0 shadow-sm mb-4">
                 <div class="card-body p-4">
-                    <h6 class="text-uppercase small fw-bold text-muted mb-3">Quick links</h6>
+                    <h6 class="text-uppercase small fw-bold text-muted mb-3">@L["Projects_Project_QuickLinks"]</h6>
                     <div class="list-group list-group-flush">
                         <a asp-page="/Projects/Details" asp-route-id="@Model.Data.Id"
                            class="list-group-item list-group-item-action border-0 px-0 d-flex justify-content-between align-items-center">
-                            <span><i class="bi bi-info-circle me-2 text-primary"></i>Project details</span>
+                            <span><i class="bi bi-info-circle me-2 text-primary"></i>@L["Projects_Project_LinkDetails"]</span>
                             <i class="bi bi-chevron-right small text-muted"></i>
                         </a>
                         <a asp-page="/Projects/Edit" asp-route-id="@Model.Data.Id"
                            class="list-group-item list-group-item-action border-0 px-0 d-flex justify-content-between align-items-center">
-                            <span><i class="bi bi-pencil-square me-2 text-secondary"></i>Edit project</span>
+                            <span><i class="bi bi-pencil-square me-2 text-secondary"></i>@L["Projects_Project_LinkEdit"]</span>
                             <i class="bi bi-chevron-right small text-muted"></i>
                         </a>
                     </div>
@@ -201,4 +201,3 @@
         color: #adb5bd;
     }
 </style>
-

@@ -1,11 +1,11 @@
 @page "/Forbidden"
 @model ForbiddenModel
 @{
-    ViewData["Title"] = "Access denied";
+    ViewData["Title"] = L["Forbidden_PageTitle"];
 }
 
 <div class="container py-5 text-center">
-    <h1 class="display-6">Access denied</h1>
-    <p class="text-secondary">You do not have permission to view this resource.</p>
-    <a class="btn btn-primary mt-3" asp-page="/Index">Back to home</a>
+    <h1 class="display-6">@L["Forbidden_Heading"]</h1>
+    <p class="text-secondary">@L["Forbidden_Lead"]</p>
+    <a class="btn btn-primary mt-3" asp-page="/Index">@L["Common_BackToHome"]</a>
 </div>

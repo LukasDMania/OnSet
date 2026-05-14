@@ -1,11 +1,11 @@
 @page "/NotFound"
 @model NotFoundModel
 @{
-    ViewData["Title"] = "Not found";
+    ViewData["Title"] = L["NotFound_PageTitle"];
 }
 
 <div class="container py-5 text-center">
-    <h1 class="display-6">Not found</h1>
-    <p class="text-secondary">The page or resource you requested does not exist or was removed.</p>
-    <a class="btn btn-primary mt-3" asp-page="/Index">Back to home</a>
+    <h1 class="display-6">@L["NotFound_Heading"]</h1>
+    <p class="text-secondary">@L["NotFound_Lead"]</p>
+    <a class="btn btn-primary mt-3" asp-page="/Index">@L["Common_BackToHome"]</a>
 </div>

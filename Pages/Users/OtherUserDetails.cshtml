@@ -1,20 +1,20 @@
 @page "{id}"
 @model OnSet.Pages.Users.OtherUserDetailsModel
 @{
-    ViewData["Title"] = $"{Model.OtherUserDetails?.FirstName}'s Profile";
     var user = Model.OtherUserDetails;
 }
 
 @if (user == null)
 {
     <div class="alert alert-warning m-5">
-        <h4 class="alert-heading">User Not Found</h4>
-        <p>The user profile you are looking for could not be found or has been deactivated.</p>
-        <a asp-page="./Index" class="btn btn-primary">Back to Directory</a>
+        <h4 class="alert-heading">@L["Users_Other_NotFoundTitle"]</h4>
+        <p>@L["Users_Other_NotFoundBody"]</p>
+        <a asp-page="/Index" class="btn btn-primary">@L["Users_Other_BackToDirectory"]</a>
     </div>
 }
 else
 {
+    ViewData["Title"] = string.Format(L["Users_Other_PageTitle"].Value, user.FirstName);
     <div class="container py-5">
         <div class="bg-white rounded-lg shadow-sm border p-6 mb-6">
             <div class="d-flex flex-column flex-md-row align-items-center gap-4">

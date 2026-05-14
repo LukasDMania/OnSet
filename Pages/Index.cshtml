@@ -1,15 +1,15 @@
 @page
 @model OnSet.Pages.IndexModel
 @{
-    ViewData["Title"] = "OnSet – Production Toolkit";
+    ViewData["Title"] = L["Index_PageTitle"];
 }
 
 <div class="container py-5">
     <div class="row justify-content-center mb-5">
         <div class="col-lg-8 text-center">
-            <h1 class="display-5 fw-bold mb-3">OnSet – Manage your productions</h1>
+            <h1 class="display-5 fw-bold mb-3">@L["Index_HeroTitle"]</h1>
             <p class="lead text-muted">
-                Create projects, manage your crew profiles, and prepare the foundation for callsheets and contracts – all in one place.
+                @L["Index_HeroLead"]
             </p>
         </div>
     </div>
@@ -18,13 +18,13 @@
         <div class="col-md-4">
             <div class="card h-100 border-0 shadow-sm">
                 <div class="card-body p-4">
-                    <h5 class="fw-bold mb-2"><i class="bi bi-person me-2 text-primary"></i>Your account</h5>
+                    <h5 class="fw-bold mb-2"><i class="bi bi-person me-2 text-primary"></i>@L["Index_Card_AccountTitle"]</h5>
                     <p class="text-muted small mb-3">
-                        Register, log in, and maintain your personal production profile.
+                        @L["Index_Card_AccountBody"]
                     </p>
                     <div class="d-grid gap-2">
-                        <a asp-page="/Users/Register" class="btn btn-primary btn-sm">Create account</a>
-                        <a asp-page="/Users/Login" class="btn btn-outline-primary btn-sm">Log in</a>
+                        <a asp-page="/Users/Register" class="btn btn-primary btn-sm">@L["Index_Card_Account_Create"]</a>
+                        <a asp-page="/Users/Login" class="btn btn-outline-primary btn-sm">@L["Index_Card_Account_LogIn"]</a>
                     </div>
                 </div>
             </div>
@@ -33,13 +33,13 @@
         <div class="col-md-4">
             <div class="card h-100 border-0 shadow-sm">
                 <div class="card-body p-4">
-                    <h5 class="fw-bold mb-2"><i class="bi bi-briefcase me-2 text-success"></i>Projects</h5>
+                    <h5 class="fw-bold mb-2"><i class="bi bi-briefcase me-2 text-success"></i>@L["Index_Card_ProjectsTitle"]</h5>
                     <p class="text-muted small mb-3">
-                        Create and edit production projects, including budget, dates, and primary location.
+                        @L["Index_Card_ProjectsBody"]
                     </p>
                     <div class="d-grid gap-2">
-                        <a asp-page="/Projects/Index" class="btn btn-success btn-sm">View all projects</a>
-                        <a asp-page="/Projects/Create" class="btn btn-outline-success btn-sm">Create new project</a>
+                        <a asp-page="/Projects/Index" class="btn btn-success btn-sm">@L["Index_Card_Projects_ViewAll"]</a>
+                        <a asp-page="/Projects/Create" class="btn btn-outline-success btn-sm">@L["Index_Card_Projects_Create"]</a>
                     </div>
                 </div>
             </div>
@@ -48,16 +48,15 @@
         <div class="col-md-4">
             <div class="card h-100 border-0 shadow-sm">
                 <div class="card-body p-4">
-                    <h5 class="fw-bold mb-2"><i class="bi bi-person-badge me-2 text-dark"></i>Your profile</h5>
+                    <h5 class="fw-bold mb-2"><i class="bi bi-person-badge me-2 text-dark"></i>@L["Index_Card_ProfileTitle"]</h5>
                     <p class="text-muted small mb-3">
-                        Once logged in, manage your skills, availability, and emergency contact details.
+                        @L["Index_Card_ProfileBody"]
                     </p>
                     <div class="d-grid gap-2">
-                        <a asp-page="/Users/Details" class="btn btn-dark btn-sm">Go to my profile</a>
+                        <a asp-page="/Users/Details" class="btn btn-dark btn-sm">@L["Index_Card_Profile_Go"]</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-

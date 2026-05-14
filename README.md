@@ -2,7 +2,7 @@
 
 OnSet is a production management web application for film projects, built with ASP.NET Core Razor Pages, EF Core, and MediatR using a CQRS-style architecture. This document describes the architecture, naming conventions, and development practices used in the project. It is intended for both human developers and AI agents working on new features.
 
-**Additional docs:** [Exception handling](docs/ExceptionHandling.md) · [Naming and code style](docs/NamingConventions.md)
+**Additional docs:** [Exception handling](docs/ExceptionHandling.md) · [Naming and code style](docs/NamingConventions.md) · [UI localization](docs/Localization.md)
 
 ---
 

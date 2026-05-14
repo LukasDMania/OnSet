@@ -4,6 +4,9 @@ using MediatR;
 using Serilog;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using System.Collections.Generic;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using OnSet.Domain;
@@ -45,6 +48,25 @@ namespace OnSet
 
             builder.Services.AddHealthChecks()
                 .AddDbContextCheck<OnSetDbContext>("database");
+
+            // Do not set ResourcesPath to "Resources" when the marker type is OnSet.Resources.Resource:
+            // the factory would build a duplicated base name (…Resources.Resources…) and lookups would fail (keys shown in UI).
+            builder.Services.AddLocalization();
+
+            builder.Services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supported = new[] { "en", "nl", "fr" }.Select(c => new CultureInfo(c)).ToList();
+                options.SetDefaultCulture("en");
+                options.DefaultRequestCulture = new RequestCulture("en");
+                options.SupportedCultures = supported;
+                options.SupportedUICultures = supported;
+                options.RequestCultureProviders = new List<IRequestCultureProvider>
+                {
+                    new CookieRequestCultureProvider(),
+                    new QueryStringRequestCultureProvider(),
+                    new AcceptLanguageHeaderRequestCultureProvider()
+                };
+            });
 
             builder.Services.AddIdentity<User, IdentityRole>(options =>
             {
@@ -132,6 +154,8 @@ namespace OnSet
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseRequestLocalization();
 
             app.UseRouting();
 

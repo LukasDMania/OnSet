@@ -55,6 +55,12 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Resource.nl.resx">
+      <DependentUpon>Resource.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Resource.fr.resx">
+      <DependentUpon>Resource.resx</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

@@ -151,6 +151,7 @@ namespace OnSet.Domain.Models
             IsAvailableForBooking = isAvailableForBooking;
             NextAvailableDate = nextAvailableDate;
             EmergencyContact = emergencyContact;
+            UpdatedAt = DateTime.UtcNow;
         }
     }
 }
