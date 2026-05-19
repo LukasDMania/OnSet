@@ -1,3 +1,7 @@
-﻿@using OnSet
+﻿@using System.Globalization
+@using Microsoft.Extensions.Localization
+@using OnSet
+@using OnSet.Resources
 @namespace OnSet.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject IStringLocalizer<Resource> L

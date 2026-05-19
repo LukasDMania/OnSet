@@ -1,27 +1,55 @@
-﻿//using MediatR;
-//using OnSet.Infrastructure.Data;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using OnSet.Infrastructure.Data;
+using OnSet.Application.Exceptions;
+using OnSet;
 
-//namespace OnSet.Features.Projects.Details
-//{
-//    public class QueryHandler : IRequestHandler<Query, Model>
-//    {
-//        private readonly OnSetDbContext _db;
-//        //automapper projection
-//        //private readonly IConfigurationProvider _configuration;
+namespace OnSet.Features.Projects.Details
+{
+    /// <summary>MediatR handler for this feature slice.</summary>
+    public class QueryHandler : IRequestHandler<Query, Model>
+    {
+        private readonly OnSetDbContext _context;
+        private readonly IMapper _mapper;
+        private readonly ICurrentUserService _currentUserService;
 
-//        //add iconfig in constr param
-//        public QueryHandler(OnSetDbContext db) 
-//        {
-//            _db = db;
-//            //_configuration = configuration;
-//        }
+        public QueryHandler(OnSetDbContext context, IMapper mapper, ICurrentUserService currentUserService)
+        {
+            _context = context;
+            _mapper = mapper;
+            _currentUserService = currentUserService;
+        }
 
-//        public Task<Model> Handle(Query message, CancellationToken cancellationToken) 
-//        {
-//            _db.Projects
-//                .Where(i => i.Id == message.Id)
-//                 //ProjectTo model(config)
-//                .SingleOrDefaultAsync(cancellationToken)
-//        }
-//    }
-//}
+        public async Task<Model> Handle(Query request, CancellationToken cancellationToken)
+        {
+            var userId = _currentUserService.UserId;
+
+            var query = _context.Projects
+                .AsNoTracking()
+                .Where(p => p.Id == request.Id)
+                .ProjectTo<Model>(_mapper.ConfigurationProvider);
+
+            // Enforce that only members (or owner) can see full project details
+            var isMember = await _context.UserProjects
+                .AnyAsync(up => up.ProjectId == request.Id && up.UserId == userId, cancellationToken);
+
+            if (!isMember)
+            {
+                throw new ForbiddenAccessException("You must be part of this project to view its details.");
+            }
+
+            var model = await query.FirstOrDefaultAsync(cancellationToken);
+
+            if (model == null)
+            {
+                throw new NotFoundException("Project", request.Id!);
+            }
+
+            return model;
+        }
+
+
+    }
+}

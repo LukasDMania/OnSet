@@ -1,12 +1,13 @@
-﻿using FluentValidation;
+using FluentValidation;
 
 namespace OnSet.Features.Projects.Details
 {
+    /// <summary>FluentValidation rules for this feature slice.</summary>
     public class Validator : AbstractValidator<Query>
     {
-        public Validator() 
+        public Validator()
         {
-            RuleFor(m => m.Id).NotNull();
+            RuleFor(p => p.Id).NotNull();
         }
     }
 }

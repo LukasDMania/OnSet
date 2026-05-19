@@ -1,4 +1,148 @@
-﻿@page
-@model OnSet.Pages.Projects.Edit
+﻿@page "{id:int}"
+@using OnSet.Domain.Enums
+@model OnSet.Pages.Projects.EditModel
 @{
+    ViewData["Title"] = $"{L["Projects_Edit_Heading"].Value} | {Model.Data.Name}";
 }
+
+<div class="container py-5">
+    <form method="post">
+        <input type="hidden" asp-for="Data.Id" />
+
+        <div class="d-flex justify-content-between align-items-end mb-4">
+            <div>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-2 text-uppercase fw-bold" style="font-size: 0.7rem; letter-spacing: 1px;">
+                        <li class="breadcrumb-item"><a asp-page="/Projects/Index" class="text-decoration-none">@L["Projects_Breadcrumb_Projects"]</a></li>
+                        <li class="breadcrumb-item active">@L["Projects_Edit_Breadcrumb_EditMode"]</li>
+                    </ol>
+                </nav>
+                <h1 class="display-6 fw-bold mb-0">@L["Projects_Edit_Heading"]</h1>
+            </div>
+            <div class="d-flex gap-2">
+                <a href="/Projects/Details/@Model.Data.Id" class="btn btn-outline-secondary px-4">@L["Common_Cancel"]</a>
+                <button type="submit" class="btn btn-dark px-4 shadow-sm">
+                    <i class="bi bi-cloud-arrow-up me-2"></i>@L["Common_SaveChanges"]
+                </button>
+            </div>
+        </div>
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger border-0 shadow-sm mb-4">
+                <div asp-validation-summary="All" class="small"></div>
+            </div>
+        }
+
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold mb-4 border-bottom pb-2">@L["Projects_Edit_Section_General"]</h5>
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label asp-for="Data.Name" class="form-label fw-semibold small text-muted text-uppercase">@L["Projects_Edit_Label_ProjectName"]</label>
+                                <input asp-for="Data.Name" class="form-control form-control-lg border-2" placeholder="Enter project name..." />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Data.ClientName" class="form-label fw-semibold small text-muted text-uppercase">@L["Projects_Edit_Label_ClientName"]</label>
+                                <input asp-for="Data.ClientName" class="form-control" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Data.ReferenceCode" class="form-label fw-semibold small text-muted text-uppercase">@L["Projects_Edit_Label_ReferenceCode"]</label>
+                                <input asp-for="Data.ReferenceCode" class="form-control" />
+                            </div>
+                            <div class="col-12">
+                                <label asp-for="Data.Description" class="form-label fw-semibold small text-muted text-uppercase">@L["Projects_Edit_Label_Description"]</label>
+                                <textarea asp-for="Data.Description" class="form-control" rows="4" placeholder="Brief project summary..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold mb-4 border-bottom pb-2">@L["Projects_Edit_Section_Logistics"]</h5>
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label asp-for="Data.Street" class="form-label fw-semibold small text-muted text-uppercase">@L["Projects_Edit_Label_Street"]</label>
+                                <input asp-for="Data.Street" class="form-control" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Data.City" class="form-label fw-semibold small text-muted text-uppercase">@L["Projects_Edit_Label_City"]</label>
+                                <input asp-for="Data.City" class="form-control" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Data.Province" class="form-label fw-semibold small text-muted text-uppercase">@L["Projects_Edit_Label_Province"]</label>
+                                <input asp-for="Data.Province" class="form-control" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Data.ZipCode" class="form-label fw-semibold small text-muted text-uppercase">@L["Projects_Edit_Label_Zip"]</label>
+                                <input asp-for="Data.ZipCode" class="form-control" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Data.Country" class="form-label fw-semibold small text-muted text-uppercase">@L["Projects_Edit_Label_Country"]</label>
+                                <input asp-for="Data.Country" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm mb-4 bg-light">
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold mb-4 border-bottom pb-2">@L["Projects_Edit_Section_Lifecycle"]</h5>
+                        <div class="mb-4">
+                            <label asp-for="Data.Status" class="form-label fw-semibold small text-muted text-uppercase">@L["Projects_Edit_Label_Status"]</label>
+                            <select asp-for="Data.Status" asp-items="Html.GetEnumSelectList<ProjectStatus>()" class="form-select border-2 border-primary"></select>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Data.StartDate" class="form-label fw-semibold small text-muted text-uppercase">@L["Projects_Edit_Label_StartDate"]</label>
+                            <input asp-for="Data.StartDate" type="date" class="form-control" />
+                        </div>
+                        <div class="mb-0">
+                            <label asp-for="Data.EndDate" class="form-label fw-semibold small text-muted text-uppercase">@L["Projects_Edit_Label_EndDate"]</label>
+                            <input asp-for="Data.EndDate" type="date" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card border-0 shadow-sm mb-4 bg-dark text-white">
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold mb-4 border-bottom border-secondary pb-2">@L["Projects_Edit_Section_Financials"]</h5>
+                        <div class="mb-3">
+                            <label asp-for="Data.Budget" class="form-label fw-semibold small text-secondary text-uppercase">@L["Projects_Edit_Label_TotalBudget"]</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-secondary border-0 text-white">$</span>
+                                <input asp-for="Data.Budget" class="form-control bg-transparent text-white border-secondary" placeholder="0.00" />
+                            </div>
+                        </div>
+                        <div class="mb-0">
+                            <label asp-for="Data.ActualCost" class="form-label fw-semibold small text-secondary text-uppercase">@L["Projects_Edit_Label_ActualCost"]</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-secondary border-0 text-white">$</span>
+                                <input asp-for="Data.ActualCost" class="form-control bg-transparent text-white border-secondary" placeholder="0.00" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<style>
+    body {
+        background-color: #f4f7f6;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.1);
+    }
+
+    .card {
+        border-radius: 12px;
+    }
+</style>

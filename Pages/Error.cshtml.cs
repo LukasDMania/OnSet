@@ -6,6 +6,7 @@ namespace OnSet.Pages
 {
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     [IgnoreAntiforgeryToken]
+    /// <summary>Razor Page handler for this route (see OpenAPI *Razor Pages* section).</summary>
     public class ErrorModel : PageModel
     {
         public string? RequestId { get; set; }

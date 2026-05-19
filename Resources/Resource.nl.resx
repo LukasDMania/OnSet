@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Layout_Nav_Dashboard" xml:space="preserve"><value>Dashboard</value></data>
+  <data name="Layout_Nav_Projects" xml:space="preserve"><value>Projecten</value></data>
+  <data name="Layout_Nav_MyProfile" xml:space="preserve"><value>Mijn profiel</value></data>
+  <data name="Layout_Nav_SignedInAs" xml:space="preserve"><value>Ingelogd als</value></data>
+  <data name="Layout_Nav_Logout" xml:space="preserve"><value>Afmelden</value></data>
+  <data name="Layout_Nav_LogIn" xml:space="preserve"><value>Inloggen</value></data>
+  <data name="Layout_Nav_SignUp" xml:space="preserve"><value>Registreren</value></data>
+  <data name="Layout_Footer_Privacy" xml:space="preserve"><value>Privacy</value></data>
+  <data name="Layout_Footer_Copyright" xml:space="preserve"><value>© {0} - OnSet</value></data>
+  <data name="Layout_Footer_LanguageEnglish" xml:space="preserve"><value>English</value></data>
+  <data name="Layout_Footer_LanguageDutch" xml:space="preserve"><value>Nederlands</value></data>
+  <data name="Layout_Footer_LanguageFrench" xml:space="preserve"><value>Frans</value></data>
+  <data name="Layout_NavToggle" xml:space="preserve"><value>Navigatie in-/uitschakelen</value></data>
+  <data name="Layout_Nav_Language" xml:space="preserve"><value>Taal</value></data>
+  <data name="Common_BackToHome" xml:space="preserve"><value>Terug naar start</value></data>
+  <data name="Common_EmDash" xml:space="preserve"><value>—</value></data>
+  <data name="Common_NotAvailable" xml:space="preserve"><value>N.v.t.</value></data>
+  <data name="Common_SaveChanges" xml:space="preserve"><value>Wijzigingen opslaan</value></data>
+  <data name="Common_Cancel" xml:space="preserve"><value>Annuleren</value></data>
+  <data name="Common_View" xml:space="preserve"><value>Bekijken</value></data>
+  <data name="Index_PageTitle" xml:space="preserve"><value>OnSet – Productietoolkit</value></data>
+  <data name="Index_HeroTitle" xml:space="preserve"><value>OnSet – Beheer je producties</value></data>
+  <data name="Index_HeroLead" xml:space="preserve"><value>Maak projecten aan, beheer crewprofielen en bereid callsheets en contracten voor – alles op één plek.</value></data>
+  <data name="Index_Card_AccountTitle" xml:space="preserve"><value>Je account</value></data>
+  <data name="Index_Card_AccountBody" xml:space="preserve"><value>Registreer, log in en onderhoud je persoonlijke productieprofiel.</value></data>
+  <data name="Index_Card_Account_Create" xml:space="preserve"><value>Account aanmaken</value></data>
+  <data name="Index_Card_Account_LogIn" xml:space="preserve"><value>Inloggen</value></data>
+  <data name="Index_Card_ProjectsTitle" xml:space="preserve"><value>Projecten</value></data>
+  <data name="Index_Card_ProjectsBody" xml:space="preserve"><value>Maak productieprojecten aan en bewerk ze, inclusief budget, data en primaire locatie.</value></data>
+  <data name="Index_Card_Projects_ViewAll" xml:space="preserve"><value>Alle projecten bekijken</value></data>
+  <data name="Index_Card_Projects_Create" xml:space="preserve"><value>Nieuw project aanmaken</value></data>
+  <data name="Index_Card_ProfileTitle" xml:space="preserve"><value>Je profiel</value></data>
+  <data name="Index_Card_ProfileBody" xml:space="preserve"><value>Eenmaal ingelogd beheer je je skills, beschikbaarheid en noodcontactgegevens.</value></data>
+  <data name="Index_Card_Profile_Go" xml:space="preserve"><value>Naar mijn profiel</value></data>
+  <data name="Privacy_PageTitle" xml:space="preserve"><value>Privacybeleid</value></data>
+  <data name="Privacy_Body" xml:space="preserve"><value>Gebruik deze pagina om het privacybeleid van je site te beschrijven.</value></data>
+  <data name="Error_PageTitle" xml:space="preserve"><value>Fout</value></data>
+  <data name="Error_Heading" xml:space="preserve"><value>Fout.</value></data>
+  <data name="Error_Subheading" xml:space="preserve"><value>Er is een fout opgetreden bij het verwerken van je verzoek.</value></data>
+  <data name="Error_RequestIdLabel" xml:space="preserve"><value>Aanvraag-ID:</value></data>
+  <data name="Error_DevModeTitle" xml:space="preserve"><value>Ontwikkelmodus</value></data>
+  <data name="Error_DevModeP1" xml:space="preserve"><value>Als je naar de ontwikkelomgeving schakelt, zie je gedetailleerde informatie over de opgetreden fout.</value></data>
+  <data name="Error_DevModeP2" xml:space="preserve"><value>De ontwikkelomgeving mag niet ingeschakeld zijn voor productie; die kan gevoelige exception-informatie tonen. Zet voor lokaal debuggen ASPNETCORE_ENVIRONMENT op Development en start de app opnieuw.</value></data>
+  <data name="NotFound_PageTitle" xml:space="preserve"><value>Niet gevonden</value></data>
+  <data name="NotFound_Heading" xml:space="preserve"><value>Niet gevonden</value></data>
+  <data name="NotFound_Lead" xml:space="preserve"><value>De pagina of resource die je zocht bestaat niet of is verwijderd.</value></data>
+  <data name="Forbidden_PageTitle" xml:space="preserve"><value>Toegang geweigerd</value></data>
+  <data name="Forbidden_Heading" xml:space="preserve"><value>Toegang geweigerd</value></data>
+  <data name="Forbidden_Lead" xml:space="preserve"><value>Je hebt geen rechten om deze resource te bekijken.</value></data>
+  <data name="BadRequest_PageTitle" xml:space="preserve"><value>Ongeldige aanvraag</value></data>
+  <data name="BadRequest_Heading" xml:space="preserve"><value>Ongeldige aanvraag</value></data>
+  <data name="BadRequest_Lead" xml:space="preserve"><value>Deze actie kon niet worden uitgevoerd omdat een bedrijfsregel werd overtreden.</value></data>
+  <data name="Login_PageTitle" xml:space="preserve"><value>Inloggen</value></data>
+  <data name="Login_Submit" xml:space="preserve"><value>Inloggen</value></data>
+  <data name="Register_PageTitle" xml:space="preserve"><value>Account aanmaken</value></data>
+  <data name="Register_Subtitle" xml:space="preserve"><value>Word lid van de OnSet-community door onderstaande profielgegevens in te vullen.</value></data>
+  <data name="Register_Section_AccountCredentials" xml:space="preserve"><value>Accountgegevens</value></data>
+  <data name="Register_Section_ProfessionalProfile" xml:space="preserve"><value>Professioneel profiel</value></data>
+  <data name="Register_SelectRole" xml:space="preserve"><value>-- Rol kiezen --</value></data>
+  <data name="Register_Section_Address" xml:space="preserve"><value>Adres</value></data>
+  <data name="Register_Section_EmergencyContact" xml:space="preserve"><value>Noodcontact</value></data>
+  <data name="Register_Submit" xml:space="preserve"><value>Mijn account aanmaken</value></data>
+  <data name="Register_TermsNote" xml:space="preserve"><value>Door te registreren ga je akkoord met onze algemene voorwaarden.</value></data>
+  <data name="Projects_Index_PageTitle" xml:space="preserve"><value>Projecten</value></data>
+  <data name="Projects_Index_Heading" xml:space="preserve"><value>Jouw projecten</value></data>
+  <data name="Projects_Index_Lead" xml:space="preserve"><value>Alleen producties waarvan je lid bent, zijn hier zichtbaar. Word lid met een code van de producent.</value></data>
+  <data name="Projects_Index_CreateProject" xml:space="preserve"><value>Project aanmaken</value></data>
+  <data name="Projects_Index_EmptyTitle" xml:space="preserve"><value>Nog geen zichtbare projecten</value></data>
+  <data name="Projects_Index_EmptyBody" xml:space="preserve"><value>Maak een nieuwe productie aan of word lid met een geheime projectcode van het team.</value></data>
+  <data name="Projects_Index_TableCaption" xml:space="preserve"><value>Projecten waar je deel van uitmaakt</value></data>
+  <data name="Projects_Index_ColName" xml:space="preserve"><value>Naam</value></data>
+  <data name="Projects_Index_ColClient" xml:space="preserve"><value>Opdrachtgever</value></data>
+  <data name="Projects_Index_ColCode" xml:space="preserve"><value>Code</value></data>
+  <data name="Projects_Index_ColStart" xml:space="preserve"><value>Start</value></data>
+  <data name="Projects_Index_ColEnd" xml:space="preserve"><value>Einde</value></data>
+  <data name="Projects_Index_JoinTitle" xml:space="preserve"><value>Word lid met projectcode</value></data>
+  <data name="Projects_Index_JoinBody" xml:space="preserve"><value>Producties zijn privé. Voer de geheime code in die je van het productiekantoor hebt gekregen.</value></data>
+  <data name="Projects_Index_ProjectCode" xml:space="preserve"><value>Projectcode</value></data>
+  <data name="Projects_Index_JoinProject" xml:space="preserve"><value>Deelnemen aan project</value></data>
+  <data name="Projects_Index_JoinFootnote" xml:space="preserve"><value>Projectnamen en details verschijnen pas nadat je succesvol bent toegetreden. Codes zijn uniek per productie en kunnen door de eigenaar worden gewijzigd.</value></data>
+  <data name="Projects_Create_PageTitle" xml:space="preserve"><value>Nieuw project aanmaken</value></data>
+  <data name="Projects_Create_Lead" xml:space="preserve"><value>Richt een nieuwe productie in en wijs je eerste rol toe.</value></data>
+  <data name="Projects_Create_Section_ProjectInformation" xml:space="preserve"><value>Projectinformatie</value></data>
+  <data name="Projects_Create_Label_ProjectName" xml:space="preserve"><value>Projectnaam</value></data>
+  <data name="Projects_Breadcrumb_Portfolio" xml:space="preserve"><value>Portfolio</value></data>
+  <data name="Projects_Breadcrumb_Projects" xml:space="preserve"><value>Projecten</value></data>
+  <data name="Projects_Edit_Breadcrumb_EditMode" xml:space="preserve"><value>Bewerkmodus</value></data>
+  <data name="Projects_Edit_Heading" xml:space="preserve"><value>Project bewerken</value></data>
+  <data name="Projects_Edit_Section_General" xml:space="preserve"><value>Algemene informatie</value></data>
+  <data name="Projects_Edit_Section_Logistics" xml:space="preserve"><value>Logistiek &amp; locatie</value></data>
+  <data name="Projects_Edit_Section_Lifecycle" xml:space="preserve"><value>Projectlevenscyclus</value></data>
+  <data name="Projects_Edit_Label_ProjectName" xml:space="preserve"><value>Projectnaam</value></data>
+  <data name="Projects_Edit_Label_ClientName" xml:space="preserve"><value>Naam opdrachtgever</value></data>
+  <data name="Projects_Edit_Label_ReferenceCode" xml:space="preserve"><value>Referentiecode</value></data>
+  <data name="Projects_Edit_Label_Description" xml:space="preserve"><value>Beschrijving</value></data>
+  <data name="Projects_Edit_Label_Street" xml:space="preserve"><value>Straat en huisnummer</value></data>
+  <data name="Projects_Edit_Label_City" xml:space="preserve"><value>Plaats</value></data>
+  <data name="Projects_Edit_Label_Province" xml:space="preserve"><value>Provincie / staat</value></data>
+  <data name="Projects_Edit_Label_Zip" xml:space="preserve"><value>Postcode</value></data>
+  <data name="Projects_Edit_Label_Country" xml:space="preserve"><value>Land</value></data>
+  <data name="Projects_Edit_Label_Status" xml:space="preserve"><value>Projectstatus</value></data>
+  <data name="Projects_Details_Owner" xml:space="preserve"><value>Eigenaar:</value></data>
+  <data name="Projects_Details_Ref" xml:space="preserve"><value>Ref:</value></data>
+  <data name="Projects_Details_Unassigned" xml:space="preserve"><value>Niet toegewezen</value></data>
+  <data name="Projects_Details_Edit" xml:space="preserve"><value>Bewerken</value></data>
+  <data name="Projects_Details_FinancialOverview" xml:space="preserve"><value>Financieel overzicht</value></data>
+  <data name="Projects_Details_ActualCost" xml:space="preserve"><value>Werkelijke kosten</value></data>
+  <data name="Projects_Details_Budget" xml:space="preserve"><value>Budget</value></data>
+  <data name="Projects_Details_Timeline" xml:space="preserve"><value>Tijdlijn</value></data>
+  <data name="Projects_Details_StartDate" xml:space="preserve"><value>Startdatum</value></data>
+  <data name="Projects_Project_PageTitleSuffix" xml:space="preserve"><value>Projectdashboard</value></data>
+  <data name="Projects_Project_Client" xml:space="preserve"><value>Opdrachtgever:</value></data>
+  <data name="Projects_Project_InternalProduction" xml:space="preserve"><value>Interne productie</value></data>
+  <data name="Projects_Project_Details" xml:space="preserve"><value>Details</value></data>
+  <data name="Projects_Project_Edit" xml:space="preserve"><value>Bewerken</value></data>
+  <data name="Projects_Project_DocumentsTitle" xml:space="preserve"><value>Productiedocumenten</value></data>
+  <data name="Projects_Project_DocumentsLead" xml:space="preserve"><value>Alle bestanden horen bij dit project en zijn alleen zichtbaar voor leden.</value></data>
+  <data name="Projects_Project_DocumentType" xml:space="preserve"><value>Documenttype</value></data>
+  <data name="Projects_Project_File" xml:space="preserve"><value>Bestand</value></data>
+  <data name="Projects_Project_Upload" xml:space="preserve"><value>Uploaden</value></data>
+  <data name="Projects_Project_NotesOptional" xml:space="preserve"><value>Notities (optioneel)</value></data>
+  <data name="Users_Details_PageTitle" xml:space="preserve"><value>Mijn profiel bewerken</value></data>
+  <data name="Users_Details_Heading" xml:space="preserve"><value>Profiel bewerken</value></data>
+  <data name="Users_Details_Lead" xml:space="preserve"><value>Beheer je persoonlijke en professionele gegevens.</value></data>
+  <data name="Users_Details_Tab_Basic" xml:space="preserve"><value>Basis</value></data>
+  <data name="Users_Details_Tab_Professional" xml:space="preserve"><value>Professioneel</value></data>
+  <data name="Users_Details_Tab_Contact" xml:space="preserve"><value>Contact &amp; veiligheid</value></data>
+  <data name="Users_Other_NotFoundTitle" xml:space="preserve"><value>Gebruiker niet gevonden</value></data>
+  <data name="Users_Other_NotFoundBody" xml:space="preserve"><value>Het gebruikersprofiel bestaat niet of is gedeactiveerd.</value></data>
+  <data name="Users_Other_BackToDirectory" xml:space="preserve"><value>Terug naar start</value></data>
+  <data name="Users_Other_PageTitle" xml:space="preserve"><value>Profiel van {0}</value></data>
+  <data name="Logout_Button" xml:space="preserve"><value>Afmelden</value></data>
+  <data name="Projects_Project_UploadNote" xml:space="preserve"><value>Als maker van het project kun je nu documenten uploaden. In een latere versie kun je uploadrechten delegeren naar crewleden.</value></data>
+  <data name="Projects_Project_UploadManagedByOffice" xml:space="preserve"><value>Uploads worden beheerd door het productiekantoor.</value></data>
+  <data name="Projects_Project_NoDocumentsTitle" xml:space="preserve"><value>Nog geen documenten geüpload</value></data>
+  <data name="Projects_Project_NoDocumentsBody" xml:space="preserve"><value>Wanneer het kantoor callsheets, planningen, scenario’s en logistiek uploadt, verschijnen ze hier gegroepeerd per type.</value></data>
+  <data name="Projects_Project_QuickLinks" xml:space="preserve"><value>Snelle links</value></data>
+  <data name="Projects_Project_LinkDetails" xml:space="preserve"><value>Projectdetails</value></data>
+  <data name="Projects_Project_LinkEdit" xml:space="preserve"><value>Project bewerken</value></data>
+  <data name="Projects_Project_ColFile" xml:space="preserve"><value>Bestand</value></data>
+  <data name="Projects_Project_ColUploadedBy" xml:space="preserve"><value>Geüpload door</value></data>
+  <data name="Projects_Project_ColUploadedAt" xml:space="preserve"><value>Geüpload op</value></data>
+  <data name="Projects_Project_ColActions" xml:space="preserve"><value>Acties</value></data>
+  <data name="Projects_Project_Download" xml:space="preserve"><value>Downloaden</value></data>
+  <data name="Projects_Details_EndDate" xml:space="preserve"><value>Einddatum</value></data>
+  <data name="Projects_Details_Ongoing" xml:space="preserve"><value>Lopend</value></data>
+  <data name="Projects_Details_ClientLabel" xml:space="preserve"><value>Opdrachtgever:</value></data>
+  <data name="Projects_Details_InternalProject" xml:space="preserve"><value>Intern project</value></data>
+  <data name="Projects_Details_DescriptionTitle" xml:space="preserve"><value>Projectbeschrijving</value></data>
+  <data name="Projects_Details_NoDescription" xml:space="preserve"><value>Er is geen uitgebreide beschrijving voor dit project opgegeven.</value></data>
+  <data name="Projects_Details_OperationalSite" xml:space="preserve"><value>Operationele locatie</value></data>
+  <data name="Projects_Details_StreetAddress" xml:space="preserve"><value>Straat en huisnummer</value></data>
+  <data name="Projects_Details_SystemMetadata" xml:space="preserve"><value>Systeemmetadata</value></data>
+  <data name="Projects_Details_InternalId" xml:space="preserve"><value>Intern ID</value></data>
+  <data name="Projects_Details_CreatedOn" xml:space="preserve"><value>Aangemaakt op</value></data>
+  <data name="Projects_Details_LastModified" xml:space="preserve"><value>Laatst gewijzigd</value></data>
+  <data name="Projects_Details_InitialRecord" xml:space="preserve"><value>Eerste vastlegging</value></data>
+  <data name="Projects_Create_Section_PrimaryLocation" xml:space="preserve"><value>Primaire locatie</value></data>
+  <data name="Projects_Create_Submit" xml:space="preserve"><value>Project aanmaken</value></data>
+  <data name="Projects_Edit_Label_StartDate" xml:space="preserve"><value>Startdatum</value></data>
+  <data name="Projects_Edit_Label_EndDate" xml:space="preserve"><value>Geschatte einddatum</value></data>
+  <data name="Projects_Edit_Section_Financials" xml:space="preserve"><value>Financiën</value></data>
+  <data name="Projects_Edit_Label_TotalBudget" xml:space="preserve"><value>Totaalbudget</value></data>
+  <data name="Projects_Edit_Label_ActualCost" xml:space="preserve"><value>Werkelijke kosten tot nu toe</value></data>
+  <data name="Register_Section_Availability" xml:space="preserve"><value>Beschikbaarheid</value></data>
+  <data name="Register_MultiSelectHint" xml:space="preserve"><value>Houd Ctrl (Cmd) ingedrukt om meerdere opties te kiezen.</value></data>
+  <data name="Projects_Create_Section_Assignment" xml:space="preserve"><value>Je eerste rol</value></data>
+  <data name="Projects_Create_Label_YourRole" xml:space="preserve"><value>Jouw rol in dit project</value></data>
+  <data name="Projects_Create_SelectYourRole" xml:space="preserve"><value>-- Kies je rol --</value></data>
+  <data name="Projects_Create_Section_Timeline" xml:space="preserve"><value>Tijdlijn &amp; status</value></data>
+  <data name="Projects_Details_BrowserTitle" xml:space="preserve"><value>Project | {0}</value></data>
+  <data name="Projects_Project_BrowserTitle" xml:space="preserve"><value>Projectdashboard | {0}</value></data>
+  <data name="Projects_Index_JoinCodePlaceholder" xml:space="preserve"><value>bijv. TOP-SECRET-9F2K</value></data>
+  <data name="Projects_Create_Placeholder_ProjectName" xml:space="preserve"><value>bijv. Zomercommercial 2024</value></data>
+  <data name="Projects_Create_Placeholder_ReferenceCode" xml:space="preserve"><value>REF-001</value></data>
+  <data name="Projects_Create_Placeholder_Description" xml:space="preserve"><value>Korte samenvatting van het project...</value></data>
+  <data name="Projects_Create_Placeholder_Budget" xml:space="preserve"><value>0,00</value></data>
+  <data name="Register_Placeholder_Email" xml:space="preserve"><value>naam@voorbeeld.nl</value></data>
+  <data name="Register_Placeholder_AvatarUrl" xml:space="preserve"><value>https://...</value></data>
+  <data name="Users_Details_Section_Appearance" xml:space="preserve"><value>Profielweergave</value></data>
+  <data name="Users_Details_Label_FirstName" xml:space="preserve"><value>Voornaam</value></data>
+  <data name="Users_Details_Label_LastName" xml:space="preserve"><value>Achternaam</value></data>
+  <data name="Users_Details_Label_Bio" xml:space="preserve"><value>Bio</value></data>
+  <data name="Users_Details_Placeholder_Bio" xml:space="preserve"><value>Schrijf een korte professionele bio...</value></data>
+  <data name="Users_Details_Hint_BioVisibility" xml:space="preserve"><value>Zichtbaar voor andere gebruikers en managers.</value></data>
+  <data name="Users_Details_Label_ProfileImageUrl" xml:space="preserve"><value>URL profielfoto</value></data>
+  <data name="Users_Details_Placeholder_ProfileImageUrl" xml:space="preserve"><value>https://pad-naar-afbeelding.nl/img.jpg</value></data>
+  <data name="Users_Details_Placeholder_FirstName" xml:space="preserve"><value>Voer voornaam in</value></data>
+  <data name="Users_Details_Placeholder_LastName" xml:space="preserve"><value>Voer achternaam in</value></data>
+  <data name="Users_Details_Section_WorkAvailability" xml:space="preserve"><value>Werk &amp; beschikbaarheid</value></data>
+  <data name="Users_Details_SelectRole" xml:space="preserve"><value>-- Kies een rol --</value></data>
+  <data name="Users_Details_Label_YearsExperience" xml:space="preserve"><value>Jaren ervaring</value></data>
+  <data name="Users_Details_Label_Languages" xml:space="preserve"><value>Talen</value></data>
+  <data name="Users_Details_Label_AvailableForBooking" xml:space="preserve"><value>Beschikbaar voor booking</value></data>
+  <data name="Users_Details_Hint_AvailableForBooking" xml:space="preserve"><value>Zet dit uit om jezelf te verbergen in actieve zoekresultaten.</value></data>
+  <data name="Users_Details_Label_NextAvailableDate" xml:space="preserve"><value>Volgende beschikbare datum</value></data>
+  <data name="Users_Details_Section_HomeAddress" xml:space="preserve"><value>Thuisadres</value></data>
+  <data name="Users_Details_Label_EmergencyContactName" xml:space="preserve"><value>Naam contact</value></data>
+  <data name="Users_Details_Label_EmergencyContactPhone" xml:space="preserve"><value>Telefoon contact</value></data>
+</root>

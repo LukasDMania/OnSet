@@ -1,4 +1,182 @@
-﻿@page
+﻿@page "{Id:int}"
+@using OnSet.Domain.Enums
 @model OnSet.Pages.Projects.Details
 @{
+    ViewData["Title"] = string.Format(L["Projects_Details_BrowserTitle"].Value, Model.Data.Name);
+
+    // DEV MODE: Unified style for all statuses
+    string statusColor = "dark";
+    string statusIcon = "bi-circle-fill";
 }
+
+<div class="container py-5">
+    <div class="project-header p-4 mb-5 rounded-4 shadow-sm border bg-white">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-2 text-uppercase fw-bold" style="font-size: 0.7rem; letter-spacing: 1px;">
+                        <li class="breadcrumb-item"><a asp-page="/Projects/Index" class="text-decoration-none">@L["Projects_Breadcrumb_Portfolio"]</a></li>
+                        <li class="breadcrumb-item active text-primary">@Model.Data.ReferenceCode</li>
+                    </ol>
+                </nav>
+                <div class="d-flex align-items-center gap-3 flex-wrap">
+                    <h1 class="display-6 fw-bold mb-0 text-dark">@Model.Data.Name</h1>
+                    <span class="badge rounded-pill bg-@statusColor bg-opacity-10 text-@statusColor border border-@statusColor border-opacity-25 px-3 py-2">
+                        <i class="bi @statusIcon me-1"></i> @Model.Data.Status
+                    </span>
+                </div>
+                <p class="text-muted mt-3 mb-0 d-flex align-items-center gap-4">
+                    <span><i class="bi bi-person-badge me-2"></i><strong>@L["Projects_Details_Owner"]</strong> @(Model.Data.OwnerName ?? L["Projects_Details_Unassigned"].Value)</span>
+                    <span><i class="bi bi-hash me-2"></i><strong>@L["Projects_Details_Ref"]</strong> @(Model.Data.ReferenceCode ?? L["Common_NotAvailable"].Value)</span>
+                </p>
+            </div>
+            <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+                <div class="btn-group shadow-sm">
+                    <a asp-page="./Edit" asp-route-id="@Model.Data.Id" class="btn btn-outline-dark px-4">
+                        <i class="bi bi-pencil-square me-2"></i>@L["Projects_Details_Edit"]
+                    </a>
+                    <button type="button" class="btn btn-dark px-4">
+                        <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-8">
+
+            <div class="row g-4 mb-4">
+                <div class="col-md-6">
+                    <div class="card h-100 border-0 shadow-sm bg-dark text-white overflow-hidden">
+                        <div class="card-body p-4 position-relative">
+                            <i class="bi bi-currency-dollar position-absolute end-0 bottom-0 opacity-10" style="font-size: 5rem; margin-right: -10px; margin-bottom: -10px;"></i>
+                            <h6 class="text-uppercase small fw-bold opacity-50 mb-3">@L["Projects_Details_FinancialOverview"]</h6>
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <span class="small opacity-75">@L["Projects_Details_ActualCost"]</span>
+                                <h3 class="fw-bold mb-0">@(Model.Data.ActualCost?.ToString("C") ?? "$0.00")</h3>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span class="small opacity-75">@L["Projects_Details_Budget"]</span>
+                                <span class="fw-medium">@(Model.Data.Budget?.ToString("C") ?? L["Common_NotAvailable"].Value)</span>
+                            </div>
+
+                            @{
+                                var progress = (Model.Data.Budget > 0) ? (int)((Model.Data.ActualCost ?? 0) / Model.Data.Budget * 100) : 0;
+                            }
+                            <div class="progress bg-white bg-opacity-10" style="height: 8px;">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: @(progress > 100 ? 100 : progress)%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <h6 class="text-uppercase small fw-bold text-muted mb-3">@L["Projects_Details_Timeline"]</h6>
+                            <div class="row">
+                                <div class="col-6 border-end">
+                                    <label class="d-block small text-muted">@L["Projects_Details_StartDate"]</label>
+                                    <span class="fw-bold text-dark">@Model.Data.StartDate.ToShortDateString()</span>
+                                </div>
+                                <div class="col-6 ps-4">
+                                    <label class="d-block small text-muted">@L["Projects_Details_EndDate"]</label>
+                                    <span class="fw-bold text-dark">@(Model.Data.EndDate?.ToShortDateString() ?? L["Projects_Details_Ongoing"].Value)</span>
+                                </div>
+                            </div>
+                            <div class="mt-4 p-2 bg-light rounded text-center">
+                                <i class="bi bi-calendar-event me-2 text-primary"></i>
+                                <span class="small fw-medium text-muted">@L["Projects_Details_ClientLabel"] @(Model.Data.ClientName ?? L["Projects_Details_InternalProject"].Value)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-4 d-flex align-items-center">
+                        <i class="bi bi-justify-left me-2 text-primary"></i>@L["Projects_Details_DescriptionTitle"]
+                    </h5>
+                    <div class="text-secondary lh-lg" style="white-space: pre-wrap;">
+                        @(string.IsNullOrWhiteSpace(Model.Data.Description)
+                            ? L["Projects_Details_NoDescription"].Value
+                            : Model.Data.Description)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <h6 class="text-uppercase small fw-bold text-muted mb-4 border-bottom pb-2">@L["Projects_Details_OperationalSite"]</h6>
+                    <div class="d-flex flex-column gap-3">
+                        <div class="d-flex gap-3">
+                            <div class="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center" style="min-width: 40px; height: 40px;">
+                                <i class="bi bi-geo-alt-fill text-primary"></i>
+                            </div>
+                            <div>
+                                <label class="text-muted small d-block">@L["Projects_Details_StreetAddress"]</label>
+                                <span class="fw-bold d-block">@(Model.Data.Street ?? L["Common_NotAvailable"].Value)</span>
+                                <span class="text-muted small">
+                                    @Model.Data.City, @Model.Data.Province @Model.Data.ZipCode
+                                </span>
+                                <span class="d-block text-muted small fw-bold">@Model.Data.Country</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card border-0 shadow-sm overflow-hidden">
+                <div class="card-header bg-white border-0 pt-4 px-4">
+                    <h6 class="text-uppercase small fw-bold text-muted mb-0">@L["Projects_Details_SystemMetadata"]</h6>
+                </div>
+                <div class="card-body p-4 pt-2">
+                    <div class="list-group list-group-flush">
+                        <div class="list-group-item px-0 bg-transparent d-flex justify-content-between align-items-center">
+                            <span class="small text-muted">@L["Projects_Details_InternalId"]</span>
+                            <span class="badge bg-light text-dark border">#@Model.Data.Id</span>
+                        </div>
+                        <div class="list-group-item px-0 bg-transparent">
+                            <span class="small text-muted d-block">@L["Projects_Details_CreatedOn"]</span>
+                            <span class="small fw-medium">@Model.Data.CreatedAt.ToString("MMMM dd, yyyy HH:mm")</span>
+                        </div>
+                        <div class="list-group-item px-0 bg-transparent">
+                            <span class="small text-muted d-block">@L["Projects_Details_LastModified"]</span>
+                            <span class="small fw-medium text-primary">
+                                @(Model.Data.UpdatedAt?.ToString("MMMM dd, yyyy HH:mm") ?? L["Projects_Details_InitialRecord"].Value)
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    .project-header {
+        border-top: 4px solid #212529;
+    }
+
+    .card {
+        border-radius: 1rem;
+    }
+
+    .progress {
+        border-radius: 20px;
+    }
+
+    .breadcrumb-item + .breadcrumb-item::before {
+        content: "›";
+        color: #adb5bd;
+    }
+</style>

@@ -1,0 +1,15 @@
+@page "/BadRequest"
+@model BadRequestModel
+@{
+    ViewData["Title"] = L["BadRequest_PageTitle"];
+}
+
+<div class="container py-5 text-center">
+    <h1 class="display-6">@L["BadRequest_Heading"]</h1>
+    <p class="text-secondary">@L["BadRequest_Lead"]</p>
+    @if (!string.IsNullOrWhiteSpace(Model.Details))
+    {
+        <p class="text-danger small mt-3 text-start mx-auto" style="max-width: 36rem;">@Model.Details</p>
+    }
+    <a class="btn btn-primary mt-3" asp-page="/Index">@L["Common_BackToHome"]</a>
+</div>

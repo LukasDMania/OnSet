@@ -2,8 +2,9 @@
 
 namespace OnSet.Features.Projects.Edit
 {
-    public class Query : IRequest<Command>
+    /// <summary>Loads project data for the edit form.</summary>
+    public record Query : IRequest<Command>
     {
-        public int? Id { get; init; }
+        public int Id { get; init; }
     }
 }

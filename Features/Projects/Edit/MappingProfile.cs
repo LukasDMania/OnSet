@@ -1,13 +1,19 @@
-﻿using AutoMapper;
+using AutoMapper;
 using OnSet.Domain.Models;
 
 namespace OnSet.Features.Projects.Edit
 {
+    /// <summary>AutoMapper profile for this feature slice.</summary>
     public class MappingProfile : Profile
     {
         public MappingProfile() 
         {
-            CreateProjection<Project, Command>();
+            CreateProjection<Project, Command>()
+                .ForMember(dest => dest.Street, opt => opt.MapFrom(src => src.Location != null ? src.Location.Street : null))
+                .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.Location != null ? src.Location.City : null))
+                .ForMember(dest => dest.Province, opt => opt.MapFrom(src => src.Location != null ? src.Location.ProvinceOrState : null))
+                .ForMember(dest => dest.Country, opt => opt.MapFrom(src => src.Location != null ? src.Location.Country : null))
+                .ForMember(dest => dest.ZipCode, opt => opt.MapFrom(src => src.Location != null ? src.Location.ZipCode : null));
         }
     }
 }

@@ -1,0 +1,717 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Layout_Nav_Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="Layout_Nav_Projects" xml:space="preserve">
+    <value>Projects</value>
+  </data>
+  <data name="Layout_Nav_MyProfile" xml:space="preserve">
+    <value>My Profile</value>
+  </data>
+  <data name="Layout_Nav_SignedInAs" xml:space="preserve">
+    <value>Signed in as</value>
+  </data>
+  <data name="Layout_Nav_Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="Layout_Nav_LogIn" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="Layout_Nav_SignUp" xml:space="preserve">
+    <value>Sign up</value>
+  </data>
+  <data name="Layout_Footer_Privacy" xml:space="preserve">
+    <value>Privacy</value>
+  </data>
+  <data name="Layout_Footer_Copyright" xml:space="preserve">
+    <value>© {0} - OnSet</value>
+  </data>
+  <data name="Layout_Footer_LanguageEnglish" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Layout_Footer_LanguageDutch" xml:space="preserve">
+    <value>Nederlands</value>
+  </data>
+  <data name="Layout_Footer_LanguageFrench" xml:space="preserve">
+    <value>Français</value>
+  </data>
+  <data name="Layout_NavToggle" xml:space="preserve">
+    <value>Toggle navigation</value>
+  </data>
+  <data name="Layout_Nav_Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Common_BackToHome" xml:space="preserve">
+    <value>Back to home</value>
+  </data>
+  <data name="Common_EmDash" xml:space="preserve">
+    <value>—</value>
+  </data>
+  <data name="Common_NotAvailable" xml:space="preserve">
+    <value>N/A</value>
+  </data>
+  <data name="Common_SaveChanges" xml:space="preserve">
+    <value>Save Changes</value>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Common_View" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="Index_PageTitle" xml:space="preserve">
+    <value>OnSet – Production Toolkit</value>
+  </data>
+  <data name="Index_HeroTitle" xml:space="preserve">
+    <value>OnSet – Manage your productions</value>
+  </data>
+  <data name="Index_HeroLead" xml:space="preserve">
+    <value>Create projects, manage your crew profiles, and prepare the foundation for callsheets and contracts – all in one place.</value>
+  </data>
+  <data name="Index_Card_AccountTitle" xml:space="preserve">
+    <value>Your account</value>
+  </data>
+  <data name="Index_Card_AccountBody" xml:space="preserve">
+    <value>Register, log in, and maintain your personal production profile.</value>
+  </data>
+  <data name="Index_Card_Account_Create" xml:space="preserve">
+    <value>Create account</value>
+  </data>
+  <data name="Index_Card_Account_LogIn" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="Index_Card_ProjectsTitle" xml:space="preserve">
+    <value>Projects</value>
+  </data>
+  <data name="Index_Card_ProjectsBody" xml:space="preserve">
+    <value>Create and edit production projects, including budget, dates, and primary location.</value>
+  </data>
+  <data name="Index_Card_Projects_ViewAll" xml:space="preserve">
+    <value>View all projects</value>
+  </data>
+  <data name="Index_Card_Projects_Create" xml:space="preserve">
+    <value>Create new project</value>
+  </data>
+  <data name="Index_Card_ProfileTitle" xml:space="preserve">
+    <value>Your profile</value>
+  </data>
+  <data name="Index_Card_ProfileBody" xml:space="preserve">
+    <value>Once logged in, manage your skills, availability, and emergency contact details.</value>
+  </data>
+  <data name="Index_Card_Profile_Go" xml:space="preserve">
+    <value>Go to my profile</value>
+  </data>
+  <data name="Privacy_PageTitle" xml:space="preserve">
+    <value>Privacy Policy</value>
+  </data>
+  <data name="Privacy_Body" xml:space="preserve">
+    <value>Use this page to detail your site's privacy policy.</value>
+  </data>
+  <data name="Error_PageTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Error_Heading" xml:space="preserve">
+    <value>Error.</value>
+  </data>
+  <data name="Error_Subheading" xml:space="preserve">
+    <value>An error occurred while processing your request.</value>
+  </data>
+  <data name="Error_RequestIdLabel" xml:space="preserve">
+    <value>Request ID:</value>
+  </data>
+  <data name="Error_DevModeTitle" xml:space="preserve">
+    <value>Development Mode</value>
+  </data>
+  <data name="Error_DevModeP1" xml:space="preserve">
+    <value>Swapping to the Development environment displays detailed information about the error that occurred.</value>
+  </data>
+  <data name="Error_DevModeP2" xml:space="preserve">
+    <value>The Development environment shouldn't be enabled for deployed applications. It can result in displaying sensitive information from exceptions to end users. For local debugging, enable the Development environment by setting the ASPNETCORE_ENVIRONMENT environment variable to Development and restarting the app.</value>
+  </data>
+  <data name="NotFound_PageTitle" xml:space="preserve">
+    <value>Not found</value>
+  </data>
+  <data name="NotFound_Heading" xml:space="preserve">
+    <value>Not found</value>
+  </data>
+  <data name="NotFound_Lead" xml:space="preserve">
+    <value>The page or resource you requested does not exist or was removed.</value>
+  </data>
+  <data name="Forbidden_PageTitle" xml:space="preserve">
+    <value>Access denied</value>
+  </data>
+  <data name="Forbidden_Heading" xml:space="preserve">
+    <value>Access denied</value>
+  </data>
+  <data name="Forbidden_Lead" xml:space="preserve">
+    <value>You do not have permission to view this resource.</value>
+  </data>
+  <data name="BadRequest_PageTitle" xml:space="preserve">
+    <value>Invalid request</value>
+  </data>
+  <data name="BadRequest_Heading" xml:space="preserve">
+    <value>Invalid request</value>
+  </data>
+  <data name="BadRequest_Lead" xml:space="preserve">
+    <value>This action could not be completed because a business rule was violated.</value>
+  </data>
+  <data name="Login_PageTitle" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="Login_Submit" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Register_PageTitle" xml:space="preserve">
+    <value>Create Account</value>
+  </data>
+  <data name="Register_Subtitle" xml:space="preserve">
+    <value>Join the OnSet community by completing the profile details below.</value>
+  </data>
+  <data name="Register_Section_AccountCredentials" xml:space="preserve">
+    <value>Account Credentials</value>
+  </data>
+  <data name="Register_Section_ProfessionalProfile" xml:space="preserve">
+    <value>Professional Profile</value>
+  </data>
+  <data name="Register_SelectRole" xml:space="preserve">
+    <value>-- Select Role --</value>
+  </data>
+  <data name="Register_Section_Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="Register_Section_EmergencyContact" xml:space="preserve">
+    <value>Emergency Contact</value>
+  </data>
+  <data name="Register_Submit" xml:space="preserve">
+    <value>Create My Account</value>
+  </data>
+  <data name="Register_TermsNote" xml:space="preserve">
+    <value>By registering, you agree to our Terms and Conditions.</value>
+  </data>
+  <data name="Projects_Index_PageTitle" xml:space="preserve">
+    <value>Projects</value>
+  </data>
+  <data name="Projects_Index_Heading" xml:space="preserve">
+    <value>Your projects</value>
+  </data>
+  <data name="Projects_Index_Lead" xml:space="preserve">
+    <value>Only productions you are a member of are visible here. Join a project with a code shared by the producer.</value>
+  </data>
+  <data name="Projects_Index_CreateProject" xml:space="preserve">
+    <value>Create project</value>
+  </data>
+  <data name="Projects_Index_EmptyTitle" xml:space="preserve">
+    <value>No visible projects yet</value>
+  </data>
+  <data name="Projects_Index_EmptyBody" xml:space="preserve">
+    <value>Create a new production, or join an existing one using a private project code from the production team.</value>
+  </data>
+  <data name="Projects_Index_TableCaption" xml:space="preserve">
+    <value>Projects you’re part of</value>
+  </data>
+  <data name="Projects_Index_ColName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Projects_Index_ColClient" xml:space="preserve">
+    <value>Client</value>
+  </data>
+  <data name="Projects_Index_ColCode" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="Projects_Index_ColStart" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="Projects_Index_ColEnd" xml:space="preserve">
+    <value>End</value>
+  </data>
+  <data name="Projects_Index_JoinTitle" xml:space="preserve">
+    <value>Join with project code</value>
+  </data>
+  <data name="Projects_Index_JoinBody" xml:space="preserve">
+    <value>Productions are private. Enter the secret code you received from the production office to join a project.</value>
+  </data>
+  <data name="Projects_Index_ProjectCode" xml:space="preserve">
+    <value>Project code</value>
+  </data>
+  <data name="Projects_Index_JoinProject" xml:space="preserve">
+    <value>Join project</value>
+  </data>
+  <data name="Projects_Index_JoinFootnote" xml:space="preserve">
+    <value>Project names and details only appear after you successfully join. Codes are unique per production and can be rotated by the owner.</value>
+  </data>
+  <data name="Projects_Create_PageTitle" xml:space="preserve">
+    <value>Create New Project</value>
+  </data>
+  <data name="Projects_Create_Lead" xml:space="preserve">
+    <value>Set up a new production project and assign your initial role.</value>
+  </data>
+  <data name="Projects_Create_Section_ProjectInformation" xml:space="preserve">
+    <value>Project Information</value>
+  </data>
+  <data name="Projects_Create_Label_ProjectName" xml:space="preserve">
+    <value>Project Name</value>
+  </data>
+  <data name="Projects_Breadcrumb_Portfolio" xml:space="preserve">
+    <value>Portfolio</value>
+  </data>
+  <data name="Projects_Breadcrumb_Projects" xml:space="preserve">
+    <value>Projects</value>
+  </data>
+  <data name="Projects_Edit_Breadcrumb_EditMode" xml:space="preserve">
+    <value>Edit Mode</value>
+  </data>
+  <data name="Projects_Edit_Heading" xml:space="preserve">
+    <value>Edit Project</value>
+  </data>
+  <data name="Projects_Edit_Section_General" xml:space="preserve">
+    <value>General Information</value>
+  </data>
+  <data name="Projects_Edit_Section_Logistics" xml:space="preserve">
+    <value>Logistics &amp; Location</value>
+  </data>
+  <data name="Projects_Edit_Section_Lifecycle" xml:space="preserve">
+    <value>Project Lifecycle</value>
+  </data>
+  <data name="Projects_Edit_Label_ProjectName" xml:space="preserve">
+    <value>Project Name</value>
+  </data>
+  <data name="Projects_Edit_Label_ClientName" xml:space="preserve">
+    <value>Client Name</value>
+  </data>
+  <data name="Projects_Edit_Label_ReferenceCode" xml:space="preserve">
+    <value>Reference Code</value>
+  </data>
+  <data name="Projects_Edit_Label_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Projects_Edit_Label_Street" xml:space="preserve">
+    <value>Street Address</value>
+  </data>
+  <data name="Projects_Edit_Label_City" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="Projects_Edit_Label_Province" xml:space="preserve">
+    <value>Province / State</value>
+  </data>
+  <data name="Projects_Edit_Label_Zip" xml:space="preserve">
+    <value>Zip / Postal Code</value>
+  </data>
+  <data name="Projects_Edit_Label_Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="Projects_Edit_Label_Status" xml:space="preserve">
+    <value>Project Status</value>
+  </data>
+  <data name="Projects_Details_Owner" xml:space="preserve">
+    <value>Owner:</value>
+  </data>
+  <data name="Projects_Details_Ref" xml:space="preserve">
+    <value>Ref:</value>
+  </data>
+  <data name="Projects_Details_Unassigned" xml:space="preserve">
+    <value>Unassigned</value>
+  </data>
+  <data name="Projects_Details_Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Projects_Details_FinancialOverview" xml:space="preserve">
+    <value>Financial Overview</value>
+  </data>
+  <data name="Projects_Details_ActualCost" xml:space="preserve">
+    <value>Actual Cost</value>
+  </data>
+  <data name="Projects_Details_Budget" xml:space="preserve">
+    <value>Budget</value>
+  </data>
+  <data name="Projects_Details_Timeline" xml:space="preserve">
+    <value>Timeline</value>
+  </data>
+  <data name="Projects_Details_StartDate" xml:space="preserve">
+    <value>Start Date</value>
+  </data>
+  <data name="Projects_Project_PageTitleSuffix" xml:space="preserve">
+    <value>Project Dashboard</value>
+  </data>
+  <data name="Projects_Project_Client" xml:space="preserve">
+    <value>Client:</value>
+  </data>
+  <data name="Projects_Project_InternalProduction" xml:space="preserve">
+    <value>Internal production</value>
+  </data>
+  <data name="Projects_Project_Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="Projects_Project_Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Projects_Project_DocumentsTitle" xml:space="preserve">
+    <value>Production documents</value>
+  </data>
+  <data name="Projects_Project_DocumentsLead" xml:space="preserve">
+    <value>All files are scoped to this project and only visible to project members.</value>
+  </data>
+  <data name="Projects_Project_DocumentType" xml:space="preserve">
+    <value>Document type</value>
+  </data>
+  <data name="Projects_Project_File" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="Projects_Project_Upload" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="Projects_Project_NotesOptional" xml:space="preserve">
+    <value>Notes (optional)</value>
+  </data>
+  <data name="Users_Details_PageTitle" xml:space="preserve">
+    <value>Edit My Profile</value>
+  </data>
+  <data name="Users_Details_Heading" xml:space="preserve">
+    <value>Edit Profile</value>
+  </data>
+  <data name="Users_Details_Lead" xml:space="preserve">
+    <value>Manage your personal and professional information.</value>
+  </data>
+  <data name="Users_Details_Tab_Basic" xml:space="preserve">
+    <value>Basic Info</value>
+  </data>
+  <data name="Users_Details_Tab_Professional" xml:space="preserve">
+    <value>Professional</value>
+  </data>
+  <data name="Users_Details_Tab_Contact" xml:space="preserve">
+    <value>Contact &amp; Safety</value>
+  </data>
+  <data name="Users_Other_NotFoundTitle" xml:space="preserve">
+    <value>User Not Found</value>
+  </data>
+  <data name="Users_Other_NotFoundBody" xml:space="preserve">
+    <value>The user profile you are looking for could not be found or has been deactivated.</value>
+  </data>
+  <data name="Users_Other_BackToDirectory" xml:space="preserve">
+    <value>Back to Directory</value>
+  </data>
+  <data name="Users_Other_PageTitle" xml:space="preserve">
+    <value>{0}'s Profile</value>
+  </data>
+  <data name="Logout_Button" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="Projects_Project_UploadNote" xml:space="preserve">
+    <value>As the project creator you can upload documents now. In a later version, you’ll be able to delegate upload rights to selected crew members.</value>
+  </data>
+  <data name="Projects_Project_UploadManagedByOffice" xml:space="preserve">
+    <value>Uploads are managed by the production office.</value>
+  </data>
+  <data name="Projects_Project_NoDocumentsTitle" xml:space="preserve">
+    <value>No documents uploaded yet</value>
+  </data>
+  <data name="Projects_Project_NoDocumentsBody" xml:space="preserve">
+    <value>When the production office uploads call sheets, schedules, scenarios, and logistics files, they will appear here grouped by type.</value>
+  </data>
+  <data name="Projects_Project_QuickLinks" xml:space="preserve">
+    <value>Quick links</value>
+  </data>
+  <data name="Projects_Project_LinkDetails" xml:space="preserve">
+    <value>Project details</value>
+  </data>
+  <data name="Projects_Project_LinkEdit" xml:space="preserve">
+    <value>Edit project</value>
+  </data>
+  <data name="Projects_Project_ColFile" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="Projects_Project_ColUploadedBy" xml:space="preserve">
+    <value>Uploaded by</value>
+  </data>
+  <data name="Projects_Project_ColUploadedAt" xml:space="preserve">
+    <value>Uploaded at</value>
+  </data>
+  <data name="Projects_Project_ColActions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="Projects_Project_Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="Projects_Details_EndDate" xml:space="preserve">
+    <value>End Date</value>
+  </data>
+  <data name="Projects_Details_Ongoing" xml:space="preserve">
+    <value>Ongoing</value>
+  </data>
+  <data name="Projects_Details_ClientLabel" xml:space="preserve">
+    <value>Client:</value>
+  </data>
+  <data name="Projects_Details_InternalProject" xml:space="preserve">
+    <value>Internal Project</value>
+  </data>
+  <data name="Projects_Details_DescriptionTitle" xml:space="preserve">
+    <value>Project Description</value>
+  </data>
+  <data name="Projects_Details_NoDescription" xml:space="preserve">
+    <value>No detailed description has been provided for this project.</value>
+  </data>
+  <data name="Projects_Details_OperationalSite" xml:space="preserve">
+    <value>Operational Site</value>
+  </data>
+  <data name="Projects_Details_StreetAddress" xml:space="preserve">
+    <value>Street Address</value>
+  </data>
+  <data name="Projects_Details_SystemMetadata" xml:space="preserve">
+    <value>System Metadata</value>
+  </data>
+  <data name="Projects_Details_InternalId" xml:space="preserve">
+    <value>Internal ID</value>
+  </data>
+  <data name="Projects_Details_CreatedOn" xml:space="preserve">
+    <value>Created On</value>
+  </data>
+  <data name="Projects_Details_LastModified" xml:space="preserve">
+    <value>Last Modified</value>
+  </data>
+  <data name="Projects_Details_InitialRecord" xml:space="preserve">
+    <value>Initial Record</value>
+  </data>
+  <data name="Projects_Create_Section_PrimaryLocation" xml:space="preserve">
+    <value>Primary Location</value>
+  </data>
+  <data name="Projects_Create_Submit" xml:space="preserve">
+    <value>Create Project</value>
+  </data>
+  <data name="Projects_Edit_Label_StartDate" xml:space="preserve">
+    <value>Start Date</value>
+  </data>
+  <data name="Projects_Edit_Label_EndDate" xml:space="preserve">
+    <value>Estimated End Date</value>
+  </data>
+  <data name="Projects_Edit_Section_Financials" xml:space="preserve">
+    <value>Financials</value>
+  </data>
+  <data name="Projects_Edit_Label_TotalBudget" xml:space="preserve">
+    <value>Total Budget</value>
+  </data>
+  <data name="Projects_Edit_Label_ActualCost" xml:space="preserve">
+    <value>Actual Cost to Date</value>
+  </data>
+  <data name="Register_Section_Availability" xml:space="preserve">
+    <value>Availability</value>
+  </data>
+  <data name="Register_MultiSelectHint" xml:space="preserve">
+    <value>Hold Ctrl (Cmd) to select multiple.</value>
+  </data>
+  <data name="Projects_Create_Section_Assignment" xml:space="preserve">
+    <value>Your Initial Assignment</value>
+  </data>
+  <data name="Projects_Create_Label_YourRole" xml:space="preserve">
+    <value>Your Role in this Project</value>
+  </data>
+  <data name="Projects_Create_SelectYourRole" xml:space="preserve">
+    <value>-- Select Your Role --</value>
+  </data>
+  <data name="Projects_Create_Section_Timeline" xml:space="preserve">
+    <value>Timeline &amp; Status</value>
+  </data>
+  <data name="Projects_Details_BrowserTitle" xml:space="preserve">
+    <value>Project | {0}</value>
+  </data>
+  <data name="Projects_Project_BrowserTitle" xml:space="preserve">
+    <value>Project Dashboard | {0}</value>
+  </data>
+  <data name="Projects_Index_JoinCodePlaceholder" xml:space="preserve">
+    <value>e.g. TOP-SECRET-9F2K</value>
+  </data>
+  <data name="Projects_Create_Placeholder_ProjectName" xml:space="preserve">
+    <value>e.g. Summer Commercial 2024</value>
+  </data>
+  <data name="Projects_Create_Placeholder_ReferenceCode" xml:space="preserve">
+    <value>REF-001</value>
+  </data>
+  <data name="Projects_Create_Placeholder_Description" xml:space="preserve">
+    <value>Brief overview of the project...</value>
+  </data>
+  <data name="Projects_Create_Placeholder_Budget" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="Register_Placeholder_Email" xml:space="preserve">
+    <value>name@example.com</value>
+  </data>
+  <data name="Register_Placeholder_AvatarUrl" xml:space="preserve">
+    <value>https://...</value>
+  </data>
+  <data name="Users_Details_Section_Appearance" xml:space="preserve">
+    <value>Profile appearance</value>
+  </data>
+  <data name="Users_Details_Label_FirstName" xml:space="preserve">
+    <value>First name</value>
+  </data>
+  <data name="Users_Details_Label_LastName" xml:space="preserve">
+    <value>Last name</value>
+  </data>
+  <data name="Users_Details_Label_Bio" xml:space="preserve">
+    <value>Bio</value>
+  </data>
+  <data name="Users_Details_Placeholder_Bio" xml:space="preserve">
+    <value>Write a short professional bio...</value>
+  </data>
+  <data name="Users_Details_Hint_BioVisibility" xml:space="preserve">
+    <value>Visible to other users and managers.</value>
+  </data>
+  <data name="Users_Details_Label_ProfileImageUrl" xml:space="preserve">
+    <value>Profile image URL</value>
+  </data>
+  <data name="Users_Details_Placeholder_ProfileImageUrl" xml:space="preserve">
+    <value>https://path-to-your-image.com/img.jpg</value>
+  </data>
+  <data name="Users_Details_Placeholder_FirstName" xml:space="preserve">
+    <value>Enter first name</value>
+  </data>
+  <data name="Users_Details_Placeholder_LastName" xml:space="preserve">
+    <value>Enter last name</value>
+  </data>
+  <data name="Users_Details_Section_WorkAvailability" xml:space="preserve">
+    <value>Work &amp; availability</value>
+  </data>
+  <data name="Users_Details_SelectRole" xml:space="preserve">
+    <value>-- Select a role --</value>
+  </data>
+  <data name="Users_Details_Label_YearsExperience" xml:space="preserve">
+    <value>Years of experience</value>
+  </data>
+  <data name="Users_Details_Label_Languages" xml:space="preserve">
+    <value>Languages</value>
+  </data>
+  <data name="Users_Details_Label_AvailableForBooking" xml:space="preserve">
+    <value>Available for booking</value>
+  </data>
+  <data name="Users_Details_Hint_AvailableForBooking" xml:space="preserve">
+    <value>Turn this off to hide yourself from active search results.</value>
+  </data>
+  <data name="Users_Details_Label_NextAvailableDate" xml:space="preserve">
+    <value>Next available date</value>
+  </data>
+  <data name="Users_Details_Section_HomeAddress" xml:space="preserve">
+    <value>Home address</value>
+  </data>
+  <data name="Users_Details_Label_EmergencyContactName" xml:space="preserve">
+    <value>Contact name</value>
+  </data>
+  <data name="Users_Details_Label_EmergencyContactPhone" xml:space="preserve">
+    <value>Contact phone</value>
+  </data>
+</root>

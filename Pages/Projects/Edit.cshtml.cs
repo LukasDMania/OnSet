@@ -1,26 +1,41 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OnSet.Features.Projects.Edit;
+using OnSet.Utils;
 
 namespace OnSet.Pages.Projects
 {
-    public class Edit : PageModel
+    /// <summary>Razor Page handler (documented in OpenAPI under Razor Pages).</summary>
+    [Authorize(Policy = "Authenticated")]
+        public class EditModel : PageModel
     {
         private readonly IMediator _mediator;
 
         [BindProperty]
         public Command Data { get; set; }
 
-        public Edit(IMediator mediator) => _mediator = mediator;
-
-        public async Task OnGetAsync(Query query) => Data = await _mediator.Send(query);
-
-        public async Task<IActionResult> OnPostAsync()
+        public EditModel(IMediator mediator)
         {
+            _mediator = mediator;
+        }
+
+        public async Task OnGetAsync(Query query)
+        {
+            Data = await _mediator.Send(query);
+        }
+
+        public async Task<ActionResult> OnPostAsync()
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
             await _mediator.Send(Data);
 
-            return this.RedirectToPageJson(nameof(Index));
+            return RedirectToPage("./Details", new { id = Data.Id });
         }
     }
 }
