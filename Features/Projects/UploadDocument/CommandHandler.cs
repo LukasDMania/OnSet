@@ -1,5 +1,4 @@
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using OnSet;
 using OnSet.Application.Exceptions;
 using OnSet.Domain.Models;
@@ -35,34 +34,6 @@ namespace OnSet.Features.Projects.UploadDocument
                 return Result.Fail("User is not authenticated.");
             }
 
-            var project = await _context.Projects
-                .AsNoTracking()
-                .FirstOrDefaultAsync(p => p.Id == request.ProjectId, cancellationToken);
-
-            if (project is null)
-            {
-                throw new NotFoundException("Project", request.ProjectId);
-            }
-
-            //nsure the current user is at least a member of the project.
-            var isMember = await _context.UserProjects
-                .AsNoTracking()
-                .AnyAsync(up => up.ProjectId == request.ProjectId && up.UserId == userId, cancellationToken);
-
-            if (!isMember)
-            {
-                return Result.Fail("You must be part of this project to upload documents.");
-            }
-
-            // For now, only the project creator (owner) can upload documents.
-            // This is intentionally open for extension: in the future, i can
-            // extend this to allow specific project roles or a configurable set
-            // of uploaders managed by the project creator.
-            if (!string.Equals(project.OwnerId, userId, StringComparison.Ordinal))
-            {
-                return Result.Fail("Only the project creator can upload documents at this time.");
-            }
-
             if (request.File is null || request.File.Length <= 0)
             {
                 return Result.Fail("A non-empty file is required.");
@@ -91,4 +62,3 @@ namespace OnSet.Features.Projects.UploadDocument
         }
     }
 }
-

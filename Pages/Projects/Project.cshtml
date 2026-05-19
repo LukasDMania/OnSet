@@ -24,14 +24,17 @@
                 </p>
             </div>
             <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
-                <div class="btn-group shadow-sm">
-                    <a asp-page="/Projects/Details" asp-route-id="@Model.Data.Id" class="btn btn-outline-secondary px-4">
-                        <i class="bi bi-card-text me-2"></i>@L["Projects_Project_Details"]
-                    </a>
-                    <a asp-page="/Projects/Edit" asp-route-id="@Model.Data.Id" class="btn btn-outline-dark px-4">
-                        <i class="bi bi-pencil-square me-2"></i>@L["Projects_Project_Edit"]
-                    </a>
-                </div>
+                @if (Model.Data.Capabilities.CanManageProject)
+                {
+                    <div class="btn-group shadow-sm">
+                        <a asp-page="/Projects/Details" asp-route-id="@Model.Data.Id" class="btn btn-outline-secondary px-4">
+                            <i class="bi bi-card-text me-2"></i>@L["Projects_Project_Details"]
+                        </a>
+                        <a asp-page="/Projects/Edit" asp-route-id="@Model.Data.Id" class="btn btn-outline-dark px-4">
+                            <i class="bi bi-pencil-square me-2"></i>@L["Projects_Project_Edit"]
+                        </a>
+                    </div>
+                }
             </div>
         </div>
     </div>
@@ -47,7 +50,7 @@
                         </p>
                     </div>
                     <div class="text-end">
-                        @if (Model.Data.CanUploadDocuments)
+                        @if (Model.Data.Capabilities.CanUploadDocuments)
                         {
                             <form method="post"
                                   asp-page-handler="Upload"
@@ -163,19 +166,22 @@
         <div class="col-lg-4">
             <div class="card border-0 shadow-sm mb-4">
                 <div class="card-body p-4">
-                    <h6 class="text-uppercase small fw-bold text-muted mb-3">@L["Projects_Project_QuickLinks"]</h6>
-                    <div class="list-group list-group-flush">
-                        <a asp-page="/Projects/Details" asp-route-id="@Model.Data.Id"
-                           class="list-group-item list-group-item-action border-0 px-0 d-flex justify-content-between align-items-center">
-                            <span><i class="bi bi-info-circle me-2 text-primary"></i>@L["Projects_Project_LinkDetails"]</span>
-                            <i class="bi bi-chevron-right small text-muted"></i>
-                        </a>
-                        <a asp-page="/Projects/Edit" asp-route-id="@Model.Data.Id"
-                           class="list-group-item list-group-item-action border-0 px-0 d-flex justify-content-between align-items-center">
-                            <span><i class="bi bi-pencil-square me-2 text-secondary"></i>@L["Projects_Project_LinkEdit"]</span>
-                            <i class="bi bi-chevron-right small text-muted"></i>
-                        </a>
-                    </div>
+                    @if (Model.Data.Capabilities.CanManageProject)
+                    {
+                        <h6 class="text-uppercase small fw-bold text-muted mb-3">@L["Projects_Project_QuickLinks"]</h6>
+                        <div class="list-group list-group-flush">
+                            <a asp-page="/Projects/Details" asp-route-id="@Model.Data.Id"
+                               class="list-group-item list-group-item-action border-0 px-0 d-flex justify-content-between align-items-center">
+                                <span><i class="bi bi-info-circle me-2 text-primary"></i>@L["Projects_Project_LinkDetails"]</span>
+                                <i class="bi bi-chevron-right small text-muted"></i>
+                            </a>
+                            <a asp-page="/Projects/Edit" asp-route-id="@Model.Data.Id"
+                               class="list-group-item list-group-item-action border-0 px-0 d-flex justify-content-between align-items-center">
+                                <span><i class="bi bi-pencil-square me-2 text-secondary"></i>@L["Projects_Project_LinkEdit"]</span>
+                                <i class="bi bi-chevron-right small text-muted"></i>
+                            </a>
+                        </div>
+                    }
                 </div>
             </div>
         </div>

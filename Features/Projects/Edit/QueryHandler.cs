@@ -2,8 +2,8 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using OnSet.Infrastructure.Data;
 using OnSet.Application.Exceptions;
+using OnSet.Infrastructure.Data;
 
 namespace OnSet.Features.Projects.Edit
 {

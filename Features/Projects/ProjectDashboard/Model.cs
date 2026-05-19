@@ -1,3 +1,4 @@
+using OnSet.Application.Authorization;
 using OnSet.Domain.Enums;
 
 namespace OnSet.Features.Projects.ProjectDashboard
@@ -11,7 +12,8 @@ namespace OnSet.Features.Projects.ProjectDashboard
         public string? ClientName { get; init; }
 
         public IReadOnlyList<DocumentGroup> DocumentGroups { get; init; } = Array.Empty<DocumentGroup>();
-        public bool CanUploadDocuments { get; init; }
+
+        public ProjectDashboardCapabilities Capabilities { get; init; } = new();
     }
 
     public record DocumentGroup
@@ -30,4 +32,3 @@ namespace OnSet.Features.Projects.ProjectDashboard
         public string FilePath { get; init; } = string.Empty;
     }
 }
-
