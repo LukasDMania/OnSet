@@ -1,11 +1,23 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using OnSet.Application.Authorization;
 
 namespace OnSet.Features.Projects.Details
 {
-    /// <summary>Loads project details for a member of the project.</summary>
-    /// <remarks>GET <c>/Projects/Details/{Id}</c>; throws <see cref="Application.Exceptions.ForbiddenAccessException"/> when not a member.</remarks>
-    public class Query : IRequest<Model>
+    /// <summary>Loads full project details for users with manage permission.</summary>
+    /// <remarks>GET <c>/Projects/Details/{Id}</c>; owner or production (<see cref="ProjectAccessTier.Manager"/>).</remarks>
+    public class Query : IRequest<Model>, IAuthorizableRequest
     {
         public int? Id { get; init; }
+
+        public IEnumerable<IAuthorizationRequirement> GetAuthorizationRequirements()
+        {
+            if (Id is null)
+            {
+                yield break;
+            }
+
+            yield return new ProjectPermissionRequirement(Id.Value, ProjectPermission.ManageProject);
+        }
     }
 }

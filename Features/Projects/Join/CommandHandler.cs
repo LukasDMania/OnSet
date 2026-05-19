@@ -47,7 +47,7 @@ namespace OnSet.Features.Projects.Join
                 return Result.Ok();
             }
 
-            var userProject = UserProject.Create(request.UserId, ProjectRoles.PRODUCTION, project.Id);
+            var userProject = UserProject.Create(request.UserId, ProjectRoles.UNASSIGNED, project.Id);
             _context.UserProjects.Add(userProject);
 
             await _context.SaveChangesAsync(cancellationToken);

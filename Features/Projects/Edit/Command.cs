@@ -1,13 +1,20 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using OnSet.Application.Authorization;
 using OnSet.Domain.Enums;
 
 namespace OnSet.Features.Projects.Edit
 {
-    /// <summary>Updates project metadata; only the project owner may edit.</summary>
+    /// <summary>Updates project metadata; requires <see cref="ProjectPermission.ManageProject"/>.</summary>
     /// <remarks>POST <c>/Projects/Edit/{id}</c>; may throw <see cref="Application.Exceptions.NotFoundException"/> or <see cref="Application.Exceptions.ForbiddenAccessException"/>.</remarks>
-    public record Command : IRequest<Unit>
+    public record Command : IRequest<Unit>, IAuthorizableRequest
     {
         public int Id { get; init; }
+
+        public IEnumerable<IAuthorizationRequirement> GetAuthorizationRequirements() =>
+        [
+            new ProjectPermissionRequirement(Id, ProjectPermission.ManageProject),
+        ];
         public string Name { get; init; } = string.Empty;
         public string? Description { get; init; }
         public string? ClientName { get; init; }

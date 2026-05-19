@@ -8,5 +8,6 @@ namespace OnSet.Domain.Enums
         CAMERA,
         SOUND,
         DIRECTOR,
+        UNASSIGNED,
     }
 }

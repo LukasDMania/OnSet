@@ -111,11 +111,13 @@ namespace OnSet
             builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CommandAuditBehavior<,>));
             builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformancePipelineBehavior<,>));
             builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+            builder.Services.AddOnSetAuthorizationPipeline();
 
             // Add Services
             builder.Services.AddTransient<IEmailSender, NoOpEmailSender>();
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+            builder.Services.AddOnSetProjectAuthorization();
             builder.Services.AddScoped<ICommandAuditService, CommandAuditService>();
             builder.Services.AddScoped<IStorageService, LocalStorageService>();
 

@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using OnSet;
 using OnSet.Application.Exceptions;
+using OnSet.Application.Services;
 using OnSet.Domain.Enums;
 using OnSet.Infrastructure.Data;
 
@@ -12,11 +13,16 @@ namespace OnSet.Features.Projects.ProjectDashboard
     {
         private readonly OnSetDbContext _context;
         private readonly ICurrentUserService _currentUserService;
+        private readonly IProjectPermissionService _permissionService;
 
-        public QueryHandler(OnSetDbContext context, ICurrentUserService currentUserService)
+        public QueryHandler(
+            OnSetDbContext context,
+            ICurrentUserService currentUserService,
+            IProjectPermissionService permissionService)
         {
             _context = context;
             _currentUserService = currentUserService;
+            _permissionService = permissionService;
         }
 
         public async Task<Model> Handle(Query request, CancellationToken cancellationToken)
@@ -24,18 +30,6 @@ namespace OnSet.Features.Projects.ProjectDashboard
             if (request.Id is null)
             {
                 throw new DomainRuleException("Project id is required.");
-            }
-
-            var userId = _currentUserService.UserId;
-
-            // Enforce that only members (or owner) can see the dashboard
-            var isMember = await _context.UserProjects
-                .AsNoTracking()
-                .AnyAsync(up => up.ProjectId == request.Id && up.UserId == userId, cancellationToken);
-
-            if (!isMember)
-            {
-                throw new ForbiddenAccessException("You must be part of this project to view its dashboard.");
             }
 
             var project = await _context.Projects
@@ -47,7 +41,6 @@ namespace OnSet.Features.Projects.ProjectDashboard
                     p.Name,
                     p.ReferenceCode,
                     p.ClientName,
-                    p.OwnerId
                 })
                 .FirstOrDefaultAsync(cancellationToken);
 
@@ -92,21 +85,20 @@ namespace OnSet.Features.Projects.ProjectDashboard
                 })
                 .ToList();
 
-            var model = new Model
+            var capabilities = await _permissionService.GetDashboardCapabilitiesAsync(
+                project.Id,
+                _currentUserService.UserId,
+                cancellationToken);
+
+            return new Model
             {
                 Id = project.Id,
                 Name = project.Name,
                 ReferenceCode = project.ReferenceCode,
                 ClientName = project.ClientName,
                 DocumentGroups = grouped,
-                // Currently only the project creator can upload documents.
-                // This is intentionally open for extension: in the future we can
-                // extend this to allow specific project roles or a configurable
-                // list of uploaders defined by the project creator.
-                CanUploadDocuments = string.Equals(project.OwnerId, userId, StringComparison.Ordinal)
+                Capabilities = capabilities,
             };
-
-            return model;
         }
 
         private static string GetDisplayNameForTag(DocumentTags tag) =>
@@ -121,4 +113,3 @@ namespace OnSet.Features.Projects.ProjectDashboard
             };
     }
 }
-
