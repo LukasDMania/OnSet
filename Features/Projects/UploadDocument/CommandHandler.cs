@@ -9,6 +9,7 @@ using OnSet.Infrastructure.Results;
 
 namespace OnSet.Features.Projects.UploadDocument
 {
+    /// <summary>MediatR handler for this feature slice.</summary>
     public class CommandHandler : IRequestHandler<Command, Result>
     {
         private readonly OnSetDbContext _context;

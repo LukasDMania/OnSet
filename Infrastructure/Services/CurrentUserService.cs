@@ -4,6 +4,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace OnSet
 {
+    /// <summary>Infrastructure component.</summary>
     public class CurrentUserService : ICurrentUserService
     {
         private readonly IHttpContextAccessor _httpContextAccessor;

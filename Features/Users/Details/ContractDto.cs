@@ -2,6 +2,7 @@
 
 namespace OnSet.Features.Users.Details
 {
+    /// <summary>Contract row shown on the user profile.</summary>
     public record ContractDto
     {
         public int Id { get; init; }

@@ -2,6 +2,7 @@ using FluentValidation;
 
 namespace OnSet.Features.Users.Edit
 {
+    /// <summary>FluentValidation rules for this feature slice.</summary>
     public class Validator : AbstractValidator<Command>
     {
         public Validator()

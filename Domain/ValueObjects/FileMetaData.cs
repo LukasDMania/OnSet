@@ -2,6 +2,8 @@ using System.IO;
 
 namespace OnSet.Domain.ValueObjects;
 
+/// <summary>Domain model or value object.</summary>
+
 public class FileMetadata : ValueObject
 {
     public string FileName { get; private set; }

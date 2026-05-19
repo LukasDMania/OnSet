@@ -7,6 +7,7 @@ using OnSet.Application.Exceptions;
 
 namespace OnSet.Features.Projects.Edit
 {
+    /// <summary>MediatR handler for this feature slice.</summary>
     public class QueryHandler : IRequestHandler<Query, Command>
     {
         private readonly OnSetDbContext _db;

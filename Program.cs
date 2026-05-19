@@ -21,8 +21,15 @@ using OnSet.Utils;
 
 namespace OnSet
 {
+    /// <summary>
+    /// OnSet web application entry point (Razor Pages, MediatR, EF Core, Identity).
+    /// </summary>
     public class Program
     {
+        /// <summary>
+        /// Configures and runs the OnSet host.
+        /// </summary>
+        /// <param name="args">Command-line arguments passed to the host.</param>
         public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
@@ -45,6 +52,8 @@ namespace OnSet
                 options.UseSqlServer(connectionString);
                 options.AddInterceptors(sp.GetRequiredService<AuditingSaveChangesInterceptor>());
             });
+
+            builder.Services.AddOnSetSwagger();
 
             builder.Services.AddHealthChecks()
                 .AddDbContextCheck<OnSetDbContext>("database");
@@ -126,12 +135,13 @@ namespace OnSet
             var app = builder.Build();
 
             app.UseSerilogRequestLogging();
-
+            app.MapSwagger().RequireAuthorization();
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.ApplyMigrations();
+                app.UseOnSetSwaggerUi();
 
                 using var scope = app.Services.CreateScope();
 

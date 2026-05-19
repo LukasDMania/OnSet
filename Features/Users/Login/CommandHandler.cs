@@ -5,6 +5,7 @@ using OnSet.Infrastructure.Results;
 
 namespace OnSet.Features.Users.Login
 {
+    /// <summary>MediatR handler for this feature slice.</summary>
     public class CommandHandler : IRequestHandler<Command, Result>
     {
         private readonly SignInManager<User> _signInManager;

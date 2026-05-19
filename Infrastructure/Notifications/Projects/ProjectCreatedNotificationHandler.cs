@@ -7,6 +7,8 @@ using OnSet.Domain.Models;
 
 namespace OnSet.Infrastructure.Notifications.Projects;
 
+/// <summary>Infrastructure component.</summary>
+
 public class ProjectCreatedNotificationHandler : INotificationHandler<ProjectCreatedNotification>
 {
     private readonly IEmailSender _emailSender;

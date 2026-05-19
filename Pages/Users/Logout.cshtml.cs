@@ -6,8 +6,9 @@ using OnSet.Features.Users.Logout;
 
 namespace OnSet.Pages.Users
 {
+    /// <summary>Razor Page handler (documented in OpenAPI under Razor Pages).</summary>
     [Authorize(Policy = "Authenticated")]
-    public class LogoutModel : PageModel
+        public class LogoutModel : PageModel
     {
         private readonly IMediator _mediator;
 

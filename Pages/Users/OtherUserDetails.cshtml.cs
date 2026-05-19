@@ -6,8 +6,9 @@ using OnSet.Features.Users.OtherUserDetails;
 
 namespace OnSet.Pages.Users
 {
+    /// <summary>Razor Page handler (documented in OpenAPI under Razor Pages).</summary>
     [Authorize(Policy = "Authenticated")]
-    public class OtherUserDetailsModel : PageModel
+        public class OtherUserDetailsModel : PageModel
     {
         public readonly IMediator _mediator;
 

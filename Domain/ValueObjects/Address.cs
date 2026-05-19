@@ -1,5 +1,6 @@
-﻿namespace OnSet.Domain.ValueObjects
+namespace OnSet.Domain.ValueObjects
 {
+    /// <summary>Domain model or value object.</summary>
     public class Address : ValueObject
     {
         public string Street { get; private set; }

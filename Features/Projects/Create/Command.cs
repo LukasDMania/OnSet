@@ -5,6 +5,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OnSet.Features.Projects.Create
 {
+    /// <summary>
+    /// Creates a new <see cref="Domain.Models.Project"/> owned by the current user.
+    /// </summary>
+    /// <remarks>POST <c>/Projects/Create</c> via <see cref="Pages.Projects.CreateModel"/>; validated by <see cref="Validator"/>.</remarks>
     public record Command : IRequest<Result>
     {
         [Required]

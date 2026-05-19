@@ -8,6 +8,7 @@ using OnSet;
 
 namespace OnSet.Features.Projects.Details
 {
+    /// <summary>MediatR handler for this feature slice.</summary>
     public class QueryHandler : IRequestHandler<Query, Model>
     {
         private readonly OnSetDbContext _context;

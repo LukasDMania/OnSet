@@ -3,6 +3,7 @@ using OnSet.Domain.Models;
 
 namespace OnSet.Features.Projects.Details
 {
+    /// <summary>AutoMapper profile for this feature slice.</summary>
     public class MappingProfile : Profile
     {
         public MappingProfile()

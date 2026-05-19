@@ -94,7 +94,7 @@ public class AuditingSaveChangesInterceptor : SaveChangesInterceptor
         }
 
         if (rows.Count > 0)
-            context.Set<EntityChangeAudit>().AddRange(rows);
+            context.EntityChangeAudits.AddRange(rows);
     }
 
     private static void ApplyTimestamps(EntityEntry entry, IAuditableEntity auditable, DateTime utc)

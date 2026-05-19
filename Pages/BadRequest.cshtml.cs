@@ -4,6 +4,7 @@ using OnSet.Infrastructure.Filters;
 
 namespace OnSet.Pages;
 
+/// <summary>HTTP 400 page when <see cref="Application.Exceptions.DomainRuleException"/> is thrown.</summary>
 [AllowAnonymous]
 public class BadRequestModel : PageModel
 {

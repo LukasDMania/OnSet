@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace OnSet.Infrastructure.Services.Email
 {
+    /// <summary>Infrastructure component.</summary>
     public class NoOpEmailSender : IEmailSender
     {
         private readonly ILogger<NoOpEmailSender> _logger;

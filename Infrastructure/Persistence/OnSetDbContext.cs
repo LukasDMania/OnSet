@@ -9,6 +9,7 @@ using OnSet.Infrastructure.Persistence;
 
 namespace OnSet.Infrastructure.Data
 {
+    /// <summary>Infrastructure component.</summary>
     public class OnSetDbContext : IdentityDbContext<User>
     {
         public OnSetDbContext(DbContextOptions<OnSetDbContext> options) : base(options) { }

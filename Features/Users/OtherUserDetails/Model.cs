@@ -2,6 +2,7 @@ using OnSet.Domain.Enums;
 
 namespace OnSet.Features.Users.OtherUserDetails
 {
+    /// <summary>Public profile view model for another user.</summary>
     public record Model
     {
         public string Email { get; init; } = string.Empty;

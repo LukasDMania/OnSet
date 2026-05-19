@@ -3,6 +3,8 @@ using OnSet.Domain.Enums;
 
 namespace OnSet.Features.Projects.Edit
 {
+    /// <summary>Updates project metadata; only the project owner may edit.</summary>
+    /// <remarks>POST <c>/Projects/Edit/{id}</c>; may throw <see cref="Application.Exceptions.NotFoundException"/> or <see cref="Application.Exceptions.ForbiddenAccessException"/>.</remarks>
     public record Command : IRequest<Unit>
     {
         public int Id { get; init; }

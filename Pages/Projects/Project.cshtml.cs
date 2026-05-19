@@ -9,8 +9,9 @@ using OnSet.Infrastructure.Results;
 
 namespace OnSet.Pages.Projects
 {
+    /// <summary>Razor Page handler (documented in OpenAPI under Razor Pages).</summary>
     [Authorize(Policy = "Authenticated")]
-    public class ProjectModel : PageModel
+        public class ProjectModel : PageModel
     {
         private readonly IMediator _mediator;
 
@@ -23,6 +24,8 @@ namespace OnSet.Pages.Projects
 
         [BindProperty]
         public UploadInputModel Upload { get; set; } = new();
+
+        /// <summary>Razor Page handler for this route (see OpenAPI *Razor Pages* section).</summary>
 
         public class UploadInputModel
         {

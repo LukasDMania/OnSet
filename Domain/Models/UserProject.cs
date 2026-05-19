@@ -1,8 +1,9 @@
-﻿using OnSet.Domain.Enums;
+using OnSet.Domain.Enums;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnSet.Domain.Models
 {
+    /// <summary>Domain model or value object.</summary>
     public class UserProject : IAuditableEntity
     {
         public string UserId { get; set; }

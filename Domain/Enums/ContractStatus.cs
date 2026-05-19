@@ -1,5 +1,6 @@
-﻿namespace OnSet.Domain.Enums
+namespace OnSet.Domain.Enums
 {
+    /// <summary>Domain enumeration.</summary>
     public enum ContractStatus
     {
         Pending,

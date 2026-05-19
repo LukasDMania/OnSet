@@ -4,6 +4,7 @@ using OnSet.Domain.Enums;
 
 namespace OnSet.Features.Users.Details
 {
+    /// <summary>AutoMapper profile for this feature slice.</summary>
     public class MappingProfile : Profile
     {
         public MappingProfile()

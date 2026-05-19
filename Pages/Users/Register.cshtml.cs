@@ -9,8 +9,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OnSet.Pages.Users
 {
+    /// <summary>Razor Page handler (documented in OpenAPI under Razor Pages).</summary>
     [AllowAnonymous]
-    public class RegisterModel : PageModel
+        public class RegisterModel : PageModel
     {
         private readonly IMediator _mediator;
 
@@ -23,6 +24,8 @@ namespace OnSet.Pages.Users
         public InputModel Input { get; set; } = new();
 
         public string? ReturnUrl { get; set; }
+
+        /// <summary>Razor Page handler for this route (see OpenAPI *Razor Pages* section).</summary>
 
         public class InputModel
         {

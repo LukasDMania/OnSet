@@ -1,10 +1,11 @@
-﻿using OnSet.Domain.Enums;
+using OnSet.Domain.Enums;
 using OnSet.Domain.ValueObjects;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnSet.Domain.Models
 {
+    /// <summary>Domain model or value object.</summary>
     public class Contract : IOnSetEntity, IAuditableEntity
     {
         [Key]

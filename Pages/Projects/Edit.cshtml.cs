@@ -7,8 +7,9 @@ using OnSet.Utils;
 
 namespace OnSet.Pages.Projects
 {
+    /// <summary>Razor Page handler (documented in OpenAPI under Razor Pages).</summary>
     [Authorize(Policy = "Authenticated")]
-    public class EditModel : PageModel
+        public class EditModel : PageModel
     {
         private readonly IMediator _mediator;
 

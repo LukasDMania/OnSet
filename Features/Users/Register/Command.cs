@@ -5,6 +5,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OnSet.Features.Users.Register
 {
+    /// <summary>
+    /// Registers a new <see cref="Domain.Models.User"/> and signs them in.
+    /// </summary>
+    /// <remarks>POST <c>/Users/Register</c>; validated by <see cref="Validator"/>.</remarks>
     public record Command : IRequest<Result>
     {
         [Required]

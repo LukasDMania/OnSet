@@ -3,6 +3,8 @@ using OnSet.Infrastructure.Persistence;
 
 namespace OnSet.Infrastructure.Services;
 
+/// <summary>Infrastructure component.</summary>
+
 public class CommandAuditService : ICommandAuditService
 {
     private readonly OnSetDbContext _db;
@@ -19,7 +21,7 @@ public class CommandAuditService : ICommandAuditService
         string? failureSummary,
         CancellationToken cancellationToken = default)
     {
-        _db.Set<CommandAuditLog>().Add(new CommandAuditLog
+        _db.CommandAuditLogs.Add(new CommandAuditLog
         {
             CommandName = commandName,
             CorrelationId = correlationId,

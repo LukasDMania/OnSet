@@ -8,6 +8,7 @@ using OnSet.Utils;
 
 namespace OnSet.Features.Users.Register
 {
+    /// <summary>MediatR handler for this feature slice.</summary>
     public class CommandHandler : IRequestHandler<Command, Result>
     {
         private readonly UserManager<User> _userManager;

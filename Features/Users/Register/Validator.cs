@@ -1,7 +1,8 @@
-﻿using FluentValidation;
+using FluentValidation;
 
 namespace OnSet.Features.Users.Register
 {
+    /// <summary>FluentValidation rules for this feature slice.</summary>
     public class Validator : AbstractValidator<Command>
     {
         public Validator()

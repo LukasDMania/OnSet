@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace OnSet.Pages;
 
+/// <summary>Sets the ASP.NET Core localization cookie and redirects.</summary>
+/// <remarks>Route <c>/culture/set</c>; supported cultures: en, nl, fr.</remarks>
 [AllowAnonymous]
 public class SetLanguageModel : PageModel
 {

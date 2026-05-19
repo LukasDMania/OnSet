@@ -1,4 +1,4 @@
-﻿using OnSet.Domain.Enums;
+using OnSet.Domain.Enums;
 using OnSet.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnSet.Domain.Models
 {
+    /// <summary>Domain model or value object.</summary>
     public class Project : IOnSetEntity, IAuditableEntity
     {
         private Project() { }

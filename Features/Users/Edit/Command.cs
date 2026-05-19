@@ -3,6 +3,8 @@ using OnSet.Domain.Enums;
 
 namespace OnSet.Features.Users.Edit
 {
+    /// <summary>Updates profile fields for a user.</summary>
+    /// <remarks>POST <c>/Users/Details</c>; handler enforces self-service only.</remarks>
     public record Command : IRequest<Unit>
     {
         public string UserId { get; set; }

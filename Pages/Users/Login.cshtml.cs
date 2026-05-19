@@ -8,6 +8,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OnSet.Pages.Users
 {
+    /// <summary>Sign-in page: GET shows the form; POST runs <see cref="Command"/>.</summary>
+    /// <remarks>Route <c>/Users/Login</c>. See OpenAPI tag <c>Users</c>.</remarks>
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
@@ -23,6 +25,8 @@ namespace OnSet.Pages.Users
 
         public string? ReturnUrl { get; set; }
 
+        /// <summary>Razor Page handler for this route (see OpenAPI *Razor Pages* section).</summary>
+
         public class InputModel
         {
             [Required]
@@ -37,11 +41,14 @@ namespace OnSet.Pages.Users
             public bool RememberMe { get; set; }
         }
 
+        /// <param name="returnUrl">Optional local URL to redirect to after successful sign-in.</param>
         public void OnGet(string? returnUrl = null)
         {
             ReturnUrl = returnUrl ?? Url.Content("~/");
         }
 
+        /// <param name="returnUrl">Optional local URL after sign-in.</param>
+        /// <returns><see cref="Page"/> on validation failure; otherwise redirect.</returns>
         public async Task<IActionResult> OnPostAsync(string? returnUrl = null)
         {
             ReturnUrl = returnUrl ?? Url.Content("~/");

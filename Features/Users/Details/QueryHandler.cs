@@ -8,6 +8,7 @@ using OnSet.Application.Exceptions;
 
 namespace OnSet.Features.Users.Details
 {
+    /// <summary>MediatR handler for this feature slice.</summary>
     public class QueryHandler : IRequestHandler<Query, Model> 
     {
         private readonly UserManager<User> _userManager;

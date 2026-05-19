@@ -2,6 +2,8 @@ using OnSet.Infrastructure.Services;
 
 namespace OnSet;
 
+/// <summary>Infrastructure component.</summary>
+
 public class LocalStorageService : IStorageService
 {
     private readonly IWebHostEnvironment _env;

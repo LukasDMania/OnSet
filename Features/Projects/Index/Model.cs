@@ -1,5 +1,6 @@
 namespace OnSet.Features.Projects.Index
 {
+    /// <summary>Project list returned by <see cref="Query"/>.</summary>
     public record Model
     {
         public IReadOnlyList<ProjectListItem> Projects { get; init; } = Array.Empty<ProjectListItem>();

@@ -1,5 +1,7 @@
 namespace OnSet.Infrastructure.Persistence;
 
+/// <summary>Infrastructure component.</summary>
+
 public class EntityChangeAudit
 {
     public long Id { get; set; }

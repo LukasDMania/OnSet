@@ -2,6 +2,7 @@ using OnSet.Domain.Enums;
 
 namespace OnSet.Features.Users.Details
 {
+    /// <summary>User profile view model returned by <see cref="Query"/>.</summary>
     public record Model
     {
         public string Id { get; init; } = string.Empty;

@@ -2,6 +2,7 @@
 
 namespace OnSet.Features.Projects.Details
 {
+    /// <summary>Project detail view model returned by <see cref="Query"/>.</summary>
     public record Model
     {
         public int Id { get; init; }

@@ -4,6 +4,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OnSet.Features.Users.Login
 {
+    /// <summary>
+    /// Signs in a user with email and password (ASP.NET Core Identity).
+    /// </summary>
+    /// <remarks>POST <c>/Users/Login</c> via <see cref="Pages.Users.LoginModel"/>.</remarks>
     public record Command : IRequest<Result>
     {
         [Required]

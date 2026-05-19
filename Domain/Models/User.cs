@@ -9,6 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnSet.Domain.Models
 {
+    /// <summary>Domain model or value object.</summary>
     public class User : IdentityUser, IAuditableEntity
     {
         [Required]

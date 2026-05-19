@@ -1,9 +1,10 @@
-﻿using MediatR;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using OnSet.Domain.Models;
 
 namespace OnSet.Features.Users.Logout
 {
+    /// <summary>MediatR handler for this feature slice.</summary>
     public class CommandHandler : IRequestHandler<Command, Unit>
     {
         private readonly SignInManager<User> _signInManager;

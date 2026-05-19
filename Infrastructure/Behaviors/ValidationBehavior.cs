@@ -4,6 +4,7 @@ using OnSet.Infrastructure.Results;
 
 namespace OnSet.Infrastructure.Behaviors
 {
+    /// <summary>Infrastructure component.</summary>
     public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
     {

@@ -2,8 +2,10 @@ using OnSet.Application.Exceptions;
 
 namespace OnSet.Utils
 {
+    /// <summary>Parses string values to enums for profile and edit forms.</summary>
     public static class EnumConverter
     {
+        /// <summary>Converts a sequence of strings to enum values; throws <see cref="Application.Exceptions.EnumConversionException"/> on invalid input.</summary>
         public static List<T> ToEnumList<T>(IEnumerable<string> values) where T : struct, Enum
         {
             var list = new List<T>();

@@ -1,8 +1,14 @@
 ﻿namespace OnSet.Utils
 {
+    /// <summary>
+    /// ASP.NET Identity role names used in OnSet authorization.
+    /// </summary>
     public static class Roles
     {
-        public const string Admin = "admin";
-        public const string StandardUser = "user";
+        /// <summary>Administrator role with elevated privileges.</summary>
+        public const string Admin = "Admin";
+
+        /// <summary>Default role assigned to registered users.</summary>
+        public const string StandardUser = "StandardUser";
     }
 }

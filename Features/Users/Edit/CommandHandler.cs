@@ -8,6 +8,7 @@ using OnSet.Application.Exceptions;
 
 namespace OnSet.Features.Users.Edit
 {
+    /// <summary>MediatR handler for this feature slice.</summary>
     public class CommandHandler : IRequestHandler<Command, Unit>
     {
         private readonly OnSetDbContext _db;

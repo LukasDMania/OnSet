@@ -4,6 +4,7 @@ using OnSet.Domain.Models;
 
 namespace OnSet.Features.Users.OtherUserDetails
 {
+    /// <summary>AutoMapper profile for this feature slice.</summary>
     public class MappingProfile : Profile
     {
         public MappingProfile() 

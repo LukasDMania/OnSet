@@ -1,5 +1,7 @@
 namespace OnSet.Infrastructure.Services;
 
+/// <summary>Infrastructure service contract.</summary>
+
 public interface ICommandAuditService
 {
     Task RecordAsync(

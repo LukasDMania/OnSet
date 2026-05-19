@@ -6,6 +6,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OnSet.Features.Projects.UploadDocument
 {
+    /// <summary>Uploads a tagged document to a project.</summary>
+    /// <remarks>POST <c>/Projects/{id}?handler=Upload</c>; validated by <see cref="Validator"/>.</remarks>
     public record Command : IRequest<Result>
     {
         [Required]

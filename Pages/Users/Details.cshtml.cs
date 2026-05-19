@@ -9,8 +9,9 @@ using Command = OnSet.Features.Users.Edit.Command;
 
 namespace OnSet.Pages.Users
 {
+    /// <summary>Razor Page handler (documented in OpenAPI under Razor Pages).</summary>
     [Authorize(Policy = "Authenticated")]
-    public class DetailsModel : PageModel
+        public class DetailsModel : PageModel
     {
         private readonly IMediator _mediator;
         private readonly ICurrentUserService _currentUser;
