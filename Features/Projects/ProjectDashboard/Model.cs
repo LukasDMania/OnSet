@@ -9,7 +9,7 @@ namespace OnSet.Features.Projects.ProjectDashboard
         public int Id { get; init; }
         public string Name { get; init; } = string.Empty;
         public string? ReferenceCode { get; init; }
-        public string? ClientName { get; init; }
+        public string? ProductionCompany { get; init; }
 
         public IReadOnlyList<DocumentGroup> DocumentGroups { get; init; } = Array.Empty<DocumentGroup>();
 

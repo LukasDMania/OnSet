@@ -13,6 +13,10 @@ namespace OnSet.Domain.Models
     public class User : IdentityUser, IAuditableEntity
     {
         [Required]
+        [Display(Name = "Account Type")]
+        public AccountType AccountType { get; set; } = AccountType.CREW;
+
+        [Required]
         public FirstName FirstName { get; set; }
 
         [Required]
@@ -24,10 +28,6 @@ namespace OnSet.Domain.Models
 
         [Display(Name = "Main Occupation Role")]
         public ProjectRoles? MainOccupationRole { get; set; }
-
-        [Range(0, 80)]
-        [Display(Name = "Years of Experience")]
-        public int? YearsExperience { get; set; }
 
         [StringLength(500)]
         public string? Bio { get; set; }
@@ -42,13 +42,27 @@ namespace OnSet.Domain.Models
         [Display(Name = "Languages Spoken")]
         public List<Languages>? SpokenLanguages { get; set; }
 
-        [Display(Name = "Available for Booking")]
-        public bool IsAvailableForBooking { get; set; } = true;
-
         [DataType(DataType.Date)]
-        [Display(Name = "Next Available Date")]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? NextAvailableDate { get; set; }
+        [Display(Name = "Date of Birth")]
+        public DateTime? DateOfBirth { get; set; }
+
+        [StringLength(200)]
+        [Display(Name = "Place of Birth")]
+        public string? PlaceOfBirth { get; set; }
+
+        [StringLength(100)]
+        [Display(Name = "Nationality")]
+        public string? Nationality { get; set; }
+
+        [StringLength(50)]
+        [Display(Name = "National Registration Number")]
+        public string? NationalRegistrationNumber { get; set; }
+
+        [Display(Name = "Marital Status")]
+        public MaritalStatus? MaritalStatus { get; set; }
+
+        [Display(Name = "Dietary Preference")]
+        public DietaryPreference? DietaryPreference { get; set; }
 
         [Display(Name = "Emergency Contact")]
         public EmergencyContact? EmergencyContact { get; set; }
@@ -80,34 +94,45 @@ namespace OnSet.Domain.Models
 
 
         public static User Create(
+            AccountType accountType,
             FirstName firstName,
             LastName lastName,
             ProjectRoles? mainOccupationRole = null,
-            int? yearsExperience = null,
             string? bio = null,
             string? avatarUrl = null,
             Address? homeAddress = null,
             List<Languages>? spokenLanguages = null,
-            bool isAvailableForBooking = true,
-            DateTime? nextAvailableDate = null,
+            DateTime? dateOfBirth = null,
+            string? placeOfBirth = null,
+            string? nationality = null,
+            string? nationalRegistrationNumber = null,
+            MaritalStatus? maritalStatus = null,
+            DietaryPreference? dietaryPreference = null,
             EmergencyContact? emergencyContact = null
         )
         {
             bio = string.IsNullOrWhiteSpace(bio) ? null : bio;
             avatarUrl = string.IsNullOrWhiteSpace(avatarUrl) ? null : avatarUrl;
+            placeOfBirth = string.IsNullOrWhiteSpace(placeOfBirth) ? null : placeOfBirth;
+            nationality = string.IsNullOrWhiteSpace(nationality) ? null : nationality;
+            nationalRegistrationNumber = string.IsNullOrWhiteSpace(nationalRegistrationNumber) ? null : nationalRegistrationNumber;
 
             return new User
             {
+                AccountType = accountType,
                 FirstName = firstName,
                 LastName = lastName,
                 MainOccupationRole = mainOccupationRole,
-                YearsExperience = yearsExperience,
                 Bio = bio,
                 AvatarUrl = avatarUrl,
                 HomeAddress = homeAddress,
                 SpokenLanguages = spokenLanguages ?? new List<Languages>(),
-                IsAvailableForBooking = isAvailableForBooking,
-                NextAvailableDate = nextAvailableDate,
+                DateOfBirth = dateOfBirth,
+                PlaceOfBirth = placeOfBirth,
+                Nationality = nationality,
+                NationalRegistrationNumber = nationalRegistrationNumber,
+                MaritalStatus = maritalStatus,
+                DietaryPreference = dietaryPreference,
                 EmergencyContact = emergencyContact,
                 IsActive = true,
                 CreatedAt = DateTime.UtcNow,
@@ -115,42 +140,79 @@ namespace OnSet.Domain.Models
             };
         }
 
+        public static User Create(
+            FirstName firstName,
+            LastName lastName,
+            ProjectRoles? mainOccupationRole = null,
+            string? bio = null,
+            string? avatarUrl = null,
+            Address? homeAddress = null,
+            List<Languages>? spokenLanguages = null,
+            DateTime? dateOfBirth = null,
+            string? placeOfBirth = null,
+            string? nationality = null,
+            string? nationalRegistrationNumber = null,
+            MaritalStatus? maritalStatus = null,
+            DietaryPreference? dietaryPreference = null,
+            EmergencyContact? emergencyContact = null
+        )
+        {
+            return Create(
+                AccountType.CREW,
+                firstName,
+                lastName,
+                mainOccupationRole,
+                bio,
+                avatarUrl,
+                homeAddress,
+                spokenLanguages,
+                dateOfBirth,
+                placeOfBirth,
+                nationality,
+                nationalRegistrationNumber,
+                maritalStatus,
+                dietaryPreference,
+                emergencyContact
+            );
+        }
+
         public void UpdateProfile(
+            AccountType accountType,
             FirstName firstName,
             LastName lastName,
             ProjectRoles? mainOccupationRole,
-            int? yearsExperience,
             string? bio,
             string? avatarUrl,
             Address? homeAddress,
             List<Languages>? spokenLanguages,
-            bool isAvailableForBooking,
-            DateTime? nextAvailableDate,
+            DateTime? dateOfBirth,
+            string? placeOfBirth,
+            string? nationality,
+            string? nationalRegistrationNumber,
+            MaritalStatus? maritalStatus,
+            DietaryPreference? dietaryPreference,
             EmergencyContact? emergencyContact)
         {
             bio = string.IsNullOrWhiteSpace(bio) ? null : bio;
             avatarUrl = string.IsNullOrWhiteSpace(avatarUrl) ? null : avatarUrl;
+            placeOfBirth = string.IsNullOrWhiteSpace(placeOfBirth) ? null : placeOfBirth;
+            nationality = string.IsNullOrWhiteSpace(nationality) ? null : nationality;
+            nationalRegistrationNumber = string.IsNullOrWhiteSpace(nationalRegistrationNumber) ? null : nationalRegistrationNumber;
 
-            if (yearsExperience is < 0 or > 80)
-            { 
-                throw new DomainRuleException("Years of experience must be between 0 and 80."); 
-            }
-
-            if (!isAvailableForBooking)
-            {
-                nextAvailableDate = null;
-            }
-
+            AccountType = accountType;
             FirstName = firstName;
             LastName = lastName;
             MainOccupationRole = mainOccupationRole;
-            YearsExperience = yearsExperience;
             Bio = bio;
             AvatarUrl = avatarUrl;
             HomeAddress = homeAddress;
             SpokenLanguages = spokenLanguages ?? new List<Languages>();
-            IsAvailableForBooking = isAvailableForBooking;
-            NextAvailableDate = nextAvailableDate;
+            DateOfBirth = dateOfBirth;
+            PlaceOfBirth = placeOfBirth;
+            Nationality = nationality;
+            NationalRegistrationNumber = nationalRegistrationNumber;
+            MaritalStatus = maritalStatus;
+            DietaryPreference = dietaryPreference;
             EmergencyContact = emergencyContact;
             UpdatedAt = DateTime.UtcNow;
         }

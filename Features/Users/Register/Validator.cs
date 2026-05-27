@@ -48,7 +48,6 @@ namespace OnSet.Features.Users.Register
                 RuleFor(x => x.EmergencyContactPhone).NotEmpty().WithMessage("Emergency contact phone is required.");
             });
 
-            RuleFor(x => x.YearsExperience).InclusiveBetween(0, 80);
             RuleFor(x => x.Bio).MaximumLength(500);
         }
     }

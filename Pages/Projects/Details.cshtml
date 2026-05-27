@@ -1,6 +1,6 @@
 ﻿@page "{Id:int}"
 @using OnSet.Domain.Enums
-@model OnSet.Pages.Projects.Details
+@model OnSet.Pages.Projects.DetailsModel
 @{
     ViewData["Title"] = string.Format(L["Projects_Details_BrowserTitle"].Value, Model.Data.Name);
 
@@ -21,9 +21,6 @@
                 </nav>
                 <div class="d-flex align-items-center gap-3 flex-wrap">
                     <h1 class="display-6 fw-bold mb-0 text-dark">@Model.Data.Name</h1>
-                    <span class="badge rounded-pill bg-@statusColor bg-opacity-10 text-@statusColor border border-@statusColor border-opacity-25 px-3 py-2">
-                        <i class="bi @statusIcon me-1"></i> @Model.Data.Status
-                    </span>
                 </div>
                 <p class="text-muted mt-3 mb-0 d-flex align-items-center gap-4">
                     <span><i class="bi bi-person-badge me-2"></i><strong>@L["Projects_Details_Owner"]</strong> @(Model.Data.OwnerName ?? L["Projects_Details_Unassigned"].Value)</span>
@@ -48,24 +45,11 @@
 
             <div class="row g-4 mb-4">
                 <div class="col-md-6">
-                    <div class="card h-100 border-0 shadow-sm bg-dark text-white overflow-hidden">
-                        <div class="card-body p-4 position-relative">
-                            <i class="bi bi-currency-dollar position-absolute end-0 bottom-0 opacity-10" style="font-size: 5rem; margin-right: -10px; margin-bottom: -10px;"></i>
-                            <h6 class="text-uppercase small fw-bold opacity-50 mb-3">@L["Projects_Details_FinancialOverview"]</h6>
-                            <div class="d-flex justify-content-between align-items-center mb-1">
-                                <span class="small opacity-75">@L["Projects_Details_ActualCost"]</span>
-                                <h3 class="fw-bold mb-0">@(Model.Data.ActualCost?.ToString("C") ?? "$0.00")</h3>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="small opacity-75">@L["Projects_Details_Budget"]</span>
-                                <span class="fw-medium">@(Model.Data.Budget?.ToString("C") ?? L["Common_NotAvailable"].Value)</span>
-                            </div>
-
-                            @{
-                                var progress = (Model.Data.Budget > 0) ? (int)((Model.Data.ActualCost ?? 0) / Model.Data.Budget * 100) : 0;
-                            }
-                            <div class="progress bg-white bg-opacity-10" style="height: 8px;">
-                                <div class="progress-bar bg-info" role="progressbar" style="width: @(progress > 100 ? 100 : progress)%"></div>
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <h6 class="text-uppercase small fw-bold text-muted mb-3">Production company</h6>
+                            <div class="fw-bold text-dark">
+                                @(Model.Data.ProductionCompany ?? L["Projects_Details_InternalProject"].Value)
                             </div>
                         </div>
                     </div>
@@ -87,7 +71,7 @@
                             </div>
                             <div class="mt-4 p-2 bg-light rounded text-center">
                                 <i class="bi bi-calendar-event me-2 text-primary"></i>
-                                <span class="small fw-medium text-muted">@L["Projects_Details_ClientLabel"] @(Model.Data.ClientName ?? L["Projects_Details_InternalProject"].Value)</span>
+                                <span class="small fw-medium text-muted">@L["Projects_Details_ClientLabel"] @(Model.Data.ProductionCompany ?? L["Projects_Details_InternalProject"].Value)</span>
                             </div>
                         </div>
                     </div>
@@ -125,6 +109,34 @@
                                 </span>
                                 <span class="d-block text-muted small fw-bold">@Model.Data.Country</span>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <h6 class="text-uppercase small fw-bold text-muted mb-4 border-bottom pb-2">Invoice details</h6>
+                    <div class="d-flex flex-column gap-2">
+                        <div>
+                            <span class="small text-muted d-block">Company</span>
+                            <span class="fw-bold d-block">@(Model.Data.InvoiceCompanyName ?? L["Common_NotAvailable"].Value)</span>
+                        </div>
+                        <div>
+                            <span class="small text-muted d-block">VAT</span>
+                            <span class="fw-bold d-block">@(Model.Data.InvoiceVatNumber ?? L["Common_NotAvailable"].Value)</span>
+                        </div>
+                        <div>
+                            <span class="small text-muted d-block">Reference</span>
+                            <span class="fw-bold d-block">@(Model.Data.InvoiceReference ?? L["Common_NotAvailable"].Value)</span>
+                        </div>
+                        <div>
+                            <span class="small text-muted d-block">Address</span>
+                            <span class="fw-bold d-block">@(Model.Data.InvoiceStreet ?? L["Common_NotAvailable"].Value)</span>
+                            <span class="text-muted small">
+                                @Model.Data.InvoiceCity, @Model.Data.InvoiceProvince @Model.Data.InvoiceZipCode
+                            </span>
+                            <span class="d-block text-muted small fw-bold">@Model.Data.InvoiceCountry</span>
                         </div>
                     </div>
                 </div>

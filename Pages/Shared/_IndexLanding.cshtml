@@ -1,0 +1,107 @@
+@using OnSet.Domain.Enums
+
+<section class="landing-hero" data-landing-hero aria-label="@L["Index_Landing_HeroAria"]">
+    <div class="landing-hero__bg" aria-hidden="true">
+        <div class="landing-hero__mesh" data-parallax-depth="0.08"></div>
+        <div class="landing-hero__grid" data-parallax-depth="0.04"></div>
+        <div class="landing-orb landing-orb--1" data-parallax-depth="0.12"></div>
+        <div class="landing-orb landing-orb--2" data-parallax-depth="0.18"></div>
+        <div class="landing-orb landing-orb--3" data-parallax-depth="0.1"></div>
+    </div>
+
+    <div class="landing-hero__content fade-in visible">
+        <span class="landing-hero__badge">
+            <span class="badge bg-primary rounded-circle" style="width: 8px; height: 8px;"></span>
+            OnSet
+        </span>
+        <h1 class="landing-hero__title">@L["Index_Landing_Title"]</h1>
+        <p class="landing-hero__lead">@L["Index_Landing_Lead"]</p>
+
+        <div class="landing-hero__cta no-page-transition">
+            <a asp-page="/Users/Register" class="btn btn-primary landing-btn-primary">
+                @L["Index_Landing_CTA_Primary"]
+            </a>
+            <a asp-page="/Users/Login" class="btn landing-btn-secondary">
+                @L["Index_Landing_CTA_Login"]
+            </a>
+        </div>
+        <p class="landing-hero__hint">@L["Index_Landing_Hint"]</p>
+    </div>
+
+    <div class="landing-scroll-hint" aria-hidden="true">
+        <i class="bi bi-chevron-down d-block text-center fs-5"></i>
+        @L["Index_Landing_Scroll"]
+    </div>
+</section>
+
+<section class="landing-section landing-section--alt">
+    <div class="container">
+        <header class="landing-section__header fade-in">
+            <h2 class="landing-section__title">@L["Index_Landing_PathsTitle"]</h2>
+            <p class="landing-section__lead">@L["Index_Landing_PathsLead"]</p>
+        </header>
+
+        <div class="landing-paths">
+            <article class="landing-path-card landing-path-card--crew fade-in delay-1">
+                <div class="landing-path-card__icon">
+                    <i class="bi bi-people-fill"></i>
+                </div>
+                <h3>@L["Index_Landing_CrewTitle"]</h3>
+                <p>@L["Index_Landing_CrewBody"]</p>
+                <a asp-page="/Users/Register"
+                   asp-route-accountType="@AccountType.CREW"
+                   class="btn btn-warning w-100 no-page-transition">
+                    @L["Index_Landing_CrewCTA"]
+                </a>
+            </article>
+
+            <article class="landing-path-card landing-path-card--production fade-in delay-2">
+                <div class="landing-path-card__icon">
+                    <i class="bi bi-clapperboard-fill"></i>
+                </div>
+                <h3>@L["Index_Landing_ProductionTitle"]</h3>
+                <p>@L["Index_Landing_ProductionBody"]</p>
+                <a asp-page="/Users/Register"
+                   asp-route-accountType="@AccountType.PRODUCTION"
+                   class="btn btn-primary w-100 no-page-transition">
+                    @L["Index_Landing_ProductionCTA"]
+                </a>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="landing-section">
+    <div class="container">
+        <div class="landing-features">
+            <div class="landing-feature fade-in">
+                <i class="bi bi-shield-lock-fill"></i>
+                <h4>@L["Index_Landing_Feature1Title"]</h4>
+                <p>@L["Index_Landing_Feature1Body"]</p>
+            </div>
+            <div class="landing-feature fade-in delay-1">
+                <i class="bi bi-key-fill"></i>
+                <h4>@L["Index_Landing_Feature2Title"]</h4>
+                <p>@L["Index_Landing_Feature2Body"]</p>
+            </div>
+            <div class="landing-feature fade-in delay-2">
+                <i class="bi bi-file-earmark-text-fill"></i>
+                <h4>@L["Index_Landing_Feature3Title"]</h4>
+                <p>@L["Index_Landing_Feature3Body"]</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="landing-cta-band">
+    <h2 class="fade-in">@L["Index_Landing_FinalTitle"]</h2>
+    <p class="fade-in delay-1">@L["Index_Landing_FinalLead"]</p>
+    <div class="d-flex flex-wrap gap-2 justify-content-center no-page-transition fade-in delay-2">
+        <a asp-page="/Users/Register" class="btn btn-primary landing-btn-primary">
+            @L["Index_Landing_CTA_Primary"]
+        </a>
+        <a asp-page="/Users/Login" class="btn landing-btn-secondary">
+            @L["Index_Landing_CTA_Login"]
+        </a>
+    </div>
+</section>

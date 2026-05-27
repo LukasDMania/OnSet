@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Logging;
-using OnSet;
+using OnSet.Application.Services;
 using OnSet.Domain.Models;
-using OnSet.Infrastructure.Data;
+using OnSet.Infrastructure.Persistence;
 
 namespace OnSet.Infrastructure.Persistence;
 

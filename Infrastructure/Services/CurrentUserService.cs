@@ -1,8 +1,9 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Primitives;
+using OnSet.Application.Services;
 
-namespace OnSet
+namespace OnSet.Infrastructure.Services
 {
     /// <summary>Infrastructure component.</summary>
     public class CurrentUserService : ICurrentUserService

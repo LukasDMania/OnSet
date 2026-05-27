@@ -23,6 +23,11 @@
                                 <h5 class="fw-bold mb-3"><i class="bi bi-shield-lock me-2 text-primary"></i>@L["Register_Section_AccountCredentials"]</h5>
                                 <div class="row g-3">
                                     <div class="col-12">
+                                        <label asp-for="Input.AccountType" class="form-label fw-medium"></label>
+                                        <select asp-for="Input.AccountType" class="form-select" asp-items="Html.GetEnumSelectList<AccountType>()"></select>
+                                        <span asp-validation-for="Input.AccountType" class="text-danger small"></span>
+                                    </div>
+                                    <div class="col-12">
                                         <label asp-for="Input.Email" class="form-label fw-medium"></label>
                                         <input asp-for="Input.Email" class="form-control" placeholder="@L["Register_Placeholder_Email"].Value" />
                                         <span asp-validation-for="Input.Email" class="text-danger small"></span>
@@ -61,11 +66,6 @@
                                             <option value="">@L["Register_SelectRole"]</option>
                                         </select>
                                         <span asp-validation-for="Input.MainOccupationRole" class="text-danger small"></span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label asp-for="Input.YearsExperience" class="form-label fw-medium"></label>
-                                        <input asp-for="Input.YearsExperience" class="form-control" />
-                                        <span asp-validation-for="Input.YearsExperience" class="text-danger small"></span>
                                     </div>
                                     <div class="col-12">
                                         <label asp-for="Input.Bio" class="form-label fw-medium"></label>
@@ -127,16 +127,39 @@
                                         <div class="form-text small">@L["Register_MultiSelectHint"]</div>
                                         <span asp-validation-for="Input.SpokenLanguages" class="text-danger small"></span>
                                     </div>
-                                    <div class="col-12 py-2">
-                                        <div class="form-check form-switch bg-light p-3 rounded border">
-                                            <input asp-for="Input.IsAvailableForBooking" class="form-check-input ms-0 me-3" type="checkbox" />
-                                            <label asp-for="Input.IsAvailableForBooking" class="form-check-label fw-bold"></label>
-                                        </div>
+                                    <div class="col-md-6">
+                                        <label asp-for="Input.DateOfBirth" class="form-label fw-medium"></label>
+                                        <input asp-for="Input.DateOfBirth" class="form-control" type="date" />
+                                        <span asp-validation-for="Input.DateOfBirth" class="text-danger small"></span>
                                     </div>
-                                    <div class="col-12">
-                                        <label asp-for="Input.NextAvailableDate" class="form-label fw-medium"></label>
-                                        <input asp-for="Input.NextAvailableDate" class="form-control" type="date" />
-                                        <span asp-validation-for="Input.NextAvailableDate" class="text-danger small"></span>
+                                    <div class="col-md-6">
+                                        <label asp-for="Input.PlaceOfBirth" class="form-label fw-medium"></label>
+                                        <input asp-for="Input.PlaceOfBirth" class="form-control" />
+                                        <span asp-validation-for="Input.PlaceOfBirth" class="text-danger small"></span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label asp-for="Input.Nationality" class="form-label fw-medium"></label>
+                                        <input asp-for="Input.Nationality" class="form-control" />
+                                        <span asp-validation-for="Input.Nationality" class="text-danger small"></span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label asp-for="Input.NationalRegistrationNumber" class="form-label fw-medium"></label>
+                                        <input asp-for="Input.NationalRegistrationNumber" class="form-control" />
+                                        <span asp-validation-for="Input.NationalRegistrationNumber" class="text-danger small"></span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label asp-for="Input.MaritalStatus" class="form-label fw-medium"></label>
+                                        <select asp-for="Input.MaritalStatus" class="form-select" asp-items="Html.GetEnumSelectList<MaritalStatus>()">
+                                            <option value="">@L["Common_NotAvailable"]</option>
+                                        </select>
+                                        <span asp-validation-for="Input.MaritalStatus" class="text-danger small"></span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label asp-for="Input.DietaryPreference" class="form-label fw-medium"></label>
+                                        <select asp-for="Input.DietaryPreference" class="form-select" asp-items="Html.GetEnumSelectList<DietaryPreference>()">
+                                            <option value="">@L["Common_NotAvailable"]</option>
+                                        </select>
+                                        <span asp-validation-for="Input.DietaryPreference" class="text-danger small"></span>
                                     </div>
                                 </div>
                             </div>

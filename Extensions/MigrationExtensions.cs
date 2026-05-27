@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using OnSet.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
+using OnSet.Infrastructure.Persistence;
 
 namespace OnSet.Extensions
 {

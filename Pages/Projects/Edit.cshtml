@@ -45,8 +45,8 @@
                                 <input asp-for="Data.Name" class="form-control form-control-lg border-2" placeholder="Enter project name..." />
                             </div>
                             <div class="col-md-6">
-                                <label asp-for="Data.ClientName" class="form-label fw-semibold small text-muted text-uppercase">@L["Projects_Edit_Label_ClientName"]</label>
-                                <input asp-for="Data.ClientName" class="form-control" />
+                                <label asp-for="Data.ProductionCompany" class="form-label fw-semibold small text-muted text-uppercase">@L["Projects_Edit_Label_ClientName"]</label>
+                                <input asp-for="Data.ProductionCompany" class="form-control" />
                             </div>
                             <div class="col-md-6">
                                 <label asp-for="Data.ReferenceCode" class="form-label fw-semibold small text-muted text-uppercase">@L["Projects_Edit_Label_ReferenceCode"]</label>
@@ -93,10 +93,6 @@
                 <div class="card border-0 shadow-sm mb-4 bg-light">
                     <div class="card-body p-4">
                         <h5 class="fw-bold mb-4 border-bottom pb-2">@L["Projects_Edit_Section_Lifecycle"]</h5>
-                        <div class="mb-4">
-                            <label asp-for="Data.Status" class="form-label fw-semibold small text-muted text-uppercase">@L["Projects_Edit_Label_Status"]</label>
-                            <select asp-for="Data.Status" asp-items="Html.GetEnumSelectList<ProjectStatus>()" class="form-select border-2 border-primary"></select>
-                        </div>
                         <div class="mb-3">
                             <label asp-for="Data.StartDate" class="form-label fw-semibold small text-muted text-uppercase">@L["Projects_Edit_Label_StartDate"]</label>
                             <input asp-for="Data.StartDate" type="date" class="form-control" />
@@ -108,21 +104,41 @@
                     </div>
                 </div>
 
-                <div class="card border-0 shadow-sm mb-4 bg-dark text-white">
+                <div class="card border-0 shadow-sm mb-4">
                     <div class="card-body p-4">
-                        <h5 class="fw-bold mb-4 border-bottom border-secondary pb-2">@L["Projects_Edit_Section_Financials"]</h5>
-                        <div class="mb-3">
-                            <label asp-for="Data.Budget" class="form-label fw-semibold small text-secondary text-uppercase">@L["Projects_Edit_Label_TotalBudget"]</label>
-                            <div class="input-group">
-                                <span class="input-group-text bg-secondary border-0 text-white">$</span>
-                                <input asp-for="Data.Budget" class="form-control bg-transparent text-white border-secondary" placeholder="0.00" />
+                        <h5 class="fw-bold mb-4 border-bottom pb-2">Invoice details</h5>
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label asp-for="Data.InvoiceCompanyName" class="form-label fw-semibold small text-muted text-uppercase">Naam bedrijf</label>
+                                <input asp-for="Data.InvoiceCompanyName" class="form-control" />
                             </div>
-                        </div>
-                        <div class="mb-0">
-                            <label asp-for="Data.ActualCost" class="form-label fw-semibold small text-secondary text-uppercase">@L["Projects_Edit_Label_ActualCost"]</label>
-                            <div class="input-group">
-                                <span class="input-group-text bg-secondary border-0 text-white">$</span>
-                                <input asp-for="Data.ActualCost" class="form-control bg-transparent text-white border-secondary" placeholder="0.00" />
+                            <div class="col-md-6">
+                                <label asp-for="Data.InvoiceVatNumber" class="form-label fw-semibold small text-muted text-uppercase">BTW nummer</label>
+                                <input asp-for="Data.InvoiceVatNumber" class="form-control" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Data.InvoiceReference" class="form-label fw-semibold small text-muted text-uppercase">Referentie</label>
+                                <input asp-for="Data.InvoiceReference" class="form-control" />
+                            </div>
+                            <div class="col-12">
+                                <label asp-for="Data.InvoiceStreet" class="form-label fw-semibold small text-muted text-uppercase">Adres</label>
+                                <input asp-for="Data.InvoiceStreet" class="form-control" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Data.InvoiceCity" class="form-label fw-semibold small text-muted text-uppercase">Stad</label>
+                                <input asp-for="Data.InvoiceCity" class="form-control" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Data.InvoiceProvince" class="form-label fw-semibold small text-muted text-uppercase">Provincie</label>
+                                <input asp-for="Data.InvoiceProvince" class="form-control" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Data.InvoiceZipCode" class="form-label fw-semibold small text-muted text-uppercase">Postcode</label>
+                                <input asp-for="Data.InvoiceZipCode" class="form-control" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Data.InvoiceCountry" class="form-label fw-semibold small text-muted text-uppercase">Land</label>
+                                <input asp-for="Data.InvoiceCountry" class="form-control" />
                             </div>
                         </div>
                     </div>

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using OnSet.Application.Services;
 using OnSet.Domain.Enums;
 using OnSet.Features.Users.Details;
 using Command = OnSet.Features.Users.Edit.Command;
@@ -11,7 +12,7 @@ namespace OnSet.Pages.Users
 {
     /// <summary>Razor Page handler (documented in OpenAPI under Razor Pages).</summary>
     [Authorize(Policy = "Authenticated")]
-        public class DetailsModel : PageModel
+    public class DetailsModel : PageModel
     {
         private readonly IMediator _mediator;
         private readonly ICurrentUserService _currentUser;
@@ -59,15 +60,19 @@ namespace OnSet.Pages.Users
             EditCommand = new Command
             {
                 UserId = UserDetails.Id,
+                AccountType = UserDetails.AccountType,
                 FirstName = UserDetails.FirstName,
                 LastName = UserDetails.LastName,
                 Bio = UserDetails.Bio,
                 AvatarUrl = UserDetails.AvatarUrl,
                 MainOccupationRole = UserDetails.MainOccupationRole?.ToString(),
-                YearsExperience = UserDetails.YearsExperience,
                 SpokenLanguages = UserDetails.SpokenLanguages.Select(l => l.ToString()).ToList(),
-                IsAvailableForBooking = UserDetails.IsAvailableForBooking,
-                NextAvailableDate = UserDetails.NextAvailableDate,
+                DateOfBirth = UserDetails.DateOfBirth,
+                PlaceOfBirth = UserDetails.PlaceOfBirth,
+                Nationality = UserDetails.Nationality,
+                NationalRegistrationNumber = UserDetails.NationalRegistrationNumber,
+                MaritalStatus = UserDetails.MaritalStatus,
+                DietaryPreference = UserDetails.DietaryPreference,
                 Street = UserDetails.Street,
                 City = UserDetails.City,
                 Province = UserDetails.Province,

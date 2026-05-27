@@ -1,4 +1,4 @@
-﻿using MediatR;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using OnSet.Application.Authorization;
 using OnSet.Domain.Enums;
@@ -17,21 +17,28 @@ namespace OnSet.Features.Projects.Edit
         ];
         public string Name { get; init; } = string.Empty;
         public string? Description { get; init; }
-        public string? ClientName { get; init; }
+        public string? ProductionCompany { get; init; }
         public string? ReferenceCode { get; init; }
 
         public DateTime StartDate { get; init; }
         public DateTime? EndDate { get; init; }
 
-        public decimal? Budget { get; init; }
-        public decimal? ActualCost { get; init; }
-        public ProjectStatus Status { get; init; }
-
+        // Production company location
         public string? Street { get; init; }
         public string? City { get; init; }
         public string? Province { get; init; }
         public string? ZipCode { get; init; }
         public string? Country { get; init; }
+
+        // Invoice details
+        public string? InvoiceCompanyName { get; init; }
+        public string? InvoiceStreet { get; init; }
+        public string? InvoiceCity { get; init; }
+        public string? InvoiceProvince { get; init; }
+        public string? InvoiceZipCode { get; init; }
+        public string? InvoiceCountry { get; init; }
+        public string? InvoiceVatNumber { get; init; }
+        public string? InvoiceReference { get; init; }
 
         public DateTime CreatedAt { get; init; }
         public DateTime? UpdatedAt { get; init; }

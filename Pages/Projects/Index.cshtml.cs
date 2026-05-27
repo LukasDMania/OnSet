@@ -2,8 +2,11 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using OnSet.Domain.Enums;
 using OnSet.Features.Projects.Index;
 using OnSet.Features.Projects.Join;
+using OnSet.Application.Services;
+using OnSet.Infrastructure.Authorization;
 using OnSet.Infrastructure.Results;
 
 namespace OnSet.Pages.Projects;
@@ -24,6 +27,9 @@ public class IndexModel : PageModel
 
     [BindProperty]
     public string JoinCode { get; set; } = string.Empty;
+
+    public bool IsProductionAccount =>
+        User.HasClaim(AccountTypeClaimsTransformation.ClaimType, AccountType.PRODUCTION.ToString());
 
     public async Task OnGetAsync()
     {

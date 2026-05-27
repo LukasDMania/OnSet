@@ -70,6 +70,13 @@
                             <div class="card-body p-4">
                                 <h5 class="fw-bold mb-4">@L["Users_Details_Section_WorkAvailability"]</h5>
                                 <div class="row g-3">
+                                    <div class="col-12">
+                                        <label asp-for="EditCommand.AccountType" class="form-label fw-medium"></label>
+                                        <select asp-for="EditCommand.AccountType"
+                                                class="form-select"
+                                                asp-items="Html.GetEnumSelectList<AccountType>()"></select>
+                                        <span asp-validation-for="EditCommand.AccountType" class="text-danger"></span>
+                                    </div>
                                     <div class="col-md-8">
                                         <label asp-for="EditCommand.MainOccupationRole" class="form-label"></label>
 
@@ -80,10 +87,6 @@
                                         </select>
 
                                         <span asp-validation-for="EditCommand.MainOccupationRole" class="text-danger"></span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label class="form-label fw-medium">@L["Users_Details_Label_YearsExperience"]</label>
-                                        <input asp-for="EditCommand.YearsExperience" type="number" class="form-control" />
                                     </div>
 
                                     <div class="col-12">
@@ -99,17 +102,43 @@
                                         <span asp-validation-for="EditCommand.SpokenLanguages" class="text-danger"></span>
                                     </div>
 
-                                    <div class="col-12 py-3">
-                                        <div class="form-check form-switch bg-light p-3 rounded border">
-                                            <input class="form-check-input ms-0 me-3" type="checkbox" asp-for="EditCommand.IsAvailableForBooking">
-                                            <label class="form-check-label fw-bold" asp-for="EditCommand.IsAvailableForBooking">@L["Users_Details_Label_AvailableForBooking"]</label>
-                                            <div class="form-text ms-5">@L["Users_Details_Hint_AvailableForBooking"]</div>
-                                        </div>
-                                    </div>
-
                                     <div class="col-md-6">
-                                        <label class="form-label fw-medium">@L["Users_Details_Label_NextAvailableDate"]</label>
-                                        <input asp-for="EditCommand.NextAvailableDate" type="date" class="form-control" />
+                                        <label asp-for="EditCommand.DateOfBirth" class="form-label fw-medium"></label>
+                                        <input asp-for="EditCommand.DateOfBirth" type="date" class="form-control" />
+                                        <span asp-validation-for="EditCommand.DateOfBirth" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label asp-for="EditCommand.PlaceOfBirth" class="form-label fw-medium"></label>
+                                        <input asp-for="EditCommand.PlaceOfBirth" class="form-control" />
+                                        <span asp-validation-for="EditCommand.PlaceOfBirth" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label asp-for="EditCommand.Nationality" class="form-label fw-medium"></label>
+                                        <input asp-for="EditCommand.Nationality" class="form-control" />
+                                        <span asp-validation-for="EditCommand.Nationality" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label asp-for="EditCommand.NationalRegistrationNumber" class="form-label fw-medium"></label>
+                                        <input asp-for="EditCommand.NationalRegistrationNumber" class="form-control" />
+                                        <span asp-validation-for="EditCommand.NationalRegistrationNumber" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label asp-for="EditCommand.MaritalStatus" class="form-label fw-medium"></label>
+                                        <select asp-for="EditCommand.MaritalStatus"
+                                                class="form-select"
+                                                asp-items="Html.GetEnumSelectList<MaritalStatus>()">
+                                            <option value="">@L["Common_NotAvailable"]</option>
+                                        </select>
+                                        <span asp-validation-for="EditCommand.MaritalStatus" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label asp-for="EditCommand.DietaryPreference" class="form-label fw-medium"></label>
+                                        <select asp-for="EditCommand.DietaryPreference"
+                                                class="form-select"
+                                                asp-items="Html.GetEnumSelectList<DietaryPreference>()">
+                                            <option value="">@L["Common_NotAvailable"]</option>
+                                        </select>
+                                        <span asp-validation-for="EditCommand.DietaryPreference" class="text-danger"></span>
                                     </div>
                                 </div>
                             </div>

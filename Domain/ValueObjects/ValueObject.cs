@@ -1,4 +1,4 @@
-﻿namespace OnSet.Domain.ValueObjects
+namespace OnSet.Domain.ValueObjects
 {
     public abstract class ValueObject
     {

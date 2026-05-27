@@ -30,6 +30,10 @@ namespace OnSet.Pages.Users
         public class InputModel
         {
             [Required]
+            [Display(Name = "Account Type")]
+            public AccountType AccountType { get; set; }
+
+            [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
@@ -57,10 +61,6 @@ namespace OnSet.Pages.Users
             [Display(Name = "Main Occupation Role")]
             public ProjectRoles? MainOccupationRole { get; set; }
 
-            [Range(0, 80)]
-            [Display(Name = "Years of Experience")]
-            public int? YearsExperience { get; set; }
-
             [StringLength(500)]
             public string? Bio { get; set; }
 
@@ -86,12 +86,24 @@ namespace OnSet.Pages.Users
             [Display(Name = "Spoken Languages")]
             public List<Languages>? SpokenLanguages { get; set; }
 
-            [Display(Name = "Available for Booking")]
-            public bool IsAvailableForBooking { get; set; } = true;
-
             [DataType(DataType.Date)]
-            [Display(Name = "Next Available Date")]
-            public System.DateTime? NextAvailableDate { get; set; }
+            [Display(Name = "Date of Birth")]
+            public DateTime? DateOfBirth { get; set; }
+
+            [Display(Name = "Place of Birth")]
+            public string? PlaceOfBirth { get; set; }
+
+            [Display(Name = "Nationality")]
+            public string? Nationality { get; set; }
+
+            [Display(Name = "National Registration Number")]
+            public string? NationalRegistrationNumber { get; set; }
+
+            [Display(Name = "Marital Status")]
+            public MaritalStatus? MaritalStatus { get; set; }
+
+            [Display(Name = "Dietary Preference")]
+            public DietaryPreference? DietaryPreference { get; set; }
 
             [Display(Name = "Emergency Contact Name")]
             public string? EmergencyContactName { get; set; }
@@ -100,9 +112,13 @@ namespace OnSet.Pages.Users
             public string? EmergencyContactPhone { get; set; }
         }
 
-        public void OnGet(string? returnUrl = null)
+        public void OnGet(string? returnUrl = null, AccountType? accountType = null)
         {
             ReturnUrl = returnUrl;
+            if (accountType.HasValue)
+            {
+                Input.AccountType = accountType.Value;
+            }
         }
 
         public async Task<IActionResult> OnPostAsync(string? returnUrl = null)
@@ -114,13 +130,13 @@ namespace OnSet.Pages.Users
 
             var command = new Command
             {
+                AccountType = Input.AccountType,
                 Email = Input.Email,
                 Password = Input.Password,
                 ConfirmPassword = Input.ConfirmPassword,
                 FirstName = Input.FirstName,
                 LastName = Input.LastName,
                 MainOccupationRole = Input.MainOccupationRole,
-                YearsExperience = Input.YearsExperience,
                 Bio = Input.Bio,
                 AvatarUrl = Input.AvatarUrl,
                 Street = Input.Street,
@@ -129,8 +145,12 @@ namespace OnSet.Pages.Users
                 ZipCode = Input.ZipCode,
                 Country = Input.Country,
                 SpokenLanguages = Input.SpokenLanguages,
-                IsAvailableForBooking = Input.IsAvailableForBooking,
-                NextAvailableDate = Input.NextAvailableDate,
+                DateOfBirth = Input.DateOfBirth,
+                PlaceOfBirth = Input.PlaceOfBirth,
+                Nationality = Input.Nationality,
+                NationalRegistrationNumber = Input.NationalRegistrationNumber,
+                MaritalStatus = Input.MaritalStatus,
+                DietaryPreference = Input.DietaryPreference,
                 EmergencyContactName = Input.EmergencyContactName,
                 EmergencyContactPhone = Input.EmergencyContactPhone
             };

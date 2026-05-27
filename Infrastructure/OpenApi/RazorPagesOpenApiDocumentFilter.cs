@@ -178,12 +178,12 @@ public sealed class RazorPagesOpenApiDocumentFilter : IDocumentFilter
         new("302", $"Redirect.{(extra is null ? "" : " " + extra)}");
 
     private static PageResponse NotFound404() =>
-        new("404", "Resource not found — see `/NotFound` (`NotFoundException`).");
+        new("404", "Resource not found  Esee `/NotFound` (`NotFoundException`).");
 
     private static PageResponse Forbidden403() =>
-        new("403", "Forbidden — see `/Forbidden` (`ForbiddenAccessException`).");
+        new("403", "Forbidden  Esee `/Forbidden` (`ForbiddenAccessException`).");
 
-    private static PageResponse Html400() => new("400", "Bad request — domain rule violated (`DomainRuleException`).");
+    private static PageResponse Html400() => new("400", "Bad request  Edomain rule violated (`DomainRuleException`).");
     private static PageResponse Html403() => new("403", "Forbidden.");
     private static PageResponse Html404() => new("404", "Not found.");
     private static PageResponse Html500() => new("500", "Internal server error.");

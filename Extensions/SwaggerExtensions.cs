@@ -86,7 +86,7 @@ public static class SwaggerExtensions
         app.UseSwaggerUI(options =>
         {
             options.SwaggerEndpoint($"/swagger/{OnSetOpenApiMetadata.DocumentName}/swagger.json", OnSetOpenApiMetadata.ApiTitle);
-            options.DocumentTitle = $"{OnSetOpenApiMetadata.ApiTitle} — OpenAPI";
+            options.DocumentTitle = $"{OnSetOpenApiMetadata.ApiTitle}  EOpenAPI";
             options.DisplayRequestDuration();
         });
 

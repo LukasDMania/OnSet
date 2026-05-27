@@ -9,17 +9,13 @@ namespace OnSet.Features.Projects.Edit
         {
             RuleFor(p => p.Name).NotEmpty().MaximumLength(100);
             RuleFor(p => p.Description).MaximumLength(500);
-            RuleFor(p => p.ClientName).MaximumLength(100);
+            RuleFor(p => p.ProductionCompany).MaximumLength(100);
             RuleFor(p => p.ReferenceCode).MaximumLength(50);
 
             RuleFor(p => p.StartDate).NotEmpty();
             RuleFor(p => p.EndDate)
                 .GreaterThan(x => x.StartDate)
                 .When(x => x.EndDate.HasValue);
-
-            RuleFor(p => p.Budget)
-                .GreaterThanOrEqualTo(0)
-                .When(x => x.Budget.HasValue);
 
             Func<Command, bool> isAddressPartiallyFilled = cmd =>
                 !string.IsNullOrWhiteSpace(cmd.Street) ||
@@ -34,6 +30,21 @@ namespace OnSet.Features.Projects.Edit
                 RuleFor(x => x.City).NotEmpty().WithMessage("City is required for a complete address.");
                 RuleFor(x => x.ZipCode).NotEmpty().WithMessage("Zip Code is required for a complete address.");
                 RuleFor(x => x.Country).NotEmpty().WithMessage("Country is required for a complete address.");
+            });
+
+            Func<Command, bool> isInvoiceAddressPartiallyFilled = cmd =>
+                !string.IsNullOrWhiteSpace(cmd.InvoiceStreet) ||
+                !string.IsNullOrWhiteSpace(cmd.InvoiceCity) ||
+                !string.IsNullOrWhiteSpace(cmd.InvoiceZipCode) ||
+                !string.IsNullOrWhiteSpace(cmd.InvoiceCountry) ||
+                !string.IsNullOrWhiteSpace(cmd.InvoiceProvince);
+
+            When(isInvoiceAddressPartiallyFilled, () =>
+            {
+                RuleFor(x => x.InvoiceStreet).NotEmpty().WithMessage("Invoice street is required for a complete invoice address.");
+                RuleFor(x => x.InvoiceCity).NotEmpty().WithMessage("Invoice city is required for a complete invoice address.");
+                RuleFor(x => x.InvoiceZipCode).NotEmpty().WithMessage("Invoice Zip Code is required for a complete invoice address.");
+                RuleFor(x => x.InvoiceCountry).NotEmpty().WithMessage("Invoice country is required for a complete invoice address.");
             });
         }
     }

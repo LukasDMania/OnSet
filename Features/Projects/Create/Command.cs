@@ -19,7 +19,7 @@ namespace OnSet.Features.Projects.Create
         public string? Description { get; init; }
 
         [StringLength(100)]
-        public string? ClientName { get; init; }
+        public string? ProductionCompany { get; init; }
 
         [StringLength(50)]
         public string? ReferenceCode { get; init; }
@@ -31,20 +31,24 @@ namespace OnSet.Features.Projects.Create
         [DataType(DataType.Date)]
         public DateTime? EndDate { get; init; }
 
-        [DataType(DataType.Currency)]
-        public decimal? Budget { get; init; }
-
-        [Required]
-        public ProjectStatus Status { get; init; }
-
         [Required]
         public ProjectRoles CreatorRole { get; init; }
 
-        // Location (Address VO parts)
+        // Production company location
         public string? Street { get; init; }
         public string? City { get; init; }
         public string? Province { get; init; }
         public string? Country { get; init; }
         public string? ZipCode { get; init; }
+
+        // Invoice details
+        public string? InvoiceCompanyName { get; init; }
+        public string? InvoiceStreet { get; init; }
+        public string? InvoiceCity { get; init; }
+        public string? InvoiceProvince { get; init; }
+        public string? InvoiceCountry { get; init; }
+        public string? InvoiceZipCode { get; init; }
+        public string? InvoiceVatNumber { get; init; }
+        public string? InvoiceReference { get; init; }
     }
 }

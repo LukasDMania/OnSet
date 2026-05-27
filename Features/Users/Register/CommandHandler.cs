@@ -51,16 +51,20 @@ namespace OnSet.Features.Users.Register
 
             // Create domain user
             var user = User.Create(
+                accountType: request.AccountType,
                 firstName: firstName,
                 lastName: lastName,
                 mainOccupationRole: request.MainOccupationRole,
-                yearsExperience: request.YearsExperience,
                 bio: request.Bio,
                 avatarUrl: request.AvatarUrl,
                 homeAddress: homeAddress,
                 spokenLanguages: spokenLanguages,
-                isAvailableForBooking: request.IsAvailableForBooking,
-                nextAvailableDate: request.NextAvailableDate,
+                dateOfBirth: request.DateOfBirth,
+                placeOfBirth: request.PlaceOfBirth,
+                nationality: request.Nationality,
+                nationalRegistrationNumber: request.NationalRegistrationNumber,
+                maritalStatus: request.MaritalStatus,
+                dietaryPreference: request.DietaryPreference,
                 emergencyContact: emergencyContact
             );
 

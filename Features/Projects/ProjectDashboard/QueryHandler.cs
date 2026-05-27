@@ -4,7 +4,7 @@ using OnSet;
 using OnSet.Application.Exceptions;
 using OnSet.Application.Services;
 using OnSet.Domain.Enums;
-using OnSet.Infrastructure.Data;
+using OnSet.Infrastructure.Persistence;
 
 namespace OnSet.Features.Projects.ProjectDashboard
 {
@@ -40,7 +40,7 @@ namespace OnSet.Features.Projects.ProjectDashboard
                     p.Id,
                     p.Name,
                     p.ReferenceCode,
-                    p.ClientName,
+                    p.ProductionCompany,
                 })
                 .FirstOrDefaultAsync(cancellationToken);
 
@@ -95,7 +95,7 @@ namespace OnSet.Features.Projects.ProjectDashboard
                 Id = project.Id,
                 Name = project.Name,
                 ReferenceCode = project.ReferenceCode,
-                ClientName = project.ClientName,
+                ProductionCompany = project.ProductionCompany,
                 DocumentGroups = grouped,
                 Capabilities = capabilities,
             };

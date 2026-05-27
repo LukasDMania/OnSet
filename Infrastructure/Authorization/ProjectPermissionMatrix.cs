@@ -35,6 +35,8 @@ internal static class ProjectPermissionMatrix
             ],
         };
 
-    public static bool Allows(ProjectAccessTier tier, ProjectPermission permission) =>
-        Permissions.TryGetValue(tier, out var set) && set.Contains(permission);
+    public static bool Allows(ProjectAccessTier tier, ProjectPermission permission)
+    {
+        return Permissions.TryGetValue(tier, out var set) && set.Contains(permission);
+    }
 }

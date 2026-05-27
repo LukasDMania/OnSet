@@ -353,6 +353,7 @@
     document.addEventListener('click', e => {
         const anchor = e.target.closest('a[href]');
         if (!anchor) return;
+        if (anchor.closest('.no-page-transition')) return;
         const href = anchor.getAttribute('href');
         // Only local, non-hash, non-external links
         if (!href || href.startsWith('#') || href.startsWith('http') ||

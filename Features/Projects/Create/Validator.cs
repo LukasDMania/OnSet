@@ -14,7 +14,7 @@ namespace OnSet.Features.Projects.Create
             RuleFor(x => x.Description)
                 .MaximumLength(500);
 
-            RuleFor(x => x.ClientName)
+            RuleFor(x => x.ProductionCompany)
                 .MaximumLength(100);
 
             RuleFor(x => x.ReferenceCode)
@@ -22,10 +22,6 @@ namespace OnSet.Features.Projects.Create
 
             RuleFor(x => x.StartDate)
                 .NotEmpty();
-
-            RuleFor(x => x.Budget)
-                .GreaterThanOrEqualTo(0)
-                .When(x => x.Budget.HasValue);
 
             RuleFor(x => x.EndDate)
                 .GreaterThan(x => x.StartDate)
@@ -52,6 +48,27 @@ namespace OnSet.Features.Projects.Create
 
                 RuleFor(x => x.Country)
                     .NotEmpty().WithMessage("Country is required for a complete address.");
+            });
+
+            Func<Command, bool> isInvoiceAddressPartiallyFilled = cmd =>
+                !string.IsNullOrWhiteSpace(cmd.InvoiceStreet) ||
+                !string.IsNullOrWhiteSpace(cmd.InvoiceCity) ||
+                !string.IsNullOrWhiteSpace(cmd.InvoiceZipCode) ||
+                !string.IsNullOrWhiteSpace(cmd.InvoiceCountry);
+
+            When(isInvoiceAddressPartiallyFilled, () =>
+            {
+                RuleFor(x => x.InvoiceStreet)
+                    .NotEmpty().WithMessage("Invoice street is required for a complete invoice address.");
+
+                RuleFor(x => x.InvoiceCity)
+                    .NotEmpty().WithMessage("Invoice city is required for a complete invoice address.");
+
+                RuleFor(x => x.InvoiceZipCode)
+                    .NotEmpty().WithMessage("Invoice Zip Code is required for a complete invoice address.");
+
+                RuleFor(x => x.InvoiceCountry)
+                    .NotEmpty().WithMessage("Invoice country is required for a complete invoice address.");
             });
         }
     }

@@ -1,9 +1,9 @@
 using MediatR;
-using OnSet;
 using OnSet.Application.Exceptions;
+using OnSet.Application.Services;
 using OnSet.Domain.Models;
 using OnSet.Domain.ValueObjects;
-using OnSet.Infrastructure.Data;
+using OnSet.Infrastructure.Persistence;
 using OnSet.Infrastructure.Results;
 
 namespace OnSet.Features.Projects.UploadDocument

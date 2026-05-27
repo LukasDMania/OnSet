@@ -7,7 +7,7 @@ using OnSet.Domain.Enums;
 
 using OnSet.Infrastructure.Persistence;
 
-namespace OnSet.Infrastructure.Data
+namespace OnSet.Infrastructure.Persistence
 {
     /// <summary>Infrastructure component.</summary>
     public class OnSetDbContext : IdentityDbContext<User>
@@ -88,7 +88,7 @@ namespace OnSet.Infrastructure.Data
             });
 
             modelBuilder.Entity<Project>(p => {
-                p.OwnsOne(x => x.Location, loc =>
+                p.OwnsOne(x => x.ProductionCompanyLocation, loc =>
                 {
                     loc.Property(p => p.Street).IsRequired(false);
                     loc.Property(p => p.City).IsRequired(false);
@@ -96,7 +96,17 @@ namespace OnSet.Infrastructure.Data
                     loc.Property(p => p.Country).IsRequired(false);
                     loc.Property(p => p.ZipCode).IsRequired(false);
                 });
-                p.Navigation(x => x.Location).IsRequired(false);
+                p.Navigation(x => x.ProductionCompanyLocation).IsRequired(false);
+
+                p.OwnsOne(x => x.InvoiceAddress, inv =>
+                {
+                    inv.Property(p => p.Street).IsRequired(false);
+                    inv.Property(p => p.City).IsRequired(false);
+                    inv.Property(p => p.ProvinceOrState).IsRequired(false);
+                    inv.Property(p => p.Country).IsRequired(false);
+                    inv.Property(p => p.ZipCode).IsRequired(false);
+                });
+                p.Navigation(x => x.InvoiceAddress).IsRequired(false);
             });
 
         }

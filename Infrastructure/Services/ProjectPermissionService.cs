@@ -4,7 +4,7 @@ using OnSet.Application.Exceptions;
 using OnSet.Application.Services;
 using OnSet.Domain.Enums;
 using OnSet.Infrastructure.Authorization;
-using OnSet.Infrastructure.Data;
+using OnSet.Infrastructure.Persistence;
 
 namespace OnSet.Infrastructure.Services;
 

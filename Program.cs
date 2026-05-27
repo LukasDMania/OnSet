@@ -4,20 +4,24 @@ using MediatR;
 using Serilog;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Authentication;
 using System.Collections.Generic;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using OnSet.Domain;
+using OnSet.Domain.Enums;
 using OnSet.Domain.Models;
 using OnSet.Extensions;
 using OnSet.Infrastructure.Behaviors;
-using OnSet.Infrastructure.Data;
-using OnSet.Infrastructure.Filters;
 using OnSet.Infrastructure.Persistence;
+using OnSet.Infrastructure.Filters;
 using OnSet.Infrastructure.Services;
+using OnSet.Infrastructure.Authorization;
 using OnSet.Utils;
+using OnSet.Application.Services;
+using System;
 
 namespace OnSet
 {
@@ -91,6 +95,11 @@ namespace OnSet
             .AddEntityFrameworkStores<OnSetDbContext>()
             .AddDefaultTokenProviders();
 
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Users/Login";
+                options.AccessDeniedPath = "/Users/Login";
+            });
 
             // --- 2. MediatR Setup ---
             // Register MediatR, scanning the entire assembly for handlers, validators, and behaviors
@@ -106,7 +115,7 @@ namespace OnSet
             builder.Services.Configure<PerformanceTelemetryOptions>(
                 builder.Configuration.GetSection(PerformanceTelemetryOptions.SectionName));
 
-            // Pipeline order (outer → inner): command audit → performance (validation+handler) → validation → handler.
+            // Pipeline order (outer ↁEinner): command audit ↁEperformance (validation+handler) ↁEvalidation ↁEhandler.
             // Performance sits inside audit so timings exclude command-audit DB I/O.
             builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CommandAuditBehavior<,>));
             builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformancePipelineBehavior<,>));
@@ -120,11 +129,17 @@ namespace OnSet
             builder.Services.AddOnSetProjectAuthorization();
             builder.Services.AddScoped<ICommandAuditService, CommandAuditService>();
             builder.Services.AddScoped<IStorageService, LocalStorageService>();
+            builder.Services.AddScoped<IClaimsTransformation, AccountTypeClaimsTransformation>();
 
 
             builder.Services.AddAuthorization(options =>
             {
                 options.AddPolicy("Authenticated", policy => policy.RequireAuthenticatedUser());
+                options.AddPolicy("ProductionOnly", policy =>
+                {
+                    policy.RequireAuthenticatedUser();
+                    policy.RequireClaim(AccountTypeClaimsTransformation.ClaimType, AccountType.PRODUCTION.ToString());
+                });
             });
 
             // Add services to the container.
@@ -146,6 +161,9 @@ namespace OnSet
                 app.UseOnSetSwaggerUi();
 
                 using var scope = app.Services.CreateScope();
+
+                //Seed dev testing data
+                await SeedData.SeedAsync(scope.ServiceProvider);
 
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
                 if (!await roleManager.RoleExistsAsync(Roles.Admin))

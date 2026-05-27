@@ -1,8 +1,9 @@
 using MediatR;
 using OnSet.Application.Notifications.Projects;
+using OnSet.Application.Services;
 using OnSet.Domain.Models;
 using OnSet.Domain.ValueObjects;
-using OnSet.Infrastructure.Data;
+using OnSet.Infrastructure.Persistence;
 using OnSet.Infrastructure.Results;
 
 namespace OnSet.Features.Projects.Create
@@ -33,7 +34,7 @@ namespace OnSet.Features.Projects.Create
                 return Result.Fail("User is not authenticated.");
             }
 
-            Address? location = null;
+            Address? productionCompanyLocation = null;
 
             var hasAnyAddressPart =
                 !string.IsNullOrWhiteSpace(request.Street) ||
@@ -44,7 +45,7 @@ namespace OnSet.Features.Projects.Create
 
             if (hasAnyAddressPart)
             {
-                location = new Address(
+                productionCompanyLocation = new Address(
                     request.Street!,
                     request.City!,
                     request.Province,
@@ -53,17 +54,38 @@ namespace OnSet.Features.Projects.Create
                 );
             }
 
+            Address? invoiceAddress = null;
+            var hasAnyInvoiceAddressPart =
+                !string.IsNullOrWhiteSpace(request.InvoiceStreet) ||
+                !string.IsNullOrWhiteSpace(request.InvoiceCity) ||
+                !string.IsNullOrWhiteSpace(request.InvoiceZipCode) ||
+                !string.IsNullOrWhiteSpace(request.InvoiceCountry) ||
+                !string.IsNullOrWhiteSpace(request.InvoiceProvince);
+
+            if (hasAnyInvoiceAddressPart)
+            {
+                invoiceAddress = new Address(
+                    request.InvoiceStreet!,
+                    request.InvoiceCity!,
+                    request.InvoiceProvince,
+                    request.InvoiceCountry!,
+                    request.InvoiceZipCode!
+                );
+            }
+
             var project = Project.Create(
                 name: request.ProjectName,
                 startDate: request.StartDate,
-                status: request.Status,
                 creatorRole: request.CreatorRole,
                 ownerId: userId,
                 description: request.Description,
-                clientName: request.ClientName,
+                productionCompany: request.ProductionCompany,
                 referenceCode: request.ReferenceCode,
-                budget: request.Budget,
-                location: location
+                productionCompanyLocation: productionCompanyLocation,
+                invoiceCompanyName: request.InvoiceCompanyName,
+                invoiceAddress: invoiceAddress,
+                invoiceVatNumber: request.InvoiceVatNumber,
+                invoiceReference: request.InvoiceReference
             );
 
             _context.Projects.Add(project);

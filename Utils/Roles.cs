@@ -1,4 +1,4 @@
-﻿namespace OnSet.Utils
+namespace OnSet.Utils
 {
     /// <summary>
     /// ASP.NET Identity role names used in OnSet authorization.

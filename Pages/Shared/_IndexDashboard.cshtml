@@ -1,0 +1,92 @@
+@model OnSet.Pages.IndexModel
+@{
+    var joinSucceeded = TempData["JoinSuccess"] as bool? == true;
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-8 text-center">
+            @if (Model.IsCrewAccount)
+            {
+                <h1 class="display-5 fw-bold mb-3">@L["Index_HeroTitle_Crew"]</h1>
+                <p class="lead text-muted">@L["Index_HeroLead_Crew"]</p>
+            }
+            else
+            {
+                <h1 class="display-5 fw-bold mb-3">@L["Index_HeroTitle"]</h1>
+                <p class="lead text-muted">@L["Index_HeroLead"]</p>
+            }
+        </div>
+    </div>
+
+    @if (joinSucceeded)
+    {
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-8">
+                <div class="alert alert-success border-0 shadow-sm mb-0">
+                    <i class="bi bi-check-circle me-2"></i>@L["Index_JoinSuccess"]
+                    <a asp-page="/Projects/Index" class="alert-link ms-1">@L["Index_Card_Projects_ViewAll"]</a>
+                </div>
+            </div>
+        </div>
+    }
+
+    @if (Model.IsCrewAccount)
+    {
+        <div class="row justify-content-center g-4 mb-4">
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold mb-2 d-flex align-items-center">
+                            <i class="bi bi-key-fill text-warning me-2"></i>
+                            @L["Projects_Index_JoinTitle"]
+                        </h5>
+                        <p class="small text-muted mb-3">@L["Projects_Index_JoinBody"]</p>
+                        <form method="post" asp-page="/Index" asp-page-handler="Join">
+                            <div class="mb-3">
+                                <label class="form-label fw-medium" asp-for="JoinCode">@L["Projects_Index_ProjectCode"]</label>
+                                <input class="form-control" asp-for="JoinCode" placeholder="@L["Projects_Index_JoinCodePlaceholder"].Value" />
+                            </div>
+                            <div asp-validation-summary="All" class="text-warning small mb-2"></div>
+                            <button type="submit" class="btn btn-warning w-100">
+                                <i class="bi bi-box-arrow-in-right me-1"></i>@L["Projects_Index_JoinProject"]
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="row g-4 justify-content-center">
+        <div class="col-md-5">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-2"><i class="bi bi-briefcase me-2 text-success"></i>@L["Index_Card_ProjectsTitle"]</h5>
+                    <p class="text-muted small mb-3">
+                        @(Model.IsCrewAccount ? L["Index_Card_ProjectsBody_Crew"] : L["Index_Card_ProjectsBody"])
+                    </p>
+                    <div class="d-grid gap-2">
+                        <a asp-page="/Projects/Index" class="btn btn-success btn-sm">@L["Index_Card_Projects_ViewAll"]</a>
+                        @if (Model.IsProductionAccount)
+                        {
+                            <a asp-page="/Projects/Create" class="btn btn-outline-success btn-sm">@L["Index_Card_Projects_Create"]</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-2"><i class="bi bi-person-badge me-2 text-dark"></i>@L["Index_Card_ProfileTitle"]</h5>
+                    <p class="text-muted small mb-3">@L["Index_Card_ProfileBody"]</p>
+                    <div class="d-grid gap-2">
+                        <a asp-page="/Users/Details" class="btn btn-dark btn-sm">@L["Index_Card_Profile_Go"]</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

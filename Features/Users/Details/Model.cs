@@ -9,11 +9,12 @@ namespace OnSet.Features.Users.Details
         public string Email { get; init; } = string.Empty;
         public string? PhoneNumber { get; init; }
 
+        public AccountType AccountType { get; init; }
+
         public string FirstName { get; init; } = string.Empty;
         public string LastName { get; init; } = string.Empty;
 
         public ProjectRoles? MainOccupationRole { get; init; }
-        public int? YearsExperience { get; init; }
         public string? Bio { get; init; }
         public string? AvatarUrl { get; init; }
 
@@ -26,8 +27,12 @@ namespace OnSet.Features.Users.Details
 
         public List<Languages> SpokenLanguages { get; init; } = new List<Languages>();
 
-        public bool IsAvailableForBooking { get; init; }
-        public DateTime? NextAvailableDate { get; init; }
+        public DateTime? DateOfBirth { get; init; }
+        public string? PlaceOfBirth { get; init; }
+        public string? Nationality { get; init; }
+        public string? NationalRegistrationNumber { get; init; }
+        public MaritalStatus? MaritalStatus { get; init; }
+        public DietaryPreference? DietaryPreference { get; init; }
 
         // Emergency contact VO
         public string? EmergencyContactName { get; init; }

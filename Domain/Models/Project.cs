@@ -24,8 +24,8 @@ namespace OnSet.Domain.Models
         public string? Description { get; set; }
 
         [StringLength(100)]
-        [Display(Name = "Client Name")]
-        public string? ClientName { get; set; }
+        [Display(Name = "Production Company")]
+        public string? ProductionCompany { get; set; }
 
         [StringLength(50)]
         [Display(Name = "Reference Code")]
@@ -41,19 +41,18 @@ namespace OnSet.Domain.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? EndDate { get; set; }
 
-        [DataType(DataType.Currency)]
-        [Column(TypeName = "money")]
-        public decimal? Budget { get; set; }
+        public Address? ProductionCompanyLocation { get; set; }
 
-        [DataType(DataType.Currency)]
-        [Column(TypeName = "money")]
-        [Display(Name = "Actual Cost")]
-        public decimal? ActualCost { get; set; }
+        [StringLength(200)]
+        public string? InvoiceCompanyName { get; set; }
 
-        [Required]
-        public ProjectStatus Status { get; set; }
+        public Address? InvoiceAddress { get; set; }
 
-        public Address? Location { get; set; }
+        [StringLength(50)]
+        public string? InvoiceVatNumber { get; set; }
+
+        [StringLength(100)]
+        public string? InvoiceReference { get; set; }
 
         [DataType(DataType.DateTime)]
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
@@ -78,6 +77,48 @@ namespace OnSet.Domain.Models
         public static Project Create(
         string name,
         DateTime startDate,
+        ProjectRoles creatorRole,
+        string ownerId,
+        string? description = null,
+        string? productionCompany = null,
+        string? referenceCode = null,
+        Address? productionCompanyLocation = null,
+        string? invoiceCompanyName = null,
+        Address? invoiceAddress = null,
+        string? invoiceVatNumber = null,
+        string? invoiceReference = null)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException("Project name is required.", nameof(name));
+
+            if (startDate == default)
+                throw new ArgumentException("Start date is required.", nameof(startDate));
+
+            var project = new Project
+            {
+                Name = name.Trim(),
+                Description = description,
+                ProductionCompany = productionCompany,
+                ReferenceCode = referenceCode,
+                StartDate = startDate,
+                OwnerId = ownerId,
+                ProductionCompanyLocation = productionCompanyLocation,
+                InvoiceCompanyName = invoiceCompanyName,
+                InvoiceAddress = invoiceAddress,
+                InvoiceVatNumber = invoiceVatNumber,
+                InvoiceReference = invoiceReference,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = null
+            };
+
+            project.AddCreator(ownerId, creatorRole);
+
+            return project;
+        }
+
+        public static Project Create(
+        string name,
+        DateTime startDate,
         ProjectStatus status,
         ProjectRoles creatorRole,
         string ownerId,
@@ -87,33 +128,53 @@ namespace OnSet.Domain.Models
         decimal? budget = null,
         Address? location = null)
         {
+            return Create(
+                name: name,
+                startDate: startDate,
+                creatorRole: creatorRole,
+                ownerId: ownerId,
+                description: description,
+                productionCompany: clientName,
+                referenceCode: referenceCode,
+                productionCompanyLocation: location
+            );
+        }
+
+        public void UpdateDetails(
+        string name,
+        DateTime startDate,
+        string? description = null,
+        string? productionCompany = null,
+        string? referenceCode = null,
+        DateTime? endDate = null,
+        Address? productionCompanyLocation = null,
+        string? invoiceCompanyName = null,
+        Address? invoiceAddress = null,
+        string? invoiceVatNumber = null,
+        string? invoiceReference = null)
+        {
             if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentException("Project name is required.", nameof(name));
+                throw new ArgumentException("Project name is required.");
 
             if (startDate == default)
-                throw new ArgumentException("Start date is required.", nameof(startDate));
+                throw new ArgumentException("Start date is required.");
 
-            if (budget < 0)
-                throw new ArgumentOutOfRangeException(nameof(budget), "Budget cannot be negative.");
+            if (endDate.HasValue && endDate.Value < startDate)
+                throw new ArgumentException("End date cannot be before the start date.");
 
-            var project = new Project
-            {
-                Name = name.Trim(),
-                Description = description,
-                ClientName = clientName,
-                ReferenceCode = referenceCode,
-                StartDate = startDate,
-                Budget = budget,
-                Status = status,
-                OwnerId = ownerId,
-                Location = location,
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = null
-            };
+            Name = name.Trim();
+            Description = string.IsNullOrWhiteSpace(description) ? null : description;
+            ProductionCompany = string.IsNullOrWhiteSpace(productionCompany) ? null : productionCompany;
+            ReferenceCode = string.IsNullOrWhiteSpace(referenceCode) ? null : referenceCode;
 
-            project.AddCreator(ownerId, creatorRole);
-
-            return project;
+            StartDate = startDate;
+            EndDate = endDate;
+            ProductionCompanyLocation = productionCompanyLocation;
+            InvoiceCompanyName = string.IsNullOrWhiteSpace(invoiceCompanyName) ? null : invoiceCompanyName;
+            InvoiceAddress = invoiceAddress;
+            InvoiceVatNumber = string.IsNullOrWhiteSpace(invoiceVatNumber) ? null : invoiceVatNumber;
+            InvoiceReference = string.IsNullOrWhiteSpace(invoiceReference) ? null : invoiceReference;
+            UpdatedAt = DateTime.UtcNow;
         }
 
         public void UpdateDetails(
@@ -127,29 +188,15 @@ namespace OnSet.Domain.Models
         decimal? budget = null,
         Address? location = null)
         {
-            if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentException("Project name is required.");
-
-            if (startDate == default)
-                throw new ArgumentException("Start date is required.");
-
-            if (endDate.HasValue && endDate.Value < startDate)
-                throw new ArgumentException("End date cannot be before the start date.");
-
-            if (budget.HasValue && budget.Value < 0)
-                throw new ArgumentException("Budget cannot be negative.");
-
-            Name = name.Trim();
-            Description = string.IsNullOrWhiteSpace(description) ? null : description;
-            ClientName = string.IsNullOrWhiteSpace(clientName) ? null : clientName;
-            ReferenceCode = string.IsNullOrWhiteSpace(referenceCode) ? null : referenceCode;
-
-            StartDate = startDate;
-            EndDate = endDate;
-            Budget = budget;
-            Status = status;
-            Location = location;
-            UpdatedAt = DateTime.UtcNow;
+            UpdateDetails(
+                name: name,
+                startDate: startDate,
+                description: description,
+                productionCompany: clientName,
+                referenceCode: referenceCode,
+                endDate: endDate,
+                productionCompanyLocation: location
+            );
         }
     }
 }

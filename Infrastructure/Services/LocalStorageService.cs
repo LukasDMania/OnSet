@@ -1,30 +1,30 @@
-using OnSet.Infrastructure.Services;
+using OnSet.Application.Services;
 
-namespace OnSet;
-
-/// <summary>Infrastructure component.</summary>
-
-public class LocalStorageService : IStorageService
+namespace OnSet.Infrastructure.Services
 {
-    private readonly IWebHostEnvironment _env;
-
-    public LocalStorageService(IWebHostEnvironment env)
+    /// <summary>Infrastructure component.</summary>
+    public class LocalStorageService : IStorageService
     {
-        _env = env;
-    }
+        private readonly IWebHostEnvironment _env;
 
-    public async Task<string> UploadFileAsync(IFormFile file, string folderName)
-    {
-        var directory = UploadPathResolver.ResolveAndCreateDirectory(_env.WebRootPath, folderName);
-        var webFolder = UploadPathResolver.ToWebRelativeFolder(folderName);
+        public LocalStorageService(IWebHostEnvironment env)
+        {
+            _env = env;
+        }
 
-        var extension = Path.GetExtension(file.FileName);
-        var fileName = Guid.NewGuid().ToString() + extension;
-        var fullPath = Path.Combine(directory, fileName);
+        public async Task<string> UploadFileAsync(IFormFile file, string folderName)
+        {
+            var directory = UploadPathResolver.ResolveAndCreateDirectory(_env.WebRootPath, folderName);
+            var webFolder = UploadPathResolver.ToWebRelativeFolder(folderName);
 
-        await using var stream = new FileStream(fullPath, FileMode.Create);
-        await file.CopyToAsync(stream);
+            var extension = Path.GetExtension(file.FileName);
+            var fileName = Guid.NewGuid().ToString() + extension;
+            var fullPath = Path.Combine(directory, fileName);
 
-        return $"/uploads/{webFolder}/{fileName}";
+            await using var stream = new FileStream(fullPath, FileMode.Create);
+            await file.CopyToAsync(stream);
+
+            return $"/uploads/{webFolder}/{fileName}";
+        }
     }
 }

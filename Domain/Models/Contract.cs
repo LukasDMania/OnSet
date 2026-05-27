@@ -19,7 +19,7 @@ namespace OnSet.Domain.Models
         public string UserId { get; private set; }
 
         [Required]
-        public ContractStatus Status { get; private set; } = ContractStatus.Pending;
+        public ContractStatus Status { get; private set; } = ContractStatus.PENDING;
 
         public SignatureInfo? Signature { get; private set; }
 
@@ -48,13 +48,13 @@ namespace OnSet.Domain.Models
 
         public void Sign(string userId)
         {
-            Status = ContractStatus.Signed;
+            Status = ContractStatus.SIGNED;
             Signature = new SignatureInfo(userId, DateTime.UtcNow);
         }
 
         public void Decline(string note)
         {
-            Status = ContractStatus.Declined;
+            Status = ContractStatus.DECLINED;
             Notes = note;
         }
     }

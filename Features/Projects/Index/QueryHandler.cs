@@ -2,7 +2,7 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using OnSet.Infrastructure.Data;
+using OnSet.Infrastructure.Persistence;
 
 namespace OnSet.Features.Projects.Index
 {

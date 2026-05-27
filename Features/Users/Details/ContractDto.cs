@@ -1,4 +1,4 @@
-﻿using OnSet.Domain.Enums;
+using OnSet.Domain.Enums;
 
 namespace OnSet.Features.Users.Details
 {

@@ -11,7 +11,7 @@ using System.ComponentModel.DataAnnotations;
 namespace OnSet.Pages.Projects
 {
     /// <summary>Razor Page handler (documented in OpenAPI under Razor Pages).</summary>
-    [Authorize(Policy = "Authenticated")]
+    [Authorize(Policy = "ProductionOnly")]
         public class CreateModel : PageModel
     {
         private readonly IMediator _mediator;
@@ -32,7 +32,7 @@ namespace OnSet.Pages.Projects
             public string ProjectName { get; set; }
 
             public string? Description { get; set; }
-            public string? ClientName { get; set; }
+            public string? ProductionCompany { get; set; }
             public string? ReferenceCode { get; set; }
 
             [Required]
@@ -42,11 +42,6 @@ namespace OnSet.Pages.Projects
             [DataType(DataType.Date)]
             public DateTime? EndDate { get; set; }
 
-            public decimal? Budget { get; set; }
-
-            [Required]
-            public ProjectStatus Status { get; set; }
-
             [Required]
             public ProjectRoles CreatorRole { get; set; }
 
@@ -55,6 +50,16 @@ namespace OnSet.Pages.Projects
             public string? Province { get; set; }
             public string? Country { get; set; }
             public string? ZipCode { get; set; }
+
+            // Invoice details
+            public string? InvoiceCompanyName { get; set; }
+            public string? InvoiceStreet { get; set; }
+            public string? InvoiceCity { get; set; }
+            public string? InvoiceProvince { get; set; }
+            public string? InvoiceCountry { get; set; }
+            public string? InvoiceZipCode { get; set; }
+            public string? InvoiceVatNumber { get; set; }
+            public string? InvoiceReference { get; set; }
         }
 
         public void OnGet() { }
@@ -68,18 +73,24 @@ namespace OnSet.Pages.Projects
             {
                 ProjectName = Input.ProjectName,
                 Description = Input.Description,
-                ClientName = Input.ClientName,
+                ProductionCompany = Input.ProductionCompany,
                 ReferenceCode = Input.ReferenceCode,
                 StartDate = Input.StartDate,
                 EndDate = Input.EndDate,
-                Budget = Input.Budget,
-                Status = Input.Status,
                 CreatorRole = Input.CreatorRole,
                 Street = Input.Street,
                 City = Input.City,
                 Province = Input.Province,
                 Country = Input.Country,
-                ZipCode = Input.ZipCode
+                ZipCode = Input.ZipCode,
+                InvoiceCompanyName = Input.InvoiceCompanyName,
+                InvoiceStreet = Input.InvoiceStreet,
+                InvoiceCity = Input.InvoiceCity,
+                InvoiceProvince = Input.InvoiceProvince,
+                InvoiceCountry = Input.InvoiceCountry,
+                InvoiceZipCode = Input.InvoiceZipCode,
+                InvoiceVatNumber = Input.InvoiceVatNumber,
+                InvoiceReference = Input.InvoiceReference
             };
 
             var result = await _mediator.Send(command);

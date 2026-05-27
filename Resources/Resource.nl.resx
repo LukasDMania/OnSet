@@ -27,6 +27,34 @@
   <data name="Index_PageTitle" xml:space="preserve"><value>OnSet – Productietoolkit</value></data>
   <data name="Index_HeroTitle" xml:space="preserve"><value>OnSet – Beheer je producties</value></data>
   <data name="Index_HeroLead" xml:space="preserve"><value>Maak projecten aan, beheer crewprofielen en bereid callsheets en contracten voor – alles op één plek.</value></data>
+  <data name="Index_HeroTitle_Crew" xml:space="preserve"><value>Welkom terug</value></data>
+  <data name="Index_HeroLead_Crew" xml:space="preserve"><value>Word lid van een productie met je referentiecode en open daarna je projecten op de set.</value></data>
+  <data name="Index_Card_ProjectsBody_Crew" xml:space="preserve"><value>Bekijk producties waar je aan deelneemt. Gebruik een referentiecode van het productiekantoor voor toegang.</value></data>
+  <data name="Index_JoinSuccess" xml:space="preserve"><value>Je bent toegetreden tot het project.</value></data>
+  <data name="Index_Landing_PageTitle" xml:space="preserve"><value>OnSet – Filmproductie, vereenvoudigd</value></data>
+  <data name="Index_Landing_HeroAria" xml:space="preserve"><value>Welkom bij OnSet</value></data>
+  <data name="Index_Landing_Title" xml:space="preserve"><value>Run je set. Verbind je crew. Eén plek.</value></data>
+  <data name="Index_Landing_Lead" xml:space="preserve"><value>OnSet verbindt productiekantoren en crew met private projecten, referentiecodes en de documenten die je nodig hebt op shootdag.</value></data>
+  <data name="Index_Landing_CTA_Primary" xml:space="preserve"><value>Gratis account aanmaken</value></data>
+  <data name="Index_Landing_CTA_Login" xml:space="preserve"><value>Inloggen</value></data>
+  <data name="Index_Landing_Hint" xml:space="preserve"><value>Geen creditcard. Kies crew of productie bij registratie.</value></data>
+  <data name="Index_Landing_Scroll" xml:space="preserve"><value>Ontdek</value></data>
+  <data name="Index_Landing_PathsTitle" xml:space="preserve"><value>Gemaakt voor hoe je op set werkt</value></data>
+  <data name="Index_Landing_PathsLead" xml:space="preserve"><value>Kies het accounttype dat bij je rol past. Je kunt je profiel later altijd aanpassen.</value></data>
+  <data name="Index_Landing_CrewTitle" xml:space="preserve"><value>Crew</value></data>
+  <data name="Index_Landing_CrewBody" xml:space="preserve"><value>Word lid van producties met een referentiecode, bekijk je projecten en houd je profiel klaar voor callsheets en contracten.</value></data>
+  <data name="Index_Landing_CrewCTA" xml:space="preserve"><value>Registreren als crew</value></data>
+  <data name="Index_Landing_ProductionTitle" xml:space="preserve"><value>Productie</value></data>
+  <data name="Index_Landing_ProductionBody" xml:space="preserve"><value>Maak projecten aan en beheer ze, nodig crew uit met codes en houd productiegegevens en documenten op één plek.</value></data>
+  <data name="Index_Landing_ProductionCTA" xml:space="preserve"><value>Registreren als productie</value></data>
+  <data name="Index_Landing_Feature1Title" xml:space="preserve"><value>Privé by default</value></data>
+  <data name="Index_Landing_Feature1Body" xml:space="preserve"><value>Projecten blijven verborgen tot iemand deelneemt met de juiste code.</value></data>
+  <data name="Index_Landing_Feature2Title" xml:space="preserve"><value>Deelnemen in seconden</value></data>
+  <data name="Index_Landing_Feature2Body" xml:space="preserve"><value>Crew voert een referentiecode in van het productiekantoor en is binnen.</value></data>
+  <data name="Index_Landing_Feature3Title" xml:space="preserve"><value>Klaar voor paperwork</value></data>
+  <data name="Index_Landing_Feature3Body" xml:space="preserve"><value>Profielen, documenten en contracten — gestructureerd voor echte shoots.</value></data>
+  <data name="Index_Landing_FinalTitle" xml:space="preserve"><value>Klaar wanneer de camera rolt?</value></data>
+  <data name="Index_Landing_FinalLead" xml:space="preserve"><value>Maak je account in enkele minuten aan, of log in als je al op de callsheet staat.</value></data>
   <data name="Index_Card_AccountTitle" xml:space="preserve"><value>Je account</value></data>
   <data name="Index_Card_AccountBody" xml:space="preserve"><value>Registreer, log in en onderhoud je persoonlijke productieprofiel.</value></data>
   <data name="Index_Card_Account_Create" xml:space="preserve"><value>Account aanmaken</value></data>
@@ -195,11 +223,7 @@
   <data name="Users_Details_Placeholder_LastName" xml:space="preserve"><value>Voer achternaam in</value></data>
   <data name="Users_Details_Section_WorkAvailability" xml:space="preserve"><value>Werk &amp; beschikbaarheid</value></data>
   <data name="Users_Details_SelectRole" xml:space="preserve"><value>-- Kies een rol --</value></data>
-  <data name="Users_Details_Label_YearsExperience" xml:space="preserve"><value>Jaren ervaring</value></data>
   <data name="Users_Details_Label_Languages" xml:space="preserve"><value>Talen</value></data>
-  <data name="Users_Details_Label_AvailableForBooking" xml:space="preserve"><value>Beschikbaar voor booking</value></data>
-  <data name="Users_Details_Hint_AvailableForBooking" xml:space="preserve"><value>Zet dit uit om jezelf te verbergen in actieve zoekresultaten.</value></data>
-  <data name="Users_Details_Label_NextAvailableDate" xml:space="preserve"><value>Volgende beschikbare datum</value></data>
   <data name="Users_Details_Section_HomeAddress" xml:space="preserve"><value>Thuisadres</value></data>
   <data name="Users_Details_Label_EmergencyContactName" xml:space="preserve"><value>Naam contact</value></data>
   <data name="Users_Details_Label_EmergencyContactPhone" xml:space="preserve"><value>Telefoon contact</value></data>

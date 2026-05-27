@@ -33,10 +33,6 @@ else
                 <div class="flex-grow-1 text-center text-md-start">
                     <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-2 mb-1">
                         <h1 class="h2 mb-0 fw-bold text-dark">@user.FirstName @user.LastName</h1>
-                        @if (user.IsAvailableForBooking)
-                        {
-                            <span class="badge rounded-pill bg-success px-3">Available</span>
-                        }
                     </div>
                     <p class="text-muted fs-5 mb-2">@(user.MainOccupationRole?.ToString() ?? "Professional")</p>
                     <div class="d-flex flex-wrap justify-content-center justify-content-md-start gap-3 text-muted small">
@@ -57,20 +53,9 @@ else
             <div class="col-lg-4">
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="card-body">
-                        <h5 class="card-title fw-bold mb-4">Status & Availability</h5>
-
-                        <div class="mb-3">
-                            <label class="text-muted small d-block">Next Available Date</label>
-                            <span class="fw-medium">@(user.NextAvailableDate?.ToShortDateString() ?? "Immediate")</span>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="text-muted small d-block">Experience</label>
-                            <span class="fw-medium">@(user.YearsExperience?.ToString() ?? "0") Years</span>
-                        </div>
+                        <h5 class="card-title fw-bold mb-4">Languages</h5>
 
                         <div class="mb-0">
-                            <label class="text-muted small d-block">Languages</label>
                             <div class="d-flex flex-wrap gap-1 mt-1">
                                 @if (user.SpokenLanguages.Any())
                                 {

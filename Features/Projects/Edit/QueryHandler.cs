@@ -3,7 +3,7 @@ using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using OnSet.Application.Exceptions;
-using OnSet.Infrastructure.Data;
+using OnSet.Infrastructure.Persistence;
 
 namespace OnSet.Features.Projects.Edit
 {

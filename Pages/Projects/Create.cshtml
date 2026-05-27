@@ -29,9 +29,9 @@
                                         <span asp-validation-for="Input.ProjectName" class="text-danger small"></span>
                                     </div>
                                     <div class="col-md-6">
-                                        <label asp-for="Input.ClientName" class="form-label fw-medium"></label>
-                                        <input asp-for="Input.ClientName" class="form-control" />
-                                        <span asp-validation-for="Input.ClientName" class="text-danger small"></span>
+                                        <label asp-for="Input.ProductionCompany" class="form-label fw-medium"></label>
+                                        <input asp-for="Input.ProductionCompany" class="form-control" />
+                                        <span asp-validation-for="Input.ProductionCompany" class="text-danger small"></span>
                                     </div>
                                     <div class="col-md-6">
                                         <label asp-for="Input.ReferenceCode" class="form-label fw-medium"></label>
@@ -68,11 +68,6 @@
                             <div class="card-body p-4">
                                 <h5 class="fw-bold mb-3"><i class="bi bi-calendar-range me-2 text-primary"></i>@L["Projects_Create_Section_Timeline"]</h5>
                                 <div class="row g-3">
-                                    <div class="col-12">
-                                        <label asp-for="Input.Status" class="form-label fw-medium"></label>
-                                        <select asp-for="Input.Status" class="form-select" asp-items="Html.GetEnumSelectList<ProjectStatus>()"></select>
-                                        <span asp-validation-for="Input.Status" class="text-danger small"></span>
-                                    </div>
                                     <div class="col-md-6">
                                         <label asp-for="Input.StartDate" class="form-label fw-medium"></label>
                                         <input asp-for="Input.StartDate" class="form-control" type="date" />
@@ -82,14 +77,6 @@
                                         <label asp-for="Input.EndDate" class="form-label fw-medium"></label>
                                         <input asp-for="Input.EndDate" class="form-control" type="date" />
                                         <span asp-validation-for="Input.EndDate" class="text-danger small"></span>
-                                    </div>
-                                    <div class="col-12">
-                                        <label asp-for="Input.Budget" class="form-label fw-medium"></label>
-                                        <div class="input-group">
-                                            <span class="input-group-text">$</span>
-                                            <input asp-for="Input.Budget" class="form-control" placeholder="@L["Projects_Create_Placeholder_Budget"].Value" />
-                                        </div>
-                                        <span asp-validation-for="Input.Budget" class="text-danger small"></span>
                                     </div>
                                 </div>
                             </div>
@@ -118,6 +105,49 @@
                                     <div class="col-md-7">
                                         <label asp-for="Input.Country" class="form-label fw-medium"></label>
                                         <input asp-for="Input.Country" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card border-0 shadow-sm mb-4">
+                            <div class="card-body p-4">
+                                <h5 class="fw-bold mb-3"><i class="bi bi-receipt me-2 text-primary"></i>Invoice details</h5>
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <label asp-for="Input.InvoiceCompanyName" class="form-label fw-medium"></label>
+                                        <input asp-for="Input.InvoiceCompanyName" class="form-control" />
+                                        <span asp-validation-for="Input.InvoiceCompanyName" class="text-danger small"></span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label asp-for="Input.InvoiceVatNumber" class="form-label fw-medium"></label>
+                                        <input asp-for="Input.InvoiceVatNumber" class="form-control" />
+                                        <span asp-validation-for="Input.InvoiceVatNumber" class="text-danger small"></span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label asp-for="Input.InvoiceReference" class="form-label fw-medium"></label>
+                                        <input asp-for="Input.InvoiceReference" class="form-control" />
+                                        <span asp-validation-for="Input.InvoiceReference" class="text-danger small"></span>
+                                    </div>
+                                    <div class="col-12">
+                                        <label asp-for="Input.InvoiceStreet" class="form-label fw-medium"></label>
+                                        <input asp-for="Input.InvoiceStreet" class="form-control" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label asp-for="Input.InvoiceCity" class="form-label fw-medium"></label>
+                                        <input asp-for="Input.InvoiceCity" class="form-control" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label asp-for="Input.InvoiceProvince" class="form-label fw-medium"></label>
+                                        <input asp-for="Input.InvoiceProvince" class="form-control" />
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label asp-for="Input.InvoiceZipCode" class="form-label fw-medium"></label>
+                                        <input asp-for="Input.InvoiceZipCode" class="form-control" />
+                                    </div>
+                                    <div class="col-md-7">
+                                        <label asp-for="Input.InvoiceCountry" class="form-label fw-medium"></label>
+                                        <input asp-for="Input.InvoiceCountry" class="form-control" />
                                     </div>
                                 </div>
                             </div>

@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using OnSet.Infrastructure.Results;
+using OnSet.Application.Services;
 
 namespace OnSet.Infrastructure.Behaviors;
 

@@ -12,11 +12,14 @@
                 @L["Projects_Index_Lead"]
             </div>
         </div>
-        <div class="col-lg-5 text-lg-end mt-3 mt-lg-0">
-            <a asp-page="./Create" class="btn btn-primary shadow-sm me-2">
-                <i class="bi bi-plus-square me-2"></i>@L["Projects_Index_CreateProject"]
-            </a>
-        </div>
+        @if (Model.IsProductionAccount)
+        {
+            <div class="col-lg-5 text-lg-end mt-3 mt-lg-0">
+                <a asp-page="./Create" class="btn btn-primary shadow-sm me-2">
+                    <i class="bi bi-plus-square me-2"></i>@L["Projects_Index_CreateProject"]
+                </a>
+            </div>
+        }
     </div>
 
     <div class="row g-4">

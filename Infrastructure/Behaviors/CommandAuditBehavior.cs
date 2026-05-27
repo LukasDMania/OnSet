@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using OnSet.Infrastructure.Results;
 using OnSet.Infrastructure.Services;
+using OnSet.Application.Services;
 
 namespace OnSet.Infrastructure.Behaviors;
 

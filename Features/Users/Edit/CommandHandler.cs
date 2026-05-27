@@ -2,9 +2,10 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using OnSet.Domain.Enums;
 using OnSet.Domain.ValueObjects;
-using OnSet.Infrastructure.Data;
+using OnSet.Infrastructure.Persistence;
 using OnSet.Utils;
 using OnSet.Application.Exceptions;
+using OnSet.Application.Services;
 
 namespace OnSet.Features.Users.Edit
 {
@@ -76,16 +77,20 @@ namespace OnSet.Features.Users.Edit
             }
 
             user.UpdateProfile(
+                request.AccountType,
                 new FirstName(request.FirstName),
                 new LastName(request.LastName),
                 mainRole,
-                request.YearsExperience,
                 request.Bio,
                 request.AvatarUrl,
                 homeAddress,
                 spokenLanguagesEnum,
-                request.IsAvailableForBooking,
-                request.NextAvailableDate,
+                request.DateOfBirth,
+                request.PlaceOfBirth,
+                request.Nationality,
+                request.NationalRegistrationNumber,
+                request.MaritalStatus,
+                request.DietaryPreference,
                 emergencyContact
             );
 

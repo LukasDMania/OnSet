@@ -1,4 +1,4 @@
-﻿using MediatR;
+using MediatR;
 
 namespace OnSet.Features.Users.OtherUserDetails
 {
